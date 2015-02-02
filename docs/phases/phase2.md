@@ -24,6 +24,6 @@
 * Photos
 
 ### Views
-* PhotoShow
+* PhotosShow
 
 ## Gems/Libraries

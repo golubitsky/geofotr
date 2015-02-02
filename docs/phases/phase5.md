@@ -4,8 +4,6 @@
 ### Models
 
 ### Controllers
-Api::BlogsController (search)
-Api::PostsController (search)
 
 ### Views
 
@@ -13,8 +11,6 @@ Api::PostsController (search)
 ### Models
 
 ### Collections
-* SearchBlogs
-* SearchPosts
 
 ### Views
 * Google Map View

@@ -4,7 +4,6 @@
 ### Models
 
 ### Controllers
-Api::PostsController (feed)
 
 ### Views
 * photos/index.json.jbuilder
@@ -14,9 +13,9 @@ Api::PostsController (feed)
 ### Models
 
 ### Collections
-* FeedPosts
 
 ### Views
-* FeedShow (composite view, contains PostShow subviews)
+* UserShow
+* PhotosIndex
 
 ## Gems/Libraries
