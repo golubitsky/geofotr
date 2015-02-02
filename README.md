@@ -1,8 +1,8 @@
-# Flux-capacitr
+# geofotr
 
 [Heroku link][heroku]
 
-[heroku]: http://flux-capacitr.herokuapp.com
+[heroku]: https://calm-reef-2273.herokuapp.com/
 
 ## Minimum Viable Product
 Geophotr is a clone of Flickr built on Rails and Backbone. Users can:
