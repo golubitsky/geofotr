@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.serializejson.min.js
 //= require turbolinks
 //= require_tree .
