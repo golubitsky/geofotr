@@ -1,8 +1,9 @@
 # geofotr
 
-[Heroku link][heroku]
+[Project link][project_link]
 
-[heroku]: https://calm-reef-2273.herokuapp.com/
+[heroku]: https://geofotr.herokuapp.com/
+[project_link]: https://www.geofotr.com
 
 ## Minimum Viable Product
 Geophotr is a clone of Flickr built on Rails and Backbone. Users can:
