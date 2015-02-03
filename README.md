@@ -75,6 +75,7 @@ but I'd settle for manually setting lat/long for photos.
 
 ### Bonus Features (TBD)
 
+- [ ] users can view all of their liked photos
 - [ ] Pagination
 - [ ] Search for photos by title
 - [ ] Search for photos by tag

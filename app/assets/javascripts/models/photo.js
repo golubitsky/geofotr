@@ -1,0 +1,3 @@
+Geofotr.Models.Photo = Backbone.Model.extend({
+
+});
