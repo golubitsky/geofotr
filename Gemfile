@@ -12,6 +12,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 gem 'newrelic_rpm'
 
+gem 'carrierwave'
+gem 'rmagick'
+gem 'fog'
+
 group :development do
   gem 'annotate'
   gem 'better_errors'
