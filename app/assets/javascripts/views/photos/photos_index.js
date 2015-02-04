@@ -20,7 +20,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   handleFile: function (event) {
-    console.log("file handling");
     var file = event.currentTarget.files[0];
     var that = this;
     var reader = new FileReader();
@@ -39,7 +38,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   submitForm: function () {
     event.preventDefault();
     params = this.$('form').serializeJSON();
-    console.log(params);
     var that = this;
 
     var success = function (model) {

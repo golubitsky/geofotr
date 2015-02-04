@@ -1,7 +1,6 @@
 json.(photo,
   :id,
   :user_id,
-  :url,
   :caption,
   :visibility,
   :latitude,
@@ -10,3 +9,5 @@ json.(photo,
   :updated_at,
   )
 json.user photo.user.username
+
+json.url image_tag photo.photo.url(:big)

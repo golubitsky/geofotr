@@ -15,7 +15,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.find_by(session_token: session[:session_token])
+    @user ||= User.find_by(session_token: session[:session_token])
+    @username = @user.username if @user
+    return @user
   end
 
   def logged_in?

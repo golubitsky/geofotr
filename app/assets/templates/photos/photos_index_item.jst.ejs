@@ -1,8 +1,11 @@
-<li>
-url: <%= photo.escape('url') %><br>
+<li class="list-group-item">
+<%= photo.get('url') %><br>
 caption: <%= photo.escape('caption') %><br>
-username: <%= photo.escape('user') %>
 <a href=<%="#photos/" + photo.id %>>show</a>
-<a href=<%="#photos/" + photo.id + "/edit" %>>edit</a>
-<a href="#" class="destroy">delete</a>
+<% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
+  <a href=<%="#photos/" + photo.id + "/edit" %>>edit</a>
+  <a href=:"#" class="destroy">delete</a>
+<% } %>
+<br>
+user: <%= photo.escape('user') %>
 </li>
