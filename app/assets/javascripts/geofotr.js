@@ -4,7 +4,10 @@ window.Geofotr = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    new Geofotr.Routers.Router({
+      "$rootEl" : $("div#content")
+      });
+    Backbone.history.start();
   }
 };
 

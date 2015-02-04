@@ -1,0 +1,46 @@
+<form>
+<label for="caption">Caption</label>
+<input type="text"
+      name="caption"
+      id="caption"
+      value='<%= photo.escape('caption') %>'
+      placeholder="optional"><br>
+<label for="url">URL</label>
+<input type="text"
+      name="url"
+      id="url"
+      value='<%= photo.escape('url') %>'
+      placeholder="for testing purposes"><br>
+<label for="visibility">Visibility: </label>
+<input type="radio"
+      name="visibility"
+      id="visibility"
+      value='public'
+      checked>Public
+<input type="radio"
+      name="visibility"
+      id="visibility"
+      value='followers'>Followers only
+<input type="radio"
+      name="visibility"
+      id="visibility"
+      value='private'>Private (only me)<br>
+<label
+
+
+<label for="latitude">Latitude (optional)</label>
+<input type="number"
+      step="any"
+      name="latitude"
+      id="latitude"
+      value='<%= photo.escape('latitude') %>'><br>
+
+<label for="longitude">Longitude (optional)</label>
+<input type="number"
+      step="any"
+      name="longitude"
+      id="longitude"
+      value='<%= photo.escape('longitude') %>'><br>
+
+<button class="submit">Upload Photo!</button>
+</form>

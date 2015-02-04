@@ -18,4 +18,8 @@ class Photo < ActiveRecord::Base
   validates :visibility, inclusion: { in: %w/public followers private/ }
 
   belongs_to :user
+
+  def Photo.public_photos
+    Photo.where(visibility: "public")
+  end
 end

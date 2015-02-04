@@ -5,5 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(username: "markov", password: "password")
-User.create(username: "mahler", password: "password")
+markov = User.create(username: "markov", password: "password")
+mahler = User.create(username: "mahler", password: "password")
+
+markov.photos.create(url: "www.spirals.com", caption: "this will be a phenomenal photo", visibility: "public", latitude: 10.4537, longitude: 3.9999)
+
+mahler.photos.create(url: "a url of the photo of alma", caption: "a photo of Alma", visibility: "private")
