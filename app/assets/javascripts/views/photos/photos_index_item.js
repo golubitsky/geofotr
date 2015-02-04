@@ -6,12 +6,15 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   events: {
-    "click button.destroy" : "destroy"
+    "click a.destroy" : "destroy"
   },
 
   render: function () {
     console.log("photo item render")
-    this.$el.html(this.template({ photo: this.model }));
+    this.$el.html(this.template({
+      photo: this.model,
+      buttonText: "Upload photo!"
+    }));
     return this;
   },
 

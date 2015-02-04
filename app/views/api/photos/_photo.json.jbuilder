@@ -9,4 +9,4 @@ json.(photo,
   :created_at,
   :updated_at,
   )
-json.username photo.user.username
+json.user photo.user.username

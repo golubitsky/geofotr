@@ -14,7 +14,8 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   edit: function (id) {
     var photo = Geofotr.photos.getOrFetch(id);
-    var editView = new Geofotr.Views.PhotoForm({
+    var editView = new Geofotr.Views.PhotoEdit({
+      collection: Geofotr.photos,
       model: photo
     });
 
@@ -28,15 +29,6 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     this.$rootEl.html(indexView.render().$el);
-  },
-
-  new: function () {
-    var newPhoto = new Geofotr.Models.Photo();
-    var newView = new Geofotr.Views.PhotoForm({
-      model: newPhoto
-    });
-
-    this.$rootEl.html(newView.render().$el);
   },
 
   show: function (id) {

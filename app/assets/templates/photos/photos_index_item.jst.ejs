@@ -1,5 +1,8 @@
 <li>
 url: <%= photo.escape('url') %><br>
 caption: <%= photo.escape('caption') %><br>
-username: <%= photo.escape('username') %>
+username: <%= photo.escape('user') %>
+<a href=<%="#photos/" + photo.id %>>show</a>
+<a href=<%="#photos/" + photo.id + "/edit" %>>edit</a>
+<a href="#" class="destroy">delete</a>
 </li>

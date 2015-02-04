@@ -30,6 +30,16 @@ class Api::PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
+  def update
+    @photo = current_user.photos.find(params[:id])
+
+    if @photo.update(photo_params)
+      render :show
+    else
+      render json: @photo.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def photo_params

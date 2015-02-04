@@ -15,6 +15,7 @@
 //= require jquery.serializejson.min.js
 //= require underscore
 //= require backbone
+//= require bootstrap
 //= require geofotr
 //= require_tree ../templates
 //= require_tree ./utils
