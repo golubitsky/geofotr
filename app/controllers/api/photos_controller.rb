@@ -1,4 +1,7 @@
 class Api::PhotosController < ApplicationController
+
+  wrap_parameters(:posted_photo, include: [:url, :caption, :visibility, :latitude, :longitude, :photo])
+
  def create
     @photo = current_user.photos.new(photo_params)
 
@@ -43,7 +46,7 @@ class Api::PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:url, :caption, :visibility, :latitude, :longitude)
+    params.require(:posted_photo).permit(:url, :caption, :visibility, :latitude, :longitude, :photo)
   end
 
 end

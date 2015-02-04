@@ -26,4 +26,14 @@ class Photo < ActiveRecord::Base
   def Photo.public_photos
     Photo.where(visibility: "public")
   end
+
+  #photo uploads using paperclip
+  has_attached_file :photo, :styles => {
+        :big => "600x600>",
+        :small => "50x50#"
+      }
+  validates_attachment_content_type(
+    :photo,
+    :content_type => /\Aimage\/.*\Z/
+  )
 end

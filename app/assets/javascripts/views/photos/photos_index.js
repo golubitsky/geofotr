@@ -5,7 +5,8 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   events: {
     "click button.create" : "openForm",
-    "click button.submit" : "submitForm"
+    "click button.submit" : "submitForm",
+    'change #photo': 'handleFile'
   },
   initialize: function () {
     this.listenTo(this.collection, 'add', this.addPhotoSubview);
@@ -16,6 +17,18 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     }, this);
 
     this.model = new Geofotr.Models.Photo();
+  },
+
+  handleFile: function (event) {
+    console.log("file handling");
+    var file = event.currentTarget.files[0];
+    var that = this;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // note that this isn't saving
+      that.model.set('photo', this.result);
+    }
+    reader.readAsDataURL(file);
   },
 
   openForm: function (event) {
