@@ -19,7 +19,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   openForm: function (event) {
-    var form = this.form_template({ photo: this.model });
+    var form = this.form_template({ buttonText: "Upload new photo!", photo: this.model });
     $(event.target).replaceWith(form);
   },
 

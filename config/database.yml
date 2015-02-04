@@ -79,7 +79,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  <<: *defaultou will need this info for the env command below.
   database: Geofotr_production
   username: Geofotr
   password: <%= ENV['GEOFOTR_DATABASE_PASSWORD'] %>
