@@ -20,6 +20,7 @@ gem 'rmagick'
 gem 'fog'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'exifr'
 
 gem 'figaro'
 

@@ -15,7 +15,6 @@
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
 #
-
 class Photo < ActiveRecord::Base
   validates :visibility, inclusion: { in: %w/public followers private/ }
 
@@ -34,4 +33,15 @@ class Photo < ActiveRecord::Base
     :photo,
     :content_type => /\Aimage\/.*\Z/
   )
+
+  before_post_process :extract_exif
+
+  def extract_exif
+    imgfile = EXIFR::JPEG.new(photo.queued_for_write[:original].path)
+    return unless imgfile
+
+    self.latitude      = imgfile.gps_latitude.to_f
+    self.longitude     = imgfile.gps_longitude.to_f
+    #store other attributes later, perhaps?
+  end
 end

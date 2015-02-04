@@ -102,6 +102,7 @@ GEM
     erubis (2.7.0)
     excon (0.44.1)
     execjs (2.2.2)
+    exifr (1.2.0)
     figaro (1.1.0)
       thor (~> 0.14)
     fission (0.5.0)
@@ -305,6 +306,7 @@ DEPENDENCIES
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
+  exifr
   figaro
   fog
   jbuilder (~> 2.0)
