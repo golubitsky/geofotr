@@ -18,6 +18,10 @@ gem 'newrelic_rpm'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'fog'
+gem 'paperclip'
+gem 'aws-sdk'
+
+gem 'figaro'
 
 group :development do
   gem 'annotate'
