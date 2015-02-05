@@ -14,7 +14,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.$el.html(this.template({
       photo: this.model
     }));
-    debugger
     return this;
   },
 

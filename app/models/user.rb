@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   after_initialize :ensure_session_token
 
+
   has_many :photos
 
   has_many(
@@ -71,14 +72,26 @@ class User < ActiveRecord::Base
   end
 
   #user follow
-  def follow(other_user)
-    outgoing_subscriptions.create(
-      follower_id: self.id,
-      followee_id: other_user.id)
+
+  #obsoleted by Backbone subscription model
+  # def follow(other_user_id)
+  #   subscription = outgoing_subscriptions.new(
+  #     follower_id: self.id,
+  #     followee_id: other_user_id)
+  #   subscription.save
+
+  #   subscription
+  # end
+
+  # def unfollow(other_user)
+  #   outgoing_subscriptions.find_by(followee_id: other_user.id).destroy
+  # end
+  def public_photos
+    photos.where(visibility: "public")
   end
 
-  def unfollow(other_user)
-    outgoing_subscriptions.find_by(followee_id: other_user.id).destroy
+  def follower_photos
+    photos.where.not(visibility: "private")
   end
 
   def following?(other_user)
