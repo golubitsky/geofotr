@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     dependent: :destroy
     )
 
-  has_many :following, through: :outgoing_subscriptions,  source: :followee
+  has_many :following, through: :outgoing_subscriptions, source: :followee
   has_many :followers, through: :incoming_subscriptions, source: :follower
 
   #authentication

@@ -40,8 +40,8 @@ class Photo < ActiveRecord::Base
     imgfile = EXIFR::JPEG.new(photo.queued_for_write[:original].path)
     return unless imgfile
 
-    self.latitude      = imgfile.gps_latitude.to_f
-    self.longitude     = imgfile.gps_longitude.to_f
+    self.latitude      = imgfile.gps.latitude.to_f
+    self.longitude     = imgfile.gps.longitude.to_f
     #store other attributes later, perhaps?
   end
 end

@@ -6,38 +6,63 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '' : 'index',
-    'photos/new' : 'new',
-    'photos/:id' : 'show',
-    'photos/:id/edit' : 'edit'
+    '' : 'photoIndex',
+    'photos/:id' : 'photoShow',
+    'photos/:id/edit' : 'photoEdit',
+    'users/:id' : 'userShowToggle'
   },
 
-  edit: function (id) {
+  photoEdit: function (id) {
     var photo = Geofotr.photos.getOrFetch(id);
     var editView = new Geofotr.Views.PhotoEdit({
       collection: Geofotr.photos,
       model: photo
     });
 
-    this.$rootEl.html(editView.render().$el);
+    this._swapView(editView);
   },
 
-  index: function () {
+  photoIndex: function () {
     Geofotr.photos.fetch();
     var indexView = new Geofotr.Views.PhotosIndex({
       collection: Geofotr.photos
     });
 
-    this.$rootEl.html(indexView.render().$el);
+    this._swapView(indexView);
   },
 
-  show: function (id) {
+  photoShow: function (id) {
     var photo = Geofotr.photos.getOrFetch(id);
-    var showView = new Geofotr.Views.PhotoShow({
+    var photoShowView = new Geofotr.Views.PhotoShow({
       model: photo
     });
 
-    this.$rootEl.html(showView.render().$el);
+    this._swapView(photoShowView);
+  },
+
+  userShowToggle: function (id) {
+    this.user = new Geofotr.Models.User({ id: id });
+    this.user.fetch();
+
+    id === Geofotr.CURRENT_USER_ID ? this.profile(id) : this.userShow(id);
+  },
+
+  userShow: function (id) {
+    var userShowView = new Geofotr.Views.UserShow({
+      model: this.user,
+      collection: this.user.photos()
+    });
+
+    this._swapView(userShowView);
+  },
+
+  profile: function (id) {
+    var userProfile = new Geofotr.Views.UserProfile({
+      model: this.user,
+      collection: this.user.photos()
+    });
+
+    this._swapView(userProfile);
   },
 
   _swapView: function (view) {

@@ -5,9 +5,10 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
     if current_user == @user
       @photos = @user.photos
-    elsif current_user.following?(@user)
+    elsif current_user && current_user.following?(@user)
       @photos = @user.follower_photos
     else
       @photos = @user.public_photos
