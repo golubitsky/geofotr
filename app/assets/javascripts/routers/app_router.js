@@ -7,9 +7,9 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '' : 'photoIndex',
+    'users/:id' : 'photoIndex',
     'photos/:id' : 'photoShow',
     'photos/:id/edit' : 'photoEdit',
-    'users/:id' : 'userShowToggle'
   },
 
   photoEdit: function (id) {
@@ -22,8 +22,14 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     this._swapView(editView);
   },
 
-  photoIndex: function () {
-    Geofotr.photos.fetch();
+  photoIndex: function (id) {
+    if (id) {
+      Geofotr.photos.fetch( {
+        data: { user_id: id }
+      });
+    } else {
+      Geofotr.photos.fetch();
+    }
     var indexView = new Geofotr.Views.PhotosIndex({
       collection: Geofotr.photos
     });

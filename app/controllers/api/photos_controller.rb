@@ -19,14 +19,23 @@ class Api::PhotosController < ApplicationController
   end
 
   def index
-    @photos = Photo.all
-    #change later to show either all self/followed photos or all photos
-    # if current_user
-    #   @photos = current_user.feed_photos
-    # else
-    #   @photos = Photo.public_photos
-    # end
-    render :index
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+
+      if current_user == @user
+        @photos = current_user.photos
+      elsif current_user && current_user.following?(@user)
+        @photos = @user.follower_photos
+      else
+        @photos = @user.public_photos
+      end
+    else
+      @photos = Photo.public_photos
+
+      if current_user
+        @photos += current_user.photos
+      end
+    end
   end
 
   def show

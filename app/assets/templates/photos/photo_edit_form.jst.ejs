@@ -1,4 +1,4 @@
-<form>
+<form class="update-photo">
 
 <label for="caption">Caption</label>
 <input type="text"
@@ -27,14 +27,16 @@
       step="any"
       name="latitude"
       id="latitude"
+      placeholder="optional"
       value='<%= photo.escape('latitude') %>'><br>
 
-<label for="longitude">Longitude (optional)</label>
+<label for="longitude">Longitude</label>
 <input type="number"
       step="any"
       name="longitude"
       id="longitude"
+      placeholder="optional"
       value='<%= photo.escape('longitude') %>'><br>
 
-<button class="submit"><%= buttonText %></button>
+<input type="submit" value="Update photo!">
 </form>

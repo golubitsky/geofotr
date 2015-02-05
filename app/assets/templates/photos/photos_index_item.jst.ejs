@@ -1,11 +1,14 @@
 <li class="list-group-item">
 <%= photo.get('url') %><br>
 caption: <%= photo.escape('caption') %><br>
-<a href=<%="#photos/" + photo.id %>>show</a>
-<% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
-  <a href=<%="#photos/" + photo.id + "/edit" %>>edit</a>
-  <a href=:"#" class="destroy">delete</a>
-<% } %>
+<div class="buttons">
+  <button class="view">View photo</button>
+  <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
+    <button class="edit">Edit photo</button>
+    <button class="destroy">Remove photo</button>
+  <% } %>
+</div>
 <br>
+
 user: <a href= <%= "#users/" +photo.escape('user_id') %> ><%= photo.escape('user') %></a>
 </li>

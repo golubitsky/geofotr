@@ -4,8 +4,8 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   form_template: JST['photos/photo_form'],
 
   events: {
-    "click button.create" : "openForm",
-    "click button.submit" : "submitForm",
+    "click button.create" : "openNewForm",
+    "submit .new-photo" : "submitForm",
     'change #photo': 'handleFile'
   },
   initialize: function () {
@@ -30,11 +30,12 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     reader.readAsDataURL(file);
   },
 
-  openForm: function (event) {
+  openNewForm: function (event) {
     var form = this.form_template({
-      buttonText: "Upload new photo!",
       photo: this.model
     });
+
+    this.$newButton = $(event.target);
     $(event.target).replaceWith(form);
   },
 
@@ -47,7 +48,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       that.collection.add(model, { merge: true });
       //this is for later, when this function wont navigate to root anymore
       $('form').replaceWith('<button class="create">Upload new photo!</button>');
-      Backbone.history.navigate('', { trigger: true })
+      that.$('form.new-photo').replaceWith(that.$newButton);
     };
 
     var error = function (model) {
@@ -62,7 +63,8 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   addPhotoSubview: function (photo) {
     var photoListItem = new Geofotr.Views.PhotosListItem({
-      model: photo
+      model: photo,
+      collection: this.collection
     });
     this.addSubview('ul', photoListItem);
   },
