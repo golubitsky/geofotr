@@ -45,6 +45,8 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
     var success = function (model) {
       that.collection.add(model, { merge: true });
+      //this is for later, when this function wont navigate to root anymore
+      $('form').replaceWith('<button class="create">Upload new photo!</button>');
       Backbone.history.navigate('', { trigger: true })
     };
 

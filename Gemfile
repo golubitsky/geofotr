@@ -15,9 +15,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 gem 'newrelic_rpm'
 
-gem 'carrierwave'
+# remove carrier wave and fog after verifying everything works
+# gem 'carrierwave'
+# gem 'fog'
+
 gem 'rmagick'
-gem 'fog'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'exifr'
