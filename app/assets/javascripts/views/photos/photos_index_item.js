@@ -58,7 +58,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     });
   },
 
-  destroy: function (event) {
+  destroyPhoto: function (event) {
     event.preventDefault();
     this.model.destroy();
   }

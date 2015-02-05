@@ -38,10 +38,17 @@ class Photo < ActiveRecord::Base
 
   def extract_exif
     imgfile = EXIFR::JPEG.new(photo.queued_for_write[:original].path)
+
     return unless imgfile
 
-    self.latitude      = imgfile.gps.latitude.to_f
-    self.longitude     = imgfile.gps.longitude.to_f
+    lat = imgfile.gps_latitude.to_f
+    lat *= -1 if imgfile.gps_latitude_ref == "S"
+
+    lng = imgfile.gps_longitude.to_f
+    lng *= -1 if imgfile.gps_longitude_ref == "W"
+
+    self.latitude = lat.to_s
+    self.longitude = lng.to_s
     #store other attributes later, perhaps?
   end
 end
