@@ -3,7 +3,7 @@ class Api::SubscriptionsController < ApplicationController
     @subscription = Subscription.new(subscription_params)
 
     if @subscription.save
-      render :json @subscription
+      render json: @subscription
     else
       render json: @subscription.errors.full_messages, status: :unprocessable_entity
     end
