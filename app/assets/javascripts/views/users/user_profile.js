@@ -14,7 +14,6 @@ Geofotr.Views.UserProfile = Backbone.CompositeView.extend({
   },
 
   addPhotoSubview: function (photo) {
-    console.log("test")
     var userProfileItem = new Geofotr.Views.UserProfileItem({
       model: photo
     });

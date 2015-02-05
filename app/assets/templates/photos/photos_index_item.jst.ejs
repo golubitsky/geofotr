@@ -7,5 +7,5 @@ caption: <%= photo.escape('caption') %><br>
   <a href=:"#" class="destroy">delete</a>
 <% } %>
 <br>
-user: <%= photo.escape('user') %>
+user: <a href= <%= "#users/" +photo.escape('user_id') %> ><%= photo.escape('user') %></a>
 </li>
