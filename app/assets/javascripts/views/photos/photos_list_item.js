@@ -6,7 +6,9 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.addCommentsIndex();
+    this.addLikeButton();
     this.listenTo(this.model, 'change', this.render)
+    this.listenTo(this.model, 'change:likeCount', this.render)
   },
 
   events: {
@@ -14,8 +16,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     'click button.edit-photo' : 'openEditForm',
     'submit .update-photo' : 'submitForm',
     'click button.destroy-photo' : 'destroyPhoto',
-    'click button.like-photo' : 'likePhoto',
-    'click button.unlike-photo' : 'unlikePhoto'
   },
 
   render: function () {
@@ -30,10 +30,20 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   addCommentsIndex: function () {
     var commentsIndex = new Geofotr.Views.CommentsIndex({
+      photos: this.collection,
       collection: this.model.comments(),
       model: this.model
     });
     this.addSubview('div.comments-container', commentsIndex);
+  },
+
+  addLikeButton: function () {
+    var likeButtonView = new Geofotr.Views.Like({
+      collection: this.collection,
+      model: this.model.currentUserLike,
+      photo: this.model
+    });
+    this.addSubview('div.like-button', likeButtonView);
   },
 
   viewPhoto: function () {
@@ -76,64 +86,5 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   destroyPhoto: function (event) {
     event.preventDefault();ul
     this.model.destroy();
-  },
-
-  likePhoto: function (event) {
-    event.preventDefault();
-
-    var $button = $(event.target)
-    var $likeCount = this.$('.count')
-    var newCount = parseInt($likeCount.text()) + 1
-
-    $button.text('liking..');
-    $button.attr('disabled', 'disabled');
-
-    var like = new Geofotr.Models.Like({
-      user_id: Geofotr.CURRENT_USER_ID,
-      photo_id: this.model.id
-    });
-
-    $likeCount.text(newCount)
-
-    var that = this;
-
-    like.save({}, {
-      success: function (response) {
-        that.model.set('likeId', response.id, { silent: true });
-
-        $likeCount.text(newCount)
-        $button.removeAttr('disabled');
-        $button.removeClass('like');
-        $button.addClass('unlike');
-        $button.text('Unlike');
-      }
-    });
-  },
-
-  unlikePhoto: function (event) {
-    event.preventDefault();
-
-    var $button = $(event.target)
-    var $likeCount = this.$('.count')
-    var newCount = parseInt($likeCount.text()) - 1
-
-    $button.text('unliking..');
-    $button.attr('disabled', 'disabled');
-
-    var subscription = new Geofotr.Models.Like({ id: this.model.get('likeId') })
-
-    var that = this;
-
-    subscription.destroy({
-      success: function () {$likeCount.text(newCount)
-        that.model.unset('likeId', { silent: true })
-
-        $likeCount.text(newCount)
-        $button.removeAttr('disabled');
-        $button.removeClass('unlike');
-        $button.addClass('like');
-        $button.text('Like');
-      }
-    });
   }
 });

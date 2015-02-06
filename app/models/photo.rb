@@ -55,7 +55,7 @@ class Photo < ActiveRecord::Base
   end
 
   #like methods
-  def likes
+  def like_count
     Like.where(photo_id: self.id).count
   end
 

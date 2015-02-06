@@ -5,21 +5,19 @@
 
 <div class="photo-buttons">
   <button class="view-photo">View photo</button>
+
   <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
     <button class="edit-photo">Edit photo</button>
     <button class="destroy-photo">Remove photo</button>
-  <% } else if (Geofotr.CURRENT_USER) { %>
-    <% if (photo.get('likeId')) { %>
-      <button class="unlike-photo">Unlike</button>
-    <% } else { %>
-      <button class="like-photo">Like</button>
-    <% } %>
   <% } %>
+
+  <div class="like-button"></div>
+
   <button class="new-comment">Add comment</button><br>
 </div>
 
 <div class="likes" style="display: inline">
-  Likes: <div class="count" style="display: inline"><%= photo.get('numLikes') %></div>
+  Likes: <div class="count" style="display: inline"><%= photo.get('likeCount') %></div>
   <br>
   user: <a href= <%= "#users/" +photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
 </div>

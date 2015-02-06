@@ -7,6 +7,7 @@ Geofotr.Models.Photo = Backbone.Model.extend({
     }
     return this._comments;
   },
+
   //parse function
   //take incoming comments and create comments collection
   parse: function (payload) {
@@ -14,6 +15,16 @@ Geofotr.Models.Photo = Backbone.Model.extend({
       this.comments().set(payload.comments);
       delete payload.comments;
     }
+
+    this.currentUserLike = new Geofotr.Models.Like({
+      photo_id: payload.id,
+      user_id: Geofotr.CURRENT_USER_ID
+    });
+
+    if (payload.likeId) {
+      this.currentUserLike.set({ id: payload.likeId });
+    }
+
     return payload;
   }
 });

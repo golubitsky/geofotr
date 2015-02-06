@@ -9,7 +9,8 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
     'submit .create-comment' : 'submitForm'
   },
 
-  initialize: function () {
+  initialize: function (options) {
+    this.photos = options.photos;
     this.listenTo(this.collection, 'add', this.addCommentSubview);
     this.listenTo(this.collection, 'remove', this.removeCommentSubview);
 
@@ -32,24 +33,26 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
     $(event.target).replaceWith(form);
   },
 
-  submitForm: function () {
-    event.preventDefault();
-    params = this.$('form').serializeJSON();
-    var that = this;
+  submitForm: function (event) {
+    if (isEnterKeypress(event)) {
+      event.preventDefault();
+      params = this.$('form').serializeJSON();
+      var that = this;
 
-    var success = function (model) {
-      that.collection.add(model, { merge: true });
-      that.$('form.new-comment').replaceWith(that.$newButton);
-    };
+      var success = function (model) {
+        that.collection.add(model, { merge: true });
+        that.$('form.new-comment').replaceWith(that.$newButton);
+      };
 
-    var error = function (model) {
-      console.log('error')
+      var error = function (model) {
+        console.log('error')
+      }
+
+      this.newComment.save(params, {
+        success: success,
+        error: error
+      });
     }
-
-    this.newComment.save(params, {
-      success: success,
-      error: error
-    });
   },
 
   addCommentSubview: function (comment) {
