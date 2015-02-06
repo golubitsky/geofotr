@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if current_user == @user
-      @photos = @user.photos
+      @photos = current_user.photos
     elsif current_user && current_user.following?(@user)
       @photos = @user.follower_photos
     else

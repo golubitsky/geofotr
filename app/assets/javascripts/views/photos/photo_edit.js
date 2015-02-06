@@ -3,7 +3,7 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   template: JST['photos/photo_edit_form'],
 
   events: {
-    "click button.submit" : "submitForm"
+    'click button.submit' : 'submitForm'
   },
 
   initialize: function () {

@@ -1,3 +1,13 @@
-<ul class="list-group centered" ></ul>
+<% if (Geofotr.CURRENT_USER) { %>
+  <button class="create">Geofotr a photo!</button>
+<% } %>
+<h1><%= user.escape('username') + "'s photos" %></h1>
 
-<a href="#">Home</a>
+<% if (Geofotr.CURRENT_USER && user.get('subscription_id')) { %>
+  <button class="unfollow">Unfollow user</button>
+<% } else if (Geofotr.CURRENT_USER) { %>
+  <button class="follow">Follow user</button>
+<% } %>
+
+<ul class="list-group centered" ></ul>
+<form></form>

@@ -51,4 +51,14 @@ class Photo < ActiveRecord::Base
     self.longitude = lng.to_s
     #store other attributes later, perhaps?
   end
+
+  #like methods
+  def likes
+    Like.where(photo_id: self.id).count
+  end
+
+  def liked?(current_user)
+    return true if Like.find_by(photo_id: self.id, user_id: current_user.id)
+    false
+  end
 end

@@ -1,2 +1,3 @@
 module Api::PhotosHelper
+
 end

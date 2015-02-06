@@ -4,18 +4,21 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.tagName = 'li';
-    this.listenTo(this.model, "change", this.render)
+    this.listenTo(this.model, 'change', this.render)
   },
 
   events: {
-    "click button.view" : "viewPhoto",
-    "click button.edit" : "openEditForm",
-    "submit .update-photo" : "submitForm",
-    "click button.destroy" : "destroyPhoto"
+    'click button.view' : 'viewPhoto',
+    'click button.edit' : 'openEditForm',
+    'submit .update-photo' : 'submitForm',
+    'click button.destroy' : 'destroyPhoto'
+    'click button.like' : 'likePhoto'
+    'click button.unlike' : 'unlikePhoto'
+
   },
 
   render: function () {
-    console.log("photo item render")
+    console.log('photo item render')
     this.$el.html(this.template({
       photo: this.model
     }));
@@ -30,7 +33,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   openEditForm: function (event) {
-    console.log("open edit form")
+    console.log('open edit form')
     this.$buttons = this.$('.buttons');
     var form = this.form_template({
       photo: this.model
@@ -61,6 +64,12 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   destroyPhoto: function (event) {
     event.preventDefault();
     this.model.destroy();
+  },
+
+  likePhoto: function (event) {
+  },
+
+  unlikePhoto: function (event) {
   }
 
 });

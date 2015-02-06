@@ -1,8 +1,7 @@
 class Api::PhotosController < ApplicationController
-
   wrap_parameters(:posted_photo, include: [:caption, :visibility, :latitude, :longitude, :photo])
 
- def create
+  def create
     @photo = current_user.photos.new(photo_params)
 
     if @photo.save
@@ -29,6 +28,8 @@ class Api::PhotosController < ApplicationController
       else
         @photos = @user.public_photos
       end
+
+      generate_subscription_id
     else
       @photos = Photo.public_photos
 
@@ -58,4 +59,15 @@ class Api::PhotosController < ApplicationController
     params.require(:posted_photo).permit(:caption, :visibility, :latitude, :longitude, :photo)
   end
 
+  def generate_subscription_id
+    @subscription_id = nil
+
+    if current_user.following?(@user)
+      @subscription = Subscription.find_by(
+        follower_id: current_user.id,
+        followee_id: @user.id
+        )
+      @subscription_id = @subscription.id
+    end
+  end
 end

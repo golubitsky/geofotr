@@ -1,9 +1,11 @@
 class Api::SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(subscription_params)
+    @user = User.find(params[:followee_id])
+    @photos = @user.follower_photos
 
     if @subscription.save
-      render json: @subscription
+      render :subscription
     else
       render json: @subscription.errors.full_messages, status: :unprocessable_entity
     end

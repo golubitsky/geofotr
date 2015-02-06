@@ -6,6 +6,8 @@ caption: <%= photo.escape('caption') %><br>
   <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
     <button class="edit">Edit photo</button>
     <button class="destroy">Remove photo</button>
+  <% } else if (Geofotr.CURRENT_USER) { %>
+
   <% } %>
 </div>
 <br>
