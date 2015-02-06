@@ -1,20 +1,21 @@
 Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
-  template: JST['photos/photos_index_item'],
+  template: JST['photos/photos_list_item'],
   form_template: JST['photos/photo_edit_form'],
+  tagName: 'li',
+  className: 'list-group-item',
 
   initialize: function () {
-    this.tagName = 'li';
+    this.addCommentsIndex();
     this.listenTo(this.model, 'change', this.render)
   },
 
   events: {
-    'click button.view' : 'viewPhoto',
-    'click button.edit' : 'openEditForm',
+    'click button.view-photo' : 'viewPhoto',
+    'click button.edit-photo' : 'openEditForm',
     'submit .update-photo' : 'submitForm',
-    'click button.destroy' : 'destroyPhoto',
-    'click button.like' : 'likePhoto',
-    'click button.unlike' : 'unlikePhoto'
-
+    'click button.destroy-photo' : 'destroyPhoto',
+    'click button.like-photo' : 'likePhoto',
+    'click button.unlike-photo' : 'unlikePhoto'
   },
 
   render: function () {
@@ -22,7 +23,17 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.$el.html(this.template({
       photo: this.model
     }));
+
+    this.attachSubviews();
     return this;
+  },
+
+  addCommentsIndex: function () {
+    var commentsIndex = new Geofotr.Views.CommentsIndex({
+      collection: this.model.comments(),
+      model: this.model
+    });
+    this.addSubview('div.comments-container', commentsIndex);
   },
 
   viewPhoto: function () {
@@ -34,11 +45,12 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   openEditForm: function (event) {
     console.log('open edit form')
-    this.$buttons = this.$('.buttons');
     var form = this.form_template({
       photo: this.model
     });
-    this.$('.buttons').replaceWith(form);
+
+    this.$buttons = this.$('.photo-buttons');
+    this.$buttons.replaceWith(form);
   },
 
   submitForm: function (event) {
@@ -62,7 +74,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   destroyPhoto: function (event) {
-    event.preventDefault();
+    event.preventDefault();ul
     this.model.destroy();
   },
 
@@ -80,12 +92,14 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       user_id: Geofotr.CURRENT_USER_ID,
       photo_id: this.model.id
     });
-$likeCount.text(newCount)
+
+    $likeCount.text(newCount)
+
     var that = this;
 
     like.save({}, {
       success: function (response) {
-        that.model.set('likeId', response.id);
+        that.model.set('likeId', response.id, { silent: true });
 
         $likeCount.text(newCount)
         $button.removeAttr('disabled');
@@ -122,5 +136,4 @@ $likeCount.text(newCount)
       }
     });
   }
-
 });

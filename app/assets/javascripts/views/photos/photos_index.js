@@ -3,10 +3,11 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   template: JST['photos/photos_index'],
   form_template: JST['photos/photo_form'],
   user_template: JST['users/user_show'],
+  className: 'photo-feed',
 
   events: {
-    'click button.create' : 'openNewForm',
-    'submit .new-photo' : 'submitForm',
+    'click button.new-photo' : 'openNewForm',
+    'submit .create-photo' : 'submitForm',
     'change #photo': 'handleFile',
     'click button.follow' : 'followUser',
     'click button.unfollow' : 'unfollowUser'
@@ -49,8 +50,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
     var success = function (model) {
       that.collection.add(model, { merge: true });
-      //this is for later, when this function wont navigate to root anymore
-      $('form').replaceWith('<button class="create">Upload new photo!</button>');
       that.$('form.new-photo').replaceWith(that.$newButton);
     };
 
@@ -73,7 +72,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
     var subscription = new Geofotr.Models.Subscription({
       follower_id: Geofotr.CURRENT_USER_ID,
-      followee_id: this.model.id
+      followee_id: this.emodel.id
     });
 
     var that = this;
@@ -94,7 +93,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   unfollowUser: function (event) {
     event.preventDefault();
-
+this.addSubview('ul', photoListItem);
     var $button = $(event.target)
     $button.text('unfollowing..');
     $button.attr('disabled', 'disabled');
@@ -116,13 +115,13 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       model: photo,
       collection: this.collection
     });
-    this.addSubview('ul', photoListItem);
+    this.addSubview('ul.photo-list', photoListItem);
   },
 
   removePhotoSubview: function (photo) {
-    this.subviews('ul').forEach(function(subview) {
+    this.subviews('ul.photo-list').forEach(function(subview) {
       if (subview.model === photo) {
-        this.removeSubview('ul', subview);
+        this.removeSubview('ul.photo-list', subview);
       }
     }.bind(this));
   },
@@ -130,7 +129,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   render: function () {
 
     console.log('index render');
-    if (this.model.isNew()===false) {
+    if (this.model.isNew() === false) {
       this.$el.html(this.user_template({
         user: this.model
       }));

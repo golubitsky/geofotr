@@ -6,8 +6,8 @@
 #  user_id            :integer
 #  caption            :string
 #  visibility         :string           default("public")
-#  latitude           :decimal(10, 6)
-#  longitude          :decimal(10, 6)
+#  latitude           :string
+#  longitude          :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  photo_file_name    :string

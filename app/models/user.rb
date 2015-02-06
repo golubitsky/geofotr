@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many :photos
+  has_many :comments
 
   has_many(
     :outgoing_subscriptions,

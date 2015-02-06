@@ -13,3 +13,9 @@ json.user photo.user.username
 json.url image_tag photo.photo.url(:big)
 json.likeId photo.like_id(current_user)
 json.numLikes photo.likes
+
+json.comments do
+  json.array!(photo.comments) do |comment|
+    json.partial!("photo_comment", comment: comment)
+  end
+end

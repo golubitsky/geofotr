@@ -1,0 +1,15 @@
+<form class=<%= className %> >
+
+<input type="hidden"
+      name="photo_id"
+      value='<%= photo_id %>'>
+
+<label for="body"></label>
+<input type="text"
+      name="body"
+      id="body"
+      value='<%= comment.escape('body') %>'
+      placeholder="Add your thoughts..">
+
+<input type="submit" value='<%= buttonText %>'>
+</form>
