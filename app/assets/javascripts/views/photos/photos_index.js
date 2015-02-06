@@ -80,7 +80,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
     subscription.save({}, {
       success: function (response) {
-        that.model.set('subscription_id', response.get('subscription_id'));
+        that.model.set('subscriptionId', response.get('subscriptionId'));
         response.photos().each(function (photo) {
           that.collection.add(photo, { merge: true });
         });
@@ -99,7 +99,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     $button.text('unfollowing..');
     $button.attr('disabled', 'disabled');
 
-    var subscription = new Geofotr.Models.Subscription({ id: this.model.get('subscription_id') })
+    var subscription = new Geofotr.Models.Subscription({ id: this.model.get('subscriptionId') })
 
     subscription.destroy({
       success: function () {

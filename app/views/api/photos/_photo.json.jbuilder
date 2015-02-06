@@ -11,4 +11,5 @@ json.(photo,
 json.user photo.user.username
 
 json.url image_tag photo.photo.url(:big)
-json.liked liked
+json.likeId photo.like_id(current_user)
+json.numLikes photo.likes

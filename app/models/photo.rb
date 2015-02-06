@@ -57,8 +57,8 @@ class Photo < ActiveRecord::Base
     Like.where(photo_id: self.id).count
   end
 
-  def liked?(current_user)
-    return true if Like.find_by(photo_id: self.id, user_id: current_user.id)
-    false
+  def like_id(current_user)
+    like = Like.find_by(photo_id: self.id, user_id: current_user.id)
+    like ? like.id : ''
   end
 end

@@ -7,8 +7,16 @@ caption: <%= photo.escape('caption') %><br>
     <button class="edit">Edit photo</button>
     <button class="destroy">Remove photo</button>
   <% } else if (Geofotr.CURRENT_USER) { %>
+    <% if (photo.get('likeId')) { %>
+      <button class="unlike">Unlike</button>
+    <% } else { %>
+      <button class="like">Like</button>
+    <% } %>
 
   <% } %>
+  <div class="likes" style="display: inline">
+  Likes: <div class="count" style="display: inline"><%= photo.get('numLikes') %></div>
+  </div>
 </div>
 <br>
 

@@ -1,4 +1,4 @@
-json.subscription_id @subscription.id
+json.subscriptionId @subscription.id
 
 json.photos do
   json.array!(@photos) do |photo|
