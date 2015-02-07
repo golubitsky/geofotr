@@ -33,7 +33,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     this._swapView(userShowView);
   },
 
-  photoIndex: function (id) {
+  photoIndex: function () {
     Geofotr.photos.fetch();
 
     var indexView = new Geofotr.Views.PhotosIndex({

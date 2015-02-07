@@ -2,7 +2,7 @@
     <%= photo.get('url') %>
     <figcaption><%= photo.escape('caption') %></figcaption>
 </figure>
-user: <a href= <%= "#users/" +photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
+user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
 
 <div class="photo-buttons">
   <button class="view-photo">View photo</button>

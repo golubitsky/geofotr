@@ -40,6 +40,7 @@ class Api::PhotosController < ApplicationController
   end
 
   def show
+    @original_size = true
     @photo = Photo.find(params[:id])
   end
 

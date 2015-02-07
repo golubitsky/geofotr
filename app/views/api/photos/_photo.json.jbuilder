@@ -11,11 +11,12 @@ json.(photo,
 json.user photo.user.username
 
 json.url image_tag photo.photo.url(:big)
+json.url image_tag photo.photo.url(:original) if @original_size
 json.likeId photo.like_id(current_user)
 json.likeCount photo.like_count
 
 json.comments do
   json.array!(photo.comments) do |comment|
-    json.partial!("photo_comment", comment: comment)
+    json.partial!("api/photos/photo_comment", comment: comment)
   end
 end

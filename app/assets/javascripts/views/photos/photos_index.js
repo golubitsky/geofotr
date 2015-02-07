@@ -9,9 +9,8 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     'click button.new-photo' : 'openNewForm',
     'submit .create-photo' : 'submitForm',
     'change #photo': 'handleFile',
-    'click button.follow' : 'followUser',
-    'click button.unfollow' : 'unfollowUser'
   },
+
   initialize: function () {
     this.listenTo(this.collection, 'add', this.addPhotoSubview);
     this.listenTo(this.collection, 'remove', this.removePhotoSubview);
@@ -21,6 +20,16 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       this.addPhotoSubview(photo);
     }, this);
     this.newPhoto = new Geofotr.Models.Photo();
+    this.addSubscriptionButton();
+  },
+
+  addSubscriptionButton: function () {
+    if (this.model.isNew()) { return };
+    var subscriptionButton = new Geofotr.Views.Subscription({
+      model: this.model,
+      collection: this.collection
+    });
+    this.addSubview('div.subscription-container', subscriptionButton);
   },
 
   handleFile: function (event) {
@@ -69,53 +78,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     } else {
       this.$('div.photo-error').html('Please select a file to Geofotr!');
     };
-  },
-
-  followUser: function (event) {
-    event.preventDefault();
-
-    var $button = $(event.target)
-    $button.text('following..');
-    $button.attr('disabled', 'disabled');
-
-    var subscription = new Geofotr.Models.Subscription({
-      follower_id: Geofotr.CURRENT_USER_ID,
-      followee_id: this.emodel.id
-    });
-
-    var that = this;
-
-    subscription.save({}, {
-      success: function (response) {
-        that.model.set('subscriptionId', response.get('subscriptionId'));
-        response.photos().each(function (photo) {
-          that.collection.add(photo, { merge: true });
-        });
-        $button.removeAttr('disabled');
-        $button.removeClass('follow');
-        $button.addClass('unfollow');
-        $button.text('Unfollow user');
-      }
-    });
-  },
-
-  unfollowUser: function (event) {
-    event.preventDefault();
-
-    var $button = $(event.target)
-    $button.text('unfollowing..');
-    $button.attr('disabled', 'disabled');
-
-    var subscription = new Geofotr.Models.Subscription({ id: this.model.get('subscriptionId') })
-
-    subscription.destroy({
-      success: function () {
-        $button.removeAttr('disabled');
-        $button.removeClass('unfollow');
-        $button.addClass('follow');
-        $button.text('Follow user');
-      }
-    });
   },
 
   addPhotoSubview: function (photo) {
