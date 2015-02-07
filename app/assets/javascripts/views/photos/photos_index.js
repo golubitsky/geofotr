@@ -43,25 +43,32 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     $(event.target).replaceWith(form);
   },
 
-  submitForm: function () {
+  submitForm: function (event) {
     event.preventDefault();
-    params = this.$('form').serializeJSON();
-    debugger
-    var that = this;
+    if (this.newPhoto.get('photo') !== undefined) {
+      params = this.$('form').serializeJSON();
+      $submitButton = this.$('input[type=submit]')
+      $submitButton.attr('disabled', 'disabled')
+      $submitButton.val('Geofotring! (please wait...)')
+      var that = this;
 
-    var success = function (model) {
-      that.collection.add(model, { merge: true });
-      that.$('form.new-photo').replaceWith(that.$newButton);
-    };
+      var success = function (model) {
+        that.$('div.photo-errors').empty();
+        that.collection.add(model, { merge: true });
+        that.$('form.create-photo').replaceWith(that.$newButton);
+      };
 
-    var error = function (model) {
-      console.log('error')
+      var error = function (model) {
+        console.log('error')
+      }
+
+      this.newPhoto.save(params, {
+        success: success,
+        error: error
+      });
+    } else {
+      this.$('div.photo-error').html('Please select a file to Geofotr!');
     }
-
-    this.newPhoto.save(params, {
-      success: success,
-      error: error
-    });
   },
 
   followUser: function (event) {
