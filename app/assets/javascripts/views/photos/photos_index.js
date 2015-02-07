@@ -59,7 +59,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       };
 
       var error = function (model) {
-        console.log('error')
+        that.$('div.photo-error').html('There was an error. Please try again!');
       }
 
       this.newPhoto.save(params, {
@@ -68,7 +68,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       });
     } else {
       this.$('div.photo-error').html('Please select a file to Geofotr!');
-    }
+    };
   },
 
   followUser: function (event) {
