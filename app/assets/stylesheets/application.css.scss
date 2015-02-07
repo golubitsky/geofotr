@@ -16,3 +16,15 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+  height: 800px;
+  width: 600px;
+}
+
+html, body, #content, #map-canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

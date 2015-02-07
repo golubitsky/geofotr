@@ -10,6 +10,12 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     'users/:id' : 'userShow',
     'photos/:id' : 'photoShow',
     'photos/:id/edit' : 'photoEdit',
+    'map' : 'mapIndex'
+  },
+
+  mapIndex: function () {
+    var mapIndex = new Geofotr.Views.MapsIndex();
+    this._swapView(mapIndex, true);
   },
 
   photoEdit: function (id) {
@@ -65,10 +71,16 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     this._swapView(photoShowView);
   },
 
-  _swapView: function (view) {
+  _swapView: function (view, googleMap) {
     this.currentView && this.currentView.remove();
 
-    this.$rootEl.html(view.render().$el);
+    if (googleMap) {
+      this.$rootEl.html(view.$el);
+      view.render();
+    } else {
+      this.$rootEl.html(view.render().$el);
+    }
+
     this.currentView = view;
   }
 });

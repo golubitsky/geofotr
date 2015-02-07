@@ -20,5 +20,15 @@
   Geofotr.CURRENT_USER_ID = "<%= current_user.try(:id) %>"
 </script>
 
+<% if Rails.env.production? %>
+  <% api_key = ENV["GOOGLEMAPS_KEY"] %>
+<% else %>
+  <% api_key = '' %>
+<% end %>
+
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?<%= api_key %>">
+</script>
+
 </body>
 </html>
