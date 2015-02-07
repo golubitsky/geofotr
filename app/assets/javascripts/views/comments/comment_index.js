@@ -58,6 +58,7 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   addCommentSubview: function (comment) {
     var commentListItem = new Geofotr.Views.CommentsListItem({
       model: comment,
+      photo: this.model,
       collection: this.collection
     });
     this.addSubview('ul.photo-comments', commentListItem);

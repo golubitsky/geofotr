@@ -1,2 +1,11 @@
-<%= comment.escape('user') %>: <%= comment.escape('body') %>
+<div class="comment-text"><%= comment.escape('user') %>: <%= comment.escape('body') %></div>
+
+<% if (Geofotr.CURRENT_USER_ID === comment.get('user_id')) { %>
+  <button class="edit-comment">Edit</button>
+<% } %>
+
+<% if (Geofotr.CURRENT_USER_ID === photo.get('user_id') || Geofotr.CURRENT_USER_ID === comment.get('user_id')) { %>
+  <button class="destroy-comment">X</button>
+<% } %>
+
 

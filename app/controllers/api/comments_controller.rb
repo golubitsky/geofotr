@@ -10,6 +10,16 @@ class Api::CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = current_user.comments.find(params[:id])
+
+    if @comment.update(comment_params)
+      render :comment
+    else
+      render json: @comment.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.try(:destroy)

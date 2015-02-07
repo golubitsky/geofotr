@@ -9,14 +9,16 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
     'click button.destroy-comment' : 'destroyComment',
   },
 
-  initialize: function () {
+  initialize: function (options) {
+    this.photo = options.photo
     this.listenTo(this.model, 'change', this.render);
     this.tagName = 'li';
   },
 
   render: function () {
     this.$el.html(this.template({
-      comment: this.model
+      comment: this.model,
+      photo: this.photo
     }));
     return this;
   },
@@ -26,11 +28,13 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
     var form = this.form_template({
       comment: this.model,
       buttonText: "Update comment",
-      className: "update-comment"
+      className: "update-comment",
+      photo_id: this.photo.id,
+      user_id: Geofotr.CURRENT_USER_ID
     });
 
-    this.$buttons = this.$('.comment-buttons');
-    this.$buttons.replaceWith(form);
+    this.$commentText = this.$('.comment-text');
+    this.$commentText.replaceWith(form);
   },
 
   submitForm: function (event) {
@@ -40,7 +44,7 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
 
     var success = function (model) {
       that.collection.add(model, { merge: true });
-      that.$('form.update-comment').replaceWith(that.$buttons);
+      that.$('form.update-comment').replaceWith(that.$commentText);
     };
 
     var error = function (model) {
