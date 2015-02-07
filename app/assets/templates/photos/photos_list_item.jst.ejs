@@ -2,6 +2,7 @@
     <%= photo.get('url') %>
     <figcaption><%= photo.escape('caption') %></figcaption>
 </figure>
+user: <a href= <%= "#users/" +photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
 
 <div class="photo-buttons">
   <button class="view-photo">View photo</button>
@@ -12,14 +13,11 @@
   <% } %>
 
   <div class="like-button"></div>
-
-  <button class="new-comment">Add comment</button><br>
 </div>
 
 <div class="likes" style="display: inline">
   Likes: <div class="count" style="display: inline"><%= photo.get('likeCount') %></div>
   <br>
-  user: <a href= <%= "#users/" +photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
 </div>
 
 <div class="comments-container"></div>

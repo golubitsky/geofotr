@@ -34,14 +34,14 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   },
 
   submitForm: function (event) {
-    if (isEnterKeypress(event)) {
+    if (event.type === "submit" || isEnterKeypress(event)) {
       event.preventDefault();
       params = this.$('form').serializeJSON();
       var that = this;
 
       var success = function (model) {
         that.collection.add(model, { merge: true });
-        that.$('form.new-comment').replaceWith(that.$newButton);
+        that.$('form.create-comment').replaceWith(that.$newButton);
       };
 
       var error = function (model) {
