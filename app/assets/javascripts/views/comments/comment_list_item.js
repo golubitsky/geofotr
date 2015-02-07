@@ -48,8 +48,8 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
     };
 
     var error = function (model) {
-      console.log('error')
-    }
+      console.log('error');
+    };
 
     this.model.save(params, {
       success: success,

@@ -29,7 +29,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     var reader = new FileReader();
     reader.onload = function(e) {
       // note that this isn't saving
-      that.model.set('photo', this.result);
+      that.newPhoto.set('photo', this.result);
     }
     reader.readAsDataURL(file);
   },
@@ -46,6 +46,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   submitForm: function () {
     event.preventDefault();
     params = this.$('form').serializeJSON();
+    debugger
     var that = this;
 
     var success = function (model) {
