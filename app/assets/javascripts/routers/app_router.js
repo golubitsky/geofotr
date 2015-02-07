@@ -6,6 +6,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '' : 'photoIndex',
+    'users' : 'userIndex',
     'users/:id' : 'userShow',
     'photos/:id' : 'photoShow',
     'photos/:id/edit' : 'photoEdit',
@@ -31,6 +32,17 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     this._swapView(userShowView);
+  },
+
+  userIndex: function () {
+    var users = new Geofotr.Collections.Users();
+    users.fetch();
+
+    var usersIndex = new Geofotr.Views.UsersIndex({
+      collection: users
+    });
+
+    this._swapView(usersIndex);
   },
 
   photoIndex: function () {

@@ -19,6 +19,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     this.collection.each(function (photo) {
       this.addPhotoSubview(photo);
     }, this);
+
     this.newPhoto = new Geofotr.Models.Photo();
     this.addSubscriptionButton();
   },
