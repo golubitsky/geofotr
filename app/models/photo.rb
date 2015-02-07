@@ -60,6 +60,7 @@ class Photo < ActiveRecord::Base
   end
 
   def like_id(current_user)
+    return '' unless current_user
     like = Like.find_by(photo_id: self.id, user_id: current_user.id)
     like ? like.id : ''
   end
