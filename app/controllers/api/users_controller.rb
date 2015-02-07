@@ -13,15 +13,5 @@ class Api::UsersController < ApplicationController
     else
       @photos = @user.public_photos
     end
-
-    @subscription_id = nil
-
-    if current_user.try(:following?, @user)
-      @subscription = Subscription.find_by(
-        follower_id: current_user.id,
-        followee_id: @user.id
-        )
-      @subscription_id = @subscription.id
-    end
   end
 end

@@ -18,7 +18,10 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <!-- <li><%= "What up, #{current_user.username}?" %></li> -->
+          <li><%= link_to "Geofotr!", "#" %></li>
+          <li><%= link_to "Feed", "" %></li>
           <li><%= link_to "Your photos", "#users/" + current_user.id.to_s %></li>
+          <li><%= link_to "Users", "#users" %></li>
           <li><%= link_to "Sign Out", session_url, method: :delete %></li>
         <% else %>
           <li><%= link_to "Sign Up", new_user_url %></li>

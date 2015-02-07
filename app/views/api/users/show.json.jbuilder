@@ -1,4 +1,4 @@
-json.partial!("user", user: @user, subscription_id: @subscription_id)
+json.partial!("user", user: @user)
 
 json.photos do
   json.array!(@photos) do |photo|

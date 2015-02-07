@@ -83,6 +83,15 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
+  def subscription_id(other_user)
+    subscription = Subscription.find_by(
+      follower_id: self.id,
+      followee_id: other_user.id
+      )
+
+    subscription.try(:id)
+  end
+
   def like_object(photo)
     Like.find_by(photo_id: photo.id, user_id: current_user.id)
   end

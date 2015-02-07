@@ -9,6 +9,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     'click button.new-photo' : 'openNewForm',
     'submit .create-photo' : 'submitForm',
     'change #photo': 'handleFile',
+    'click .navigate-back' : 'navigateBack'
   },
 
   initialize: function () {
@@ -108,6 +109,10 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     }
     this.attachSubviews();
     return this;
+  },
+
+  navigateBack: function () {
+    Backbone.history.history.back()
   }
 
 });
