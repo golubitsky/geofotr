@@ -13,7 +13,6 @@ Geofotr.Views.Subscription = Backbone.CompositeView.extend({
     },
 
     render: function () {
-      debugger
       console.log('subscription render');
       this.$el.html(this.template({ user: this.model }));
       return this;
@@ -57,7 +56,7 @@ Geofotr.Views.Subscription = Backbone.CompositeView.extend({
     subscription.destroy({
       success: function () {
         that.model.unset('subscriptionId');
-        that.collection.fetch();
+        that.model.fetch();
       }
     });
   },

@@ -11,7 +11,7 @@ Geofotr.Models.Subscription = Backbone.Model.extend({
   //take incoming photos and create photos collection
   parse: function (payload) {
     if (payload.photos) {
-      this.photos().set(payload.photos);
+      this.photos().set(payload.photos, { parse: true });
       delete payload.photos;
     }
     return payload;

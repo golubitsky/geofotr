@@ -97,7 +97,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-
     console.log('index render');
     if (this.model.isNew() === false) {
       this.$el.html(this.user_template({
