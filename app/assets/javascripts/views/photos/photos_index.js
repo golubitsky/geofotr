@@ -93,7 +93,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   unfollowUser: function (event) {
     event.preventDefault();
-this.addSubview('ul', photoListItem);
+
     var $button = $(event.target)
     $button.text('unfollowing..');
     $button.attr('disabled', 'disabled');

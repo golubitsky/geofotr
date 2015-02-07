@@ -30,16 +30,15 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   addCommentsIndex: function () {
     var commentsIndex = new Geofotr.Views.CommentsIndex({
-      photos: this.collection,
       collection: this.model.comments(),
-      model: this.model
+      model: this.model,
+      photos: this.collection
     });
     this.addSubview('div.comments-container', commentsIndex);
   },
 
   addLikeButton: function () {
     var likeButtonView = new Geofotr.Views.Like({
-      collection: this.collection,
       model: this.model.currentUserLike,
       photo: this.model
     });
