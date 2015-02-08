@@ -56,8 +56,9 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   submitForm: function (event) {
     event.preventDefault();
+    debugger
     if (this.newPhoto.get('photo') !== undefined) {
-      params = this.$('form').serializeJSON();
+      params = this.$('.create-photo').serializeJSON();
       $submitButton = this.$('input[type=submit]')
       $submitButton.attr('disabled', 'disabled')
       $submitButton.val('Geofotring! (please wait...)')

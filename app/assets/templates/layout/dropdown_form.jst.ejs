@@ -1,0 +1,36 @@
+<li>
+  <div class="alert alert-danger alert-error"></div>
+</li>
+<li class='divider'></li>
+<li>
+  <form class="create-photo" enctype="multipart/form-data">
+    <label for "photo">File</label>
+    <input type="file"
+          name="photo"
+          id="photo">
+
+    <label for="caption">Caption</label>
+    <input type="text"
+          name="caption"
+          id="caption"
+          value='<%= photo.escape('caption') %>'
+          placeholder="optional"><br>
+
+    <label for="visibility">Visibility: </label>
+    <input type="radio"
+          name="visibility"
+          id="visibility"
+          value='public'
+          checked>Public
+    <input type="radio"
+          name="visibility"
+          id="visibility"
+          value='followers'>Followers only
+    <input type="radio"
+          name="visibility"
+          id="visibility"
+          value='private'>Private (only me)<br>
+
+    <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
+  </form>
+</li>

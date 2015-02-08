@@ -5,35 +5,57 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   createPhoto: function(event) {
-    var view = this;
-    var $form = $(event.target);
-    var photoTitle = $form.find('input').val() ||
-          'Untitled Photo';
-    TrelloClone.Collections.photos.create({ title: photoTitle }, {
-      success: function(photo) {
-        var id = photo.id;
-        Backbone.history.navigate('/photos/' + id, { trigger: true });
-        view.reset();
+    event.preventDefault();
+    if (this.model.get('photo') !== undefined) {
+      params = this.$('form').serializeJSON();
+      $submitButton = this.$('input[type=submit]')
+      $submitButton.attr('disabled', 'disabled')
+      $submitButton.val('Geofotring! (please wait...)')
+      var that = this;
+
+      var success = function (model) {
+        that.$('div.photo-errors').empty();
+        that.collection.add(model, { merge: true });
+        that.$('form.create-photo').replaceWith(that.$newButton);
+        that.reset();
+      };
+
+      var error = function (model) {
+        that.$('div.alert-error').html('There was an error. Please try again!');
       }
-    });
-    return false;
+      this.model.save(params, {
+        success: success,
+        error: error
+      });
+
+    } else {
+      this.$('div.alert-error').html('Please select a file to Geofotr!');
+    };
+  },
+
+  handleFile: function (event) {
+    var file = event.currentTarget.files[0];
+    var that = this;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // note that this isn't saving
+      that.model.set('photo', this.result);
+    }
+    reader.readAsDataURL(file);
   },
 
   events: {
     'click .new-photo': 'showForm',
-    'click .cancel': 'hideForm',
-    'submit form': 'createPhoto'
+    'change #photo': 'handleFile',
+    'submit .create-photo' : 'createPhoto',
   },
 
-  formTemplate: JST['layout/_form'],
-
-  hideForm: function(event) {
-    this.$el.html(this.template());
-    return false;
-  },
+  template: JST['layout/dropdown_form'],
 
   render: function() {
-    var renderedContent = this.template();
+    var renderedContent = this.template({
+      photo: this.model
+    });
     this.$el.html(renderedContent);
     return this;
   },
@@ -50,7 +72,5 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     return false;
   },
 
-  tagName: 'ul',
-
-  template: JST['layout/dropdown'],
+  tagName: 'ul'
 });
