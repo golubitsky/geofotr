@@ -1,5 +1,5 @@
 <figure class="photo">
-    <%= photo.get('url') %>
+    <%= photo.get('feedUrl') %>
     <figcaption><%= photo.escape('caption') %></figcaption>
 </figure>
 user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>

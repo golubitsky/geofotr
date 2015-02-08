@@ -76,6 +76,9 @@ but I'd settle for manually setting lat/long for photos.
 ### Bonus Features (TBD)
 
 - [ ] users can view all of their liked photos
+- [ ] users can set their profile picture thumbnail
+- [ ] map displays medium size photo
+- [ ] users enter text location and auto-convert to lat/long for map display
 - [ ] Pagination
 - [ ] Search for photos by title
 - [ ] Search for photos by tag

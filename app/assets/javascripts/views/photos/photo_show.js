@@ -3,6 +3,7 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
   template: JST['photos/photo_show'],
 
   events: {
+    'click .navigate-back' : 'navigateBack'
   },
 
   initialize: function () {
@@ -14,6 +15,10 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
     this.$el.html(this.template({ photo: this.model }));
     this.attachSubviews();
     return this;
+  },
+
+  navigateBack: function () {
+    Backbone.history.history.back()
   }
 
 });

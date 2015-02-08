@@ -14,7 +14,12 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   mapIndex: function () {
-    var mapIndex = new Geofotr.Views.MapsIndex();
+    Geofotr.photos.fetch();
+
+    var mapIndex = new Geofotr.Views.MapsIndex({
+      collection: Geofotr.photos,
+    });
+
     this._swapView(mapIndex, true);
   },
 

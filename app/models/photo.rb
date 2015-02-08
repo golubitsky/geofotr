@@ -28,8 +28,9 @@ class Photo < ActiveRecord::Base
 
   #photo uploads using paperclip
   has_attached_file :photo, :styles => {
-        :big => "800x800>",
-        :small => "50x50#"
+        :feed => "800x800>",
+        :map => "200x200>",
+        :thumb => "50x50#"
       }
   validates_attachment_content_type(
     :photo,

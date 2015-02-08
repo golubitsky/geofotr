@@ -10,8 +10,11 @@ json.(photo,
   )
 json.user photo.user.username
 
-json.url image_tag photo.photo.url(:big)
-json.url image_tag photo.photo.url(:original) if @original_size
+json.originalUrl image_tag photo.photo.url(:original)
+json.feedUrl image_tag photo.photo.url(:feed)
+json.mapUrl image_tag photo.photo.url(:map)
+json.thumbUrl image_tag photo.photo.url(:thumb)
+
 json.likeId photo.like_id(current_user)
 json.likeCount photo.like_count
 

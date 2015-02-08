@@ -18,7 +18,8 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <!-- <li><%= "What up, #{current_user.username}?" %></li> -->
-          <li><%= link_to "Geofotr!", "#" %></li>
+          <li><%= link_to "Geofotr new photo", "#" %></li>
+          <li><%= link_to "Map", "#map" %></li>
           <li><%= link_to "Feed", "" %></li>
           <li><%= link_to "Your photos", "#users/" + current_user.id.to_s %></li>
           <li><%= link_to "Users", "#users" %></li>
