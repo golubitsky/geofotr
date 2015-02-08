@@ -10,9 +10,22 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     id: 'dropdown-menu'
   },
 
+
+  events: {
+    'click .new-photo': 'showForm',
+    'change #photo': 'handleFile',
+    'submit .create-photo' : 'createPhoto',
+    'keypress #location' : 'locationRequest'
+  },
+
   initialize: function () {
   },
 
+  locationRequest: function (event) {
+    console.log("test");
+
+    // event.stopPropagation();
+  },
 
   render: function() {
     console.log('dropdown render')
@@ -43,6 +56,21 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         }, 0);
       }
     );
+
+    $location = this.$('#location')
+    $location.geocomplete({
+      map: this.mapEl
+    });
+
+    autocomplete = new google.maps.places.Autocomplete($location[0]);
+    google.maps.event.addListener(autocomplete, 'place_changed', function(event) {
+        debugger
+        // var data = $("#search_form").serialize();
+        // console.log('blah')
+        // show_submit_data(data);
+        event.stopPropagation();
+        return false;
+    });
   },
 
   createPhoto: function(event) {
@@ -91,12 +119,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       that.model.set('photo', this.result);
     }
     reader.readAsDataURL(file);
-  },
-
-  events: {
-    'click .new-photo': 'showForm',
-    'change #photo': 'handleFile',
-    'submit .create-photo' : 'createPhoto',
   },
 
   reset: function() {
