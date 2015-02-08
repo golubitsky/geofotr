@@ -2,3 +2,6 @@
     <%= photo.get('mapUrl') %>
     <figcaption><%= photo.escape('caption') %></figcaption>
 </figure>
+<a href= <%= "#users/" + photo.get('user_id') %> >
+  <%= photo.escape('user') %>
+</a>

@@ -1,7 +1,14 @@
 Geofotr.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
-    this.$rootEl = options.$rootEl;
     Geofotr.photos = new Geofotr.Collections.Photos();
+
+    var dropDownView = new Geofotr.Views.DropDownView({
+      collection: Geofotr.photos,
+      model: new Geofotr.Models.Photo()
+    })
+    $('#add-dropdown').append(dropDownView.render().$el);
+
+    this.$rootEl = options.$rootEl;
   },
 
   routes: {
@@ -81,7 +88,6 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
     if (googleMap) {
       this.$rootEl.html(view.$el);
-      view.render();
     } else {
       this.$rootEl.html(view.render().$el);
     }

@@ -18,6 +18,12 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <!-- <li><%= "What up, #{current_user.username}?" %></li> -->
+          <li id='add-dropdown' class='dropdown'>
+            <button
+              class='dropdown-toggle navbar-btn btn btn-primary'
+              data-toggle='dropdown'><span class='glyphicon glyphicon-plus'></span>
+            </button>
+          </li>
           <li><%= link_to "Geofotr new photo", "#" %></li>
           <li><%= link_to "Map", "#map" %></li>
           <li><%= link_to "Feed", "" %></li>

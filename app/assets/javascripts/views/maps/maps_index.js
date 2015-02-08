@@ -1,6 +1,6 @@
 Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
-  // Initialization
-  template: JST['maps/maps_index'],
+
+  template: JST['maps/maps_photo'],
 
   attributes: {
     id: "map-canvas"
@@ -20,6 +20,8 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
+    this.initializeMap();
+
     this._markers = {};
 
     this.listenTo(this.collection, 'add', this.addMarker);
@@ -30,11 +32,10 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
     }, this);
   },
 
-  render: function () {
-    // ONLY CALL THIS ONCE!
+  initializeMap: function () {
     var mapOptions = {
-      center: { lat: 37.7833, lng: -122.4167},
-      zoom: 12
+      center: { lat: 0, lng: 0},
+      zoom: 3
     };
 
     this._map = new google.maps.Map(this.el, mapOptions);
@@ -60,7 +61,6 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
     });
 
     google.maps.event.addListener(marker, 'click', function (event) {
-      debugger
       that.showMarkerInfo(event, marker);
     });
 
@@ -74,15 +74,8 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   },
 
   showMarkerInfo: function (event, marker) {
-    // This event will be triggered when a marker is clicked. Right now it
-    // simply opens an info window with the title of the marker. However, you
-    // could get fancier if you wanted (maybe use a template for the content of
-    // the window?)
-
     this.template({ photo: marker.photo });
     var infoWindow = new google.maps.InfoWindow({
-      // content: marker.title
-
       content: this.template({ photo: marker.photo })
     });
 
