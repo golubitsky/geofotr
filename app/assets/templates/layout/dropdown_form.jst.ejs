@@ -1,21 +1,36 @@
 <li>
-  <div class="alert alert-danger alert-error"></div>
+  <div class="error-container"></div>
 </li>
-<li class='divider'></li>
 <li>
   <form class="create-photo" enctype="multipart/form-data">
+    <li class="map-container">
+      <div id="dropdown-map-canvas"></div>
+    </li>
+
+    <li>
     <label for "photo">File</label>
     <input type="file"
           name="photo"
           id="photo">
+    </li>
 
+    <li>
     <label for="caption">Caption</label>
     <input type="text"
           name="caption"
           id="caption"
           value='<%= photo.escape('caption') %>'
-          placeholder="optional"><br>
+          placeholder="optional">
+    </li>
+    <li>
+      <label for="location">Location</label>
+      <input type="text"
+            name="location"
+            id="location"
+            placeholder="enter a location..">
+    </li>
 
+    <li>
     <label for="visibility">Visibility: </label>
     <input type="radio"
           name="visibility"
@@ -29,8 +44,11 @@
     <input type="radio"
           name="visibility"
           id="visibility"
-          value='private'>Private (only me)<br>
+          value='private'>Private (only me)
+    </li>
 
-    <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
+    <li>
+      <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
+    </li>
   </form>
 </li>

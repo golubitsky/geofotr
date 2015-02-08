@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializejson.min.js
+//= require jquery.geocomplete.min.js
 //= require underscore
 //= require backbone
 //= require bootstrap

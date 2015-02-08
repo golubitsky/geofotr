@@ -1,7 +1,48 @@
 Geofotr.Views.DropDownView = Backbone.View.extend({
+
+  tagName: 'ul',
+
+  template: JST['layout/dropdown_form'],
+
   attributes: {
     role: 'menu',
-    class: 'dropdown-menu add-menu'
+    class: 'dropdown-menu add-menu',
+    id: 'dropdown-menu'
+  },
+
+  initialize: function () {
+  },
+
+
+  render: function() {
+    console.log('dropdown render')
+    var renderedContent = this.template({
+      photo: this.model
+    });
+    this.$el.html(renderedContent);
+
+    this.mapEl = this.$('#dropdown-map-canvas')[0];
+    this.initializeMap();
+
+    return this;
+  },
+
+  initializeMap: function () {
+    var mapOptions = {
+      center: { lat: 0, lng: 0},
+      zoom: 2
+    };
+
+    this._map = new google.maps.Map(this.mapEl, mapOptions);
+
+    var that = this;
+    var dropButton = document.getElementById('add-dropdown')
+    google.maps.event.addDomListener(dropButton, 'click', function() {
+        setTimeout(function () {
+          google.maps.event.trigger(that._map, 'resize');
+        }, 0);
+      }
+    );
   },
 
   createPhoto: function(event) {
@@ -13,6 +54,11 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       $submitButton.val('Geofotring! (please wait...)')
       var that = this;
 
+
+      var $otherErrorMsg = $('span');
+      $otherErrorMsg.html('There was an error. Please try again!');
+      $otherErrorMsg.addClass('alert alert-danger alert-error');
+
       var success = function (model) {
         that.$('div.photo-errors').empty();
         that.collection.add(model, { merge: true });
@@ -21,7 +67,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       };
 
       var error = function (model) {
-        that.$('div.alert-error').html('There was an error. Please try again!');
+        that.$('div.error-container').html($otherErrorMsg);
       }
       this.model.save(params, {
         success: success,
@@ -29,7 +75,10 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       });
 
     } else {
-      this.$('div.alert-error').html('Please select a file to Geofotr!');
+      var $fileErrorMsg = $('<span>');
+      $fileErrorMsg.text('Please select a file to Geofotr!');
+      $fileErrorMsg.addClass('alert alert-danger alert-error');
+      this.$('div.error-container').html($fileErrorMsg);
     };
   },
 
@@ -50,27 +99,18 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     'submit .create-photo' : 'createPhoto',
   },
 
-  template: JST['layout/dropdown_form'],
-
-  render: function() {
-    var renderedContent = this.template({
-      photo: this.model
-    });
-    this.$el.html(renderedContent);
-    return this;
-  },
-
   reset: function() {
     this.render();
     this.$el.parent().removeClass('open');
   },
 
   showForm: function() {
+    console.log("test")
     this.$el.html(this.formTemplate({
       photo: this.model
     }));
+
     return false;
   },
 
-  tagName: 'ul'
 });

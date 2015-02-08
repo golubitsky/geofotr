@@ -30,6 +30,12 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
     this.collection.each(function (photo) {
       this.addMarker(photo);
     }, this);
+
+    var that = this;
+    google.maps.event.addListenerOnce(this._map, 'idle', function() {
+      google.maps.event.trigger(that._map, 'resize');
+    });
+
   },
 
   initializeMap: function () {
