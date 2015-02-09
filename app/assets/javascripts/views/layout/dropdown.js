@@ -15,16 +15,23 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     'click .new-photo': 'showForm',
     'change #photo': 'handleFile',
     'submit .create-photo' : 'createPhoto',
-    'keypress #location' : 'locationRequest'
+    'keypress #location' : 'locationRequest',
   },
 
   initialize: function () {
   },
 
   locationRequest: function (event) {
-    console.log("test");
-
-    // event.stopPropagation();
+    $(event.currentTarget).geocomplete({
+      map: this.mapEl,
+      details: 'form.create-photo',
+      detailsAttribute: 'data-geo',
+      markerOptions: { draggable: true },
+      mapOptions: {
+        mapTypeId: 'satellite',
+        zoom: 3
+      }
+    });
   },
 
   render: function() {
@@ -43,7 +50,8 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   initializeMap: function () {
     var mapOptions = {
       center: { lat: 0, lng: 0},
-      zoom: 2
+      zoom: 2,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
     };
 
     this._map = new google.maps.Map(this.mapEl, mapOptions);
@@ -57,22 +65,49 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
     );
 
-    $location = this.$('#location')
-    $location.geocomplete({
-      map: this.mapEl
+    $location = this.$('#location');
+    $location.on('click', function (event) {
+      event.stopPropagation();
     });
 
     autocomplete = new google.maps.places.Autocomplete($location[0]);
-    google.maps.event.addListener(autocomplete, 'place_changed', function(event) {
-        debugger
-        // var data = $("#search_form").serialize();
-        // console.log('blah')
-        // show_submit_data(data);
-        event.stopPropagation();
-        return false;
+    google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
+      //event triggered by pressing enter in autocomplete
     });
+
+    //auto update of lat/long fields on drag of marker
+    this.$el.geocomplete().bind("geocode:dragged", function(event, result){
+      that.setFormLocation(result);
+    });
+
+    //allow clicking on map to place a marker unless one exists
+    google.maps.event.addListener(this._map, 'click', function(event) {
+      if (that.marker) { return };
+
+      that.marker = true;
+      placeMarker(event.latLng);
+    });
+
+    function placeMarker(location) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: that._map,
+        draggable: true
+      });
+      that.setFormLocation(location);
+    }
+
+    google.maps.event.addListener(this._map, marker, 'drag', function () {
+      debugger
+      that.setFormLocation(result);
+    });
+
   },
 
+  setFormLocation: function (location) {
+    $('#longitude').val(location.D);
+    $('#latitude').val(location.k);
+  },
   createPhoto: function(event) {
     event.preventDefault();
     if (this.model.get('photo') !== undefined) {
@@ -122,12 +157,13 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   reset: function() {
+    console.log('reset')
     this.render();
     this.$el.parent().removeClass('open');
   },
 
   showForm: function() {
-    console.log("test")
+    console.log("showForm")
     this.$el.html(this.formTemplate({
       photo: this.model
     }));

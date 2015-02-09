@@ -2,11 +2,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     Geofotr.photos = new Geofotr.Collections.Photos();
 
-    var dropDownView = new Geofotr.Views.DropDownView({
-      collection: Geofotr.photos,
-      model: new Geofotr.Models.Photo()
-    })
-    $('#add-dropdown').append(dropDownView.render().$el);
+    this.addDropDownView();
 
     this.$rootEl = options.$rootEl;
   },
@@ -18,6 +14,19 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     'photos/:id' : 'photoShow',
     'photos/:id/edit' : 'photoEdit',
     'map' : 'mapIndex'
+  },
+
+  addDropDownView: function () {
+    var dropDownView = new Geofotr.Views.DropDownView({
+      collection: Geofotr.photos,
+      model: new Geofotr.Models.Photo()
+    })
+
+    $('#add-dropdown').append(dropDownView.render().$el);
+
+    $('#dropdown-menu').on('click', function (event) {
+      event.stopPropagation();
+    });
   },
 
   mapIndex: function () {

@@ -41,7 +41,8 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   initializeMap: function () {
     var mapOptions = {
       center: { lat: 0, lng: 0},
-      zoom: 3
+      zoom: 3,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
     };
 
     this._map = new google.maps.Map(this.el, mapOptions);
