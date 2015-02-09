@@ -88,6 +88,9 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
       that.marker = true;
       that.placeMarker(event.latLng);
+      var lat = event.latLng.k;
+      var lng = event.latLng.D;
+      that.setFormLocation({ lat: lat, lng: lng });
     });
   },
 
@@ -105,18 +108,15 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     };
 
     //set up drag listen!
-    this.marker = marker;
+    that.marker = marker;
     google.maps.event.addListener(that.marker, 'dragend', function () {
       var lat = that.marker.position.k;
       var lng = that.marker.position.D;
       that.setFormLocation({ lat: lat, lng: lng });
     });
-
-    this.setFormLocation({ lat: location.k, lng: location.D });
   },
 
   setFormLocation: function (location) {
-    debugger
     $('#latitude').val(location.lat);
     $('#longitude').val(location.lng);
     $('#altitude').val(location.alt);
@@ -174,6 +174,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   handleExif: function (exif) {
+    this._map.setMap(null);
     var lat = exif.GPSLatitude[0] + (exif.GPSLatitude[1]/60) + (exif.GPSLatitude[2]/3600)
     var lng = exif.GPSLongitude[0] + (exif.GPSLongitude[1]/60) + (exif.GPSLongitude[2]/3600)
     if (exif.GPSLatitudeRef === "S") { lat *= -1 };
