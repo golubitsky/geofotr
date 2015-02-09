@@ -1,0 +1,35 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Geofotr</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if (Geofotr.CURRENT_USER) { %>
+          <li id='dropdown-photo'>
+            <button class='navbar-btn btn btn-primary'>
+              <span>Geofotr a photo!</span>
+            </button>
+          </li>
+          <li><a href="#map">Map</a></li>
+          <li><a href="">Feed</a></li>
+          <li><a href= "<%= '#users/' + Geofotr.CURRENT_USER_ID %>">Your photos</a></li>
+          <li><a href="#users">Users</a></li>
+          <li><a href="#" class="sign-out">Sign Out</a></li>
+        <% } else { %>
+          <li><a href="/users/new">Sign Up</a></li>
+          <li><a href="/session/new">Sign In</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>

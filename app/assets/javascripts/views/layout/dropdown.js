@@ -185,7 +185,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         that.$('div.photo-errors').empty();
         that.collection.add(model, { merge: true });
         that.reset();
-        debugger
         Backbone.history.navigate(
           '#photos/' + model.id,
           { trigger: true }
@@ -193,7 +192,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       };
 
       var error = function (model) {
-        debugger
         that.$('div.error-container').html($otherErrorMsg);
       }
       this.model.save(params, {
