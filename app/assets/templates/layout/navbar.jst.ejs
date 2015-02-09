@@ -17,8 +17,9 @@
         <% if (Geofotr.CURRENT_USER) { %>
           <li id='dropdown-photo'>
             <button class='navbar-btn btn btn-primary'>
-              <span>Geofotr a photo!</span>
+              Geofotr a photo!
             </button>
+            <div id='create-photo-dropdown'></div>
           </li>
           <li><a href="#map">Map</a></li>
           <li><a href="">Feed</a></li>
@@ -26,8 +27,8 @@
           <li><a href="#users">Users</a></li>
           <li><a href="#" class="sign-out">Sign Out</a></li>
         <% } else { %>
-          <li><a href="/users/new">Sign Up</a></li>
-          <li><a href="/session/new">Sign In</a></li>
+          <li><a href="#users/signup">Sign Up</a></li>
+          <li><a href="#users/signin">Sign In</a></li>
         <% } %>
       </ul>
     </div>

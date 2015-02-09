@@ -1,4 +1,4 @@
-json.partial!("user", user: @user)
+json.partial!("api/users/user", user: @user)
 
 json.photos do
   json.array!(@photos) do |photo|

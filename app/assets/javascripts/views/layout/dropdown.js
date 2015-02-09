@@ -1,15 +1,5 @@
 Geofotr.Views.DropDownView = Backbone.View.extend({
-
-  tagName: 'ul',
-
   template: JST['layout/dropdown_form'],
-
-  attributes: {
-    role: 'menu',
-    class: 'dropdown-menu add-menu',
-    id: 'dropdown-menu'
-  },
-
 
   events: {
     'change #photo': 'handleFile',

@@ -3,13 +3,15 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     Geofotr.photos = new Geofotr.Collections.Photos();
 
     this.addNavBarView();
-    // this.addDropDownView();
+    this.addDropDownView();
 
     this.$rootEl = options.$rootEl;
   },
 
   routes: {
     '' : 'photoIndex',
+    'users/signin' : 'signIn',
+    'users/signup' : 'signUp',
     'users' : 'userIndex',
     'users/:id' : 'userShow',
     'photos/:id' : 'photoShow',
@@ -18,11 +20,11 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   addNavBarView: function () {
-    this.navBar = new Geofotr.Views.NavShow({
+    Geofotr.navBar = new Geofotr.Views.NavShow({
       el: $('#navbar')
     });
 
-    this.navBar.render();
+    Geofotr.navBar.render();
   },
 
   addDropDownView: function () {
@@ -31,7 +33,19 @@ Geofotr.Routers.Router = Backbone.Router.extend({
       model: new Geofotr.Models.Photo()
     })
 
-    $('#add-dropdown').append(dropDownView.render().$el);
+    $('#create-photo-dropdown').append(dropDownView.render().$el);
+  },
+
+  signIn: function () {
+    var signInView = new Geofotr.Views.SignIn();
+
+    this._swapView(signInView);
+  },
+
+  signUp: function () {
+    var signUpView = new Geofotr.Views.SignUp();
+
+    this._swapView(signUpView);
   },
 
   mapIndex: function () {
