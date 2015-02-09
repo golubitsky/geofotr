@@ -150,11 +150,19 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     var file = event.currentTarget.files[0];
     var that = this;
     var reader = new FileReader();
+    debugger
+    $(event.target).fileExif(this.extractExif);
+
     reader.onload = function(e) {
       // note that this isn't saving
       that.model.set('photo', this.result);
     }
     reader.readAsDataURL(file);
+  },
+
+  extractExif: function (exif) {
+    console.log(exif.Model);
+    debugger
   },
 
   reset: function() {
