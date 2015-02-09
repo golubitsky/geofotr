@@ -2,69 +2,85 @@
   <div class="error-container"></div>
 </li>
 <li>
-  <form class="create-photo" enctype="multipart/form-data">
-    <li class="map-container">
+  <form class="form-horizontal create-photo" enctype="multipart/form-data">
+    <div class="map-container">
       <div id="dropdown-map-canvas"></div>
-    </li>
+    </div>
 
-    <li>
-    <label for="photo">File</label>
-    <input type="file"
-          name="photo"
-          id="photo">
-    </li>
+    <div class="form-group">
+    <label for="photo" class="col-sm-2 control-label">File</label>
+      <div class="col-sm-10">
+        <input type="file"
+              name="photo"
+              id="photo"
+              class="form-control">
+      </div>
+    </div>
 
-    <li>
-    <label for="caption">Caption</label>
-    <input type="text"
-          name="caption"
-          id="caption"
-          value='<%= photo.escape('caption') %>'
-          placeholder="enter a caption..">
-    </li>
-    <li>
-      <label for="location">Location</label>
-      <input type="text"
-            name="location"
-            id="location"
-            placeholder="enter a location..">
-    </li>
-    <li>
-      <label for="latitude">Latitude</label>
-      <input type="text"
-            name="latitude"
-            id="latitude"
-            data-geo="lat"
-            placeholder="e.g. 37.7749">
-    </li>
+    <div class="form-group">
+    <label for="caption" class="col-sm-2 control-label">Caption</label>
+      <div class="col-sm-10">
+        <input type="text"
+              name="caption"
+              id="caption"
+              value='<%= photo.escape('caption') %>'
+              placeholder="enter a caption.."
+              class="form-control">
+      </div>
+    </div>
 
-    <li>
-      <label for="longitude">Longitude</label>
-      <input type="text"
-            name="longitude"
-            id="longitude"
-            data-geo="lng"
-            placeholder="e.g. -122.4194">
-    </li>
-    <li>
-    <label for="visibility">Visibility: </label>
-    <input type="radio"
-          name="visibility"
-          id="visibility"
-          value='public'
-          checked>Public
-    <input type="radio"
-          name="visibility"
-          id="visibility"
-          value='followers'>Followers only
-    <input type="radio"
-          name="visibility"
-          id="visibility"
-          value='private'>Private (only me)
-    </li>
+    <div class="form-group">
+      <label for="location" class="col-sm-2 control-label">Location</label>
+        <div class="col-sm-10">
+          <input type="text"
+                name="location"
+                id="location"
+                placeholder="type a location or click on the map to set lat/long.."
+                class="form-control">
+        </div>
+    </div>
 
-    <li>
-      <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
-    </li>
+    <div class="form-group">
+      <label for="latitude" class="col-sm-2 control-label">Latitude</label>
+        <div class="col-sm-10">
+          <input type="text"
+                name="latitude"
+                id="latitude"
+                data-geo="lat"
+                placeholder="e.g. 37.7749"
+                class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="longitude" class="col-sm-2 control-label">Longitude</label>
+        <div class="col-sm-10">
+          <input type="text"
+                name="longitude"
+                id="longitude"
+                data-geo="lng"
+                placeholder="e.g. -122.4194"
+                class="form-control">
+        </div>
+    </div>
+
+    <div class="radios">
+      <label for="visibility">Visibility: </label>
+      <input type="radio"
+            name="visibility"
+            id="visibility"
+            value='public'
+            checked>Public
+      <input type="radio"
+            name="visibility"
+            id="visibility"
+            value='followers'>Followers only
+      <input type="radio"
+            name="visibility"
+            id="visibility"
+            value='private'>Private (only me)
+    </div>
+
+    <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
   </form>
 </li>

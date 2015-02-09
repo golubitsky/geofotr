@@ -94,13 +94,14 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         map: that._map,
         draggable: true
       });
+      that.marker = marker;
+
+      //set up drag listen!
+      google.maps.event.addListener(that.marker, 'dragend', function () {
+        that.setFormLocation(that.marker.position);
+      });
       that.setFormLocation(location);
     }
-
-    google.maps.event.addListener(this._map, marker, 'drag', function () {
-      debugger
-      that.setFormLocation(result);
-    });
 
   },
 
