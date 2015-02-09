@@ -73,7 +73,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     autocomplete = new google.maps.places.Autocomplete($location[0]);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
-      event.stopPropagation();
+      // event.stopPropagation();
       //event triggered by pressing enter in autocomplete
     });
 
@@ -116,6 +116,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   setFormLocation: function (location) {
+    debugger
     $('#latitude').val(location.lat);
     $('#longitude').val(location.lng);
     $('#altitude').val(location.alt);
