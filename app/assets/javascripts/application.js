@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializejson.min.js
-//= require jquery.geocomplete.min.js
 //= require jquery.exif.js
 //= require underscore
 //= require backbone

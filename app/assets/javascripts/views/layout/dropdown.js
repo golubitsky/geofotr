@@ -14,24 +14,16 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   events: {
     'click .new-photo': 'showForm',
     'change #photo': 'handleFile',
+    'change #location': 'stopPropagation',
     'submit .create-photo' : 'createPhoto',
-    'keypress #location' : 'locationRequest',
   },
 
+  stopPropagation: function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  },
   initialize: function () {
-  },
-
-  locationRequest: function (event) {
-    $(event.currentTarget).geocomplete({
-      map: this.mapEl,
-      details: 'form.create-photo',
-      detailsAttribute: 'data-geo',
-      markerOptions: { draggable: true },
-      mapOptions: {
-        mapTypeId: 'satellite',
-        zoom: 3
-      }
-    });
+    this.markers = [];
   },
 
   render: function() {
@@ -42,8 +34,9 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     this.$el.html(renderedContent);
 
     this.mapEl = this.$('#dropdown-map-canvas')[0];
-    this.initializeMap();
 
+    this.initializeMap();
+    this.bindMapEvents();
     return this;
   },
 
@@ -56,6 +49,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     this._map = new google.maps.Map(this.mapEl, mapOptions);
 
+    //size/center map on dropdown
     var that = this;
     var dropButton = document.getElementById('add-dropdown')
     google.maps.event.addDomListener(dropButton, 'click', function() {
@@ -66,27 +60,28 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
     );
 
+    //prevent disappearing bootstrap dropdown
     $location = this.$('#location');
     $location.on('click', function (event) {
       event.stopPropagation();
     });
+  },
 
+  bindMapEvents: function () {
+    var that = this;
+    //autocomplete map/marker logic
     autocomplete = new google.maps.places.Autocomplete($location[0]);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
-      // event.stopPropagation();
-      //event triggered by pressing enter in autocomplete
-    });
+      var location = autocomplete.getPlace().geometry.location
 
-    //auto update of lat/long fields on drag of marker
-    this.$el.geocomplete().bind("geocode:dragged", function(event, result){
-      that.setFormLocation(result);
+      that.placeMarker(location);
+      var lat = location.k;
+      var lng = location.D;
+      that.setFormLocation({ lat: lat, lng: lng });
     });
 
     //allow clicking on map to place a marker unless one exists
     google.maps.event.addListener(this._map, 'click', function(event) {
-      if (that.marker) { return };
-
-      that.marker = true;
       that.placeMarker(event.latLng);
       var lat = event.latLng.k;
       var lng = event.latLng.D;
@@ -95,20 +90,20 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   placeMarker: function (location, reset) {
-    var that = this;
-    var marker = new google.maps.Marker({
+    if (this.marker) { this.marker.setMap(null) };
+
+    this.marker = new google.maps.Marker({
       position: location,
-      map: that._map,
+      map: this._map,
       draggable: true
     });
 
-    if (reset) {
-      this._map.setCenter(location);
-      this._map.setZoom(3);
-    };
+    //pan/zoom map to marker
+    this._map.setCenter(location);
+    this._map.setZoom(3);
 
     //set up drag listen!
-    that.marker = marker;
+    var that = this;
     google.maps.event.addListener(that.marker, 'dragend', function () {
       var lat = that.marker.position.k;
       var lng = that.marker.position.D;
@@ -120,42 +115,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     $('#latitude').val(location.lat);
     $('#longitude').val(location.lng);
     $('#altitude').val(location.alt);
-  },
-  createPhoto: function(event) {
-    event.preventDefault();
-    if (this.model.get('photo') !== undefined) {
-      params = this.$('form').serializeJSON();
-      $submitButton = this.$('input[type=submit]')
-      $submitButton.attr('disabled', 'disabled')
-      $submitButton.val('Geofotring! (please wait...)')
-      var that = this;
-
-
-      var $otherErrorMsg = $('span');
-      $otherErrorMsg.html('There was an error. Please try again!');
-      $otherErrorMsg.addClass('alert alert-danger alert-error');
-
-      var success = function (model) {
-        that.$('div.photo-errors').empty();
-        that.collection.add(model, { merge: true });
-        that.$('form.create-photo').replaceWith(that.$newButton);
-        that.reset();
-      };
-
-      var error = function (model) {
-        that.$('div.error-container').html($otherErrorMsg);
-      }
-      this.model.save(params, {
-        success: success,
-        error: error
-      });
-
-    } else {
-      var $fileErrorMsg = $('<span>');
-      $fileErrorMsg.text('Please select a file to Geofotr!');
-      $fileErrorMsg.addClass('alert alert-danger alert-error');
-      this.$('div.error-container').html($fileErrorMsg);
-    };
   },
 
   handleFile: function (event) {
@@ -174,7 +133,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   handleExif: function (exif) {
-    this._map.setMap(null);
     var lat = exif.GPSLatitude[0] + (exif.GPSLatitude[1]/60) + (exif.GPSLatitude[2]/3600)
     var lng = exif.GPSLongitude[0] + (exif.GPSLongitude[1]/60) + (exif.GPSLongitude[2]/3600)
     if (exif.GPSLatitudeRef === "S") { lat *= -1 };
@@ -189,7 +147,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     this.placeMarker({
       lat: lat,
       lng: lng
-    }, true);
+    });
   },
 
   reset: function() {
@@ -207,4 +165,45 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     return false;
   },
 
+  createPhoto: function(event) {
+    event.preventDefault();
+    if (this.model.get('photo') !== undefined) {
+      params = this.$('form').serializeJSON();
+      $submitButton = this.$('input[type=submit]')
+      $submitButton.attr('disabled', 'disabled')
+      $submitButton.val('Geofotring! (please wait...)')
+      var that = this;
+
+      var $otherErrorMsg = $('<span>');
+      $otherErrorMsg.html('There was an error. Please try again!');
+      $otherErrorMsg.addClass('alert alert-danger alert-error');
+
+      var success = function (model) {
+
+        that.$('div.photo-errors').empty();
+        that.collection.add(model, { merge: true });
+        that.reset();
+        debugger
+        Backbone.history.navigate(
+          '#photos/' + model.id,
+          { trigger: true }
+          )
+      };
+
+      var error = function (model) {
+        debugger
+        that.$('div.error-container').html($otherErrorMsg);
+      }
+      this.model.save(params, {
+        success: success,
+        error: error
+      });
+
+    } else {
+      var $fileErrorMsg = $('<span>');
+      $fileErrorMsg.text('Please select a file to Geofotr!');
+      $fileErrorMsg.addClass('alert alert-danger alert-error');
+      this.$('div.error-container').html($fileErrorMsg);
+    };
+  },
 });
