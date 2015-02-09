@@ -49,8 +49,8 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
   initializeMap: function () {
     var mapOptions = {
-      center: { lat: 0, lng: 0},
-      zoom: 2,
+      center: { lat: 0, lng: 0 },
+      zoom: 1,
       mapTypeId: google.maps.MapTypeId.SATELLITE
     };
 
@@ -61,6 +61,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     google.maps.event.addDomListener(dropButton, 'click', function() {
         setTimeout(function () {
           google.maps.event.trigger(that._map, 'resize');
+          that._map.setCenter({ lat: 0, lng: 0 });
         }, 0);
       }
     );
@@ -72,6 +73,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     autocomplete = new google.maps.places.Autocomplete($location[0]);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
+      event.stopPropagation();
       //event triggered by pressing enter in autocomplete
     });
 
@@ -85,29 +87,38 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       if (that.marker) { return };
 
       that.marker = true;
-      placeMarker(event.latLng);
+      that.placeMarker(event.latLng);
+    });
+  },
+
+  placeMarker: function (location, reset) {
+    var that = this;
+    var marker = new google.maps.Marker({
+      position: location,
+      map: that._map,
+      draggable: true
     });
 
-    function placeMarker(location) {
-      var marker = new google.maps.Marker({
-        position: location,
-        map: that._map,
-        draggable: true
-      });
-      that.marker = marker;
+    if (reset) {
+      this._map.setCenter(location);
+      this._map.setZoom(3);
+    };
 
-      //set up drag listen!
-      google.maps.event.addListener(that.marker, 'dragend', function () {
-        that.setFormLocation(that.marker.position);
-      });
-      that.setFormLocation(location);
-    }
+    //set up drag listen!
+    this.marker = marker;
+    google.maps.event.addListener(that.marker, 'dragend', function () {
+      var lat = that.marker.position.k;
+      var lng = that.marker.position.D;
+      that.setFormLocation({ lat: lat, lng: lng });
+    });
 
+    this.setFormLocation({ lat: location.k, lng: location.D });
   },
 
   setFormLocation: function (location) {
-    $('#longitude').val(location.D);
-    $('#latitude').val(location.k);
+    $('#latitude').val(location.lat);
+    $('#longitude').val(location.lng);
+    $('#altitude').val(location.alt);
   },
   createPhoto: function(event) {
     event.preventDefault();
@@ -150,19 +161,33 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     var file = event.currentTarget.files[0];
     var that = this;
     var reader = new FileReader();
-    debugger
-    $(event.target).fileExif(this.extractExif);
+
+    $(event.target).fileExif(this.handleExif.bind(this));
 
     reader.onload = function(e) {
       // note that this isn't saving
       that.model.set('photo', this.result);
     }
+
     reader.readAsDataURL(file);
   },
 
-  extractExif: function (exif) {
-    console.log(exif.Model);
-    debugger
+  handleExif: function (exif) {
+    var lat = exif.GPSLatitude[0] + (exif.GPSLatitude[1]/60) + (exif.GPSLatitude[2]/3600)
+    var lng = exif.GPSLongitude[0] + (exif.GPSLongitude[1]/60) + (exif.GPSLongitude[2]/3600)
+    if (exif.GPSLatitudeRef === "S") { lat *= -1 };
+    if (exif.GPSLongitudeRef === "W") { lng *= -1 };
+
+    this.setFormLocation({
+      lat: lat,
+      lng: lng,
+      alt: exif.GPSAltitude
+    });
+
+    this.placeMarker({
+      lat: lat,
+      lng: lng
+    }, true);
   },
 
   reset: function() {
