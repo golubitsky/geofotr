@@ -12,9 +12,8 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
 
   events: {
-    'click .new-photo': 'showForm',
     'change #photo': 'handleFile',
-    'change #location': 'stopPropagation',
+    // 'change #location': 'stopPropagation',
     'submit .create-photo' : 'createPhoto',
   },
 
@@ -22,6 +21,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     event.preventDefault();
     event.stopPropagation();
   },
+
   initialize: function () {
     this.markers = [];
   },
@@ -62,9 +62,9 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     //prevent disappearing bootstrap dropdown
     $location = this.$('#location');
-    $location.on('click', function (event) {
-      event.stopPropagation();
-    });
+    // $location.on('click', function (event) {
+    //   event.stopPropagation();
+    // });
   },
 
   bindMapEvents: function () {
@@ -72,6 +72,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     //autocomplete map/marker logic
     autocomplete = new google.maps.places.Autocomplete($location[0]);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
+      //problems when pressing enter in form (as opposed to clicking on result)
       var location = autocomplete.getPlace().geometry.location
 
       that.placeMarker(location);
@@ -156,16 +157,17 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     this.$el.parent().removeClass('open');
   },
 
-  showForm: function() {
-    console.log("showForm")
-    this.$el.html(this.formTemplate({
-      photo: this.model
-    }));
+  // showForm: function() {
+  //   console.log("showForm")
+  //   this.$el.html(this.formTemplate({
+  //     photo: this.model
+  //   }));
 
-    return false;
-  },
+  //   return false;
+  // },
 
   createPhoto: function(event) {
+    console.log("form submit");
     event.preventDefault();
     if (this.model.get('photo') !== undefined) {
       params = this.$('form').serializeJSON();
