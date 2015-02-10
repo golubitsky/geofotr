@@ -3,7 +3,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     Geofotr.photos = new Geofotr.Collections.Photos();
 
     this.addNavBarView();
-    this.addDropDownView();
+    // this.addDropDownView();
 
     this.$rootEl = options.$rootEl;
   },
@@ -27,14 +27,14 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     Geofotr.navBar.render();
   },
 
-  addDropDownView: function () {
-    var dropDownView = new Geofotr.Views.DropDownView({
-      collection: Geofotr.photos,
-      model: new Geofotr.Models.Photo()
-    })
+  // addDropDownView: function () {
+  //   var dropDownView = new Geofotr.Views.DropDownView({
+  //     collection: Geofotr.photos,
+  //     model: new Geofotr.Models.Photo()
+  //   })
 
-    $('#create-photo-dropdown').append(dropDownView.render().$el);
-  },
+  //   $('#create-photo-dropdown').append(dropDownView.render().$el);
+  // },
 
   signIn: function () {
     var signInView = new Geofotr.Views.SignIn();

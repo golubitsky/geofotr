@@ -1,11 +1,11 @@
-<li>
+<button class='navbar-btn btn btn-primary toggle-dropdown'>
+  Geofotr a photo!
+</button>
+<div id="dropdown-main" class="hidden">
   <div class="error-container"></div>
-</li>
-<li>
+  <div id="dropdown-map-canvas"></div>
+
   <form class="form-horizontal create-photo" enctype="multipart/form-data">
-    <div class="map-container">
-      <div id="dropdown-map-canvas"></div>
-    </div>
 
     <div class="form-group">
     <label for="photo" class="col-sm-2 control-label">File</label>
@@ -87,4 +87,4 @@
 
     <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
   </form>
-</li>
+</div>

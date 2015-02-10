@@ -1,19 +1,39 @@
 Geofotr.Views.DropDownView = Backbone.View.extend({
+
   template: JST['layout/dropdown_form'],
+
+  attributes: {
+    id: "dropdown-view"
+  },
 
   events: {
     'change #photo': 'handleFile',
-    // 'change #location': 'stopPropagation',
     'submit .create-photo' : 'createPhoto',
-  },
-
-  stopPropagation: function (event) {
-    event.preventDefault();
-    event.stopPropagation();
+    'click .toggle-dropdown' : 'toggleDropdown'
   },
 
   initialize: function () {
-    this.markers = [];
+  },
+
+  toggleDropdown: function (event) {
+    var $dropdown = $('#dropdown-main')
+    if ($dropdown.hasClass('hidden')) {
+      $dropdown.removeClass('hidden')
+
+      $dropdown.click(function (event) {
+        event.stopPropagation();
+      });
+
+      setTimeout(function () {
+        $('html').click(function() {
+          $dropdown.addClass('hidden');
+          $('html').off('click');
+          $dropdown.off('click');
+        })
+      }, 0);
+    } else {
+      $dropdown.addClass('hidden')
+    };
   },
 
   render: function() {
@@ -24,13 +44,13 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     this.$el.html(renderedContent);
 
     this.mapEl = this.$('#dropdown-map-canvas')[0];
-
     this.initializeMap();
     this.bindMapEvents();
     return this;
   },
 
   initializeMap: function () {
+
     var mapOptions = {
       center: { lat: 0, lng: 0 },
       zoom: 1,
@@ -41,7 +61,8 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     //size/center map on dropdown
     var that = this;
-    var dropButton = document.getElementById('add-dropdown')
+    var dropButton = this.$('.toggle-dropdown')[0]
+
     google.maps.event.addDomListener(dropButton, 'click', function() {
         setTimeout(function () {
           google.maps.event.trigger(that._map, 'resize');

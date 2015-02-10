@@ -17,31 +17,43 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$lightgrey: #ccc;
+
 body {
   height: 800px;
   width: 600px;
 }
 
-html, body, #content, #map-canvas {
+html, body, #content, #map-canvas, #dropdown-map-canvas {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
 }
-
-#create-photo-dropdown {
-  width: 450px;
+ // #create-photo-dropdown,
+// #photo-dropdown-container,
+#dropdown-main {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  z-index: 1;
+  background: $lightgrey;
+  right: 0px;
   // padding: 10px;
 }
+#create-photo-dropdown div {
+  width: 100%;
+  height: 100%;
+  }
 
-#create-photo-dropdown .map-container {
+#dropdown-map-canvas {
   width: 100%;
   height: 200px;
 }
-#create-photo-dropdown {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
+// #create-photo-dropdown {
+//   height: 100%;
+//   width: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
 
