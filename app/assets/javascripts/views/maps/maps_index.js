@@ -35,7 +35,6 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
     setTimeout(function(){ this.$el.removeClass('invisible')}.bind(this), 1000  );
     this._map.setCenter({ lat: 0, lng: 0 });
     this._map.setZoom(3);
-
   },
 
   render: function () {
@@ -55,7 +54,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
     this._map = new google.maps.Map(this.el, mapOptions);
 
     console.log('map is on the page');
-        this.collection.each(function (photo) {
+    this.collection.each(function (photo) {
       this.addMarker(photo);
     }, this);
 

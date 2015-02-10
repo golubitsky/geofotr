@@ -27,15 +27,6 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     Geofotr.navBar.render();
   },
 
-  // addDropDownView: function () {
-  //   var dropDownView = new Geofotr.Views.DropDownView({
-  //     collection: Geofotr.photos,
-  //     model: new Geofotr.Models.Photo()
-  //   })
-
-  //   $('#create-photo-dropdown').append(dropDownView.render().$el);
-  // },
-
   signIn: function () {
     var signInView = new Geofotr.Views.SignIn();
 
@@ -56,11 +47,6 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     this._swapView(mapIndex, true);
-    // setTimeout(function () {
-    //   mapIndex.positionMap()
-    //   // google.maps.event.trigger(mapIndex, 'resize')
-    //   // console.log('positionMap')
-    // },  500);
   },
 
   photoEdit: function (id) {

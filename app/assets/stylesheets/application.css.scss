@@ -34,10 +34,19 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   padding: 0;
 }
 
+//photo feed
+#content .photo-feed {
+  width: 830px;
+  margin: auto;
+  }
+
+#content figure {
+  margin: auto;
+}
+//map styling
 #map-canvas {
   opacity: 100;
   transition: opacity 1s;
-  // -webkit-transition: opacity 5s;
 }
 
 #map-canvas.invisible {
@@ -52,7 +61,7 @@ nav.navbar.navbar-default {
 #dropdown-main {
   position: absolute;
   width: 500px;
-  height: 500px;
+  height: 520px;
   z-index: 1;
   background: $lightgrey;
   right: 0px;

@@ -14,6 +14,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   events: {
     'click button.view-photo' : 'viewPhoto',
     'click button.edit-photo' : 'openEditForm',
+    // 'click button.edit-photo' : 'newOpenEditForm',
     'submit .update-photo' : 'submitForm',
     'click button.destroy-photo' : 'destroyPhoto',
   },
