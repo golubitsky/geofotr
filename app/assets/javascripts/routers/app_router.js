@@ -56,6 +56,11 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     this._swapView(mapIndex, true);
+    // setTimeout(function () {
+    //   mapIndex.positionMap()
+    //   // google.maps.event.trigger(mapIndex, 'resize')
+    //   // console.log('positionMap')
+    // },  500);
   },
 
   photoEdit: function (id) {
@@ -114,11 +119,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   _swapView: function (view, googleMap) {
     this.currentView && this.currentView.remove();
 
-    if (googleMap) {
-      this.$rootEl.html(view.$el);
-    } else {
-      this.$rootEl.html(view.render().$el);
-    }
+    this.$rootEl.html(view.render().$el);
 
     this.currentView = view;
   }

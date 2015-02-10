@@ -3,7 +3,7 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
   template: JST['layout/navbar'],
 
   events: {
-    'click .sign-out' : 'signout'
+    'click .sign-out' : 'signout',
   },
 
   signout: function () {

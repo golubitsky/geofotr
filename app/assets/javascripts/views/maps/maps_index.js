@@ -5,6 +5,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   attributes: {
     id: "map-canvas"
   },
+  className: "invisible",
 
   events: {
     'click figure' : 'viewPhoto'
@@ -22,30 +23,47 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   initialize: function () {
     this.initializeMap();
 
-    this._markers = {};
+
 
     this.listenTo(this.collection, 'add', this.addMarker);
     this.listenTo(this.collection, 'remove', this.removeMarker);
 
-    this.collection.each(function (photo) {
-      this.addMarker(photo);
-    }, this);
-
-    var that = this;
-    google.maps.event.addListenerOnce(this._map, 'idle', function() {
-      google.maps.event.trigger(that._map, 'resize');
-    });
 
   },
 
-  initializeMap: function () {
-    var mapOptions = {
+  positionAndShowMap: function () {
+    setTimeout(function(){ this.$el.removeClass('invisible')}.bind(this), 1000  );
+    this._map.setCenter({ lat: 0, lng: 0 });
+    this._map.setZoom(3);
+
+  },
+
+  render: function () {
+    this.$el.empty();
+    this.initializeMap();
+    return this;
+  },
+
+  initializeMap: function(){
+    this._markers = {};
+     var mapOptions = {
       center: { lat: 0, lng: 0},
       zoom: 3,
       mapTypeId: google.maps.MapTypeId.SATELLITE
     };
 
     this._map = new google.maps.Map(this.el, mapOptions);
+
+    console.log('map is on the page');
+        this.collection.each(function (photo) {
+      this.addMarker(photo);
+    }, this);
+
+    var that = this;
+    google.maps.event.addListenerOnce(this._map, 'idle', function() {
+      google.maps.event.trigger(that._map, 'resize');
+      that.positionAndShowMap();
+    });
   },
 
   addMarker: function (photo) {

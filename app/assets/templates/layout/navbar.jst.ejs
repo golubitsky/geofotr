@@ -18,14 +18,14 @@
           <li id='photo-dropdown-container' class='dropdown-closed'>
 
           </li>
-          <li><a href="#map">Map</a></li>
-          <li><a href="">Feed</a></li>
-          <li><a href= "<%= '#users/' + Geofotr.CURRENT_USER_ID %>">Your photos</a></li>
-          <li><a href="#users">Users</a></li>
+          <li><a href="#/map">Map</a></li>
+          <li><a href="#">Feed</a></li>
+          <li><a href= "<%= '#/users/' + Geofotr.CURRENT_USER_ID %>">Your photos</a></li>
+          <li><a href="#/users">Users</a></li>
           <li><a href="#" class="sign-out">Sign Out</a></li>
         <% } else { %>
-          <li><a href="#users/signup">Sign Up</a></li>
-          <li><a href="#users/signin">Sign In</a></li>
+          <li><a href="#/users/signup">Sign Up</a></li>
+          <li><a href="#/users/signin">Sign In</a></li>
         <% } %>
       </ul>
     </div>
