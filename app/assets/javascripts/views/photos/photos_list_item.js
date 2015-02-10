@@ -14,7 +14,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   events: {
     'click button.view-photo' : 'viewPhoto',
     'click button.edit-photo' : 'openEditForm',
-    // 'click button.edit-photo' : 'newOpenEditForm',
     'submit .update-photo' : 'submitForm',
     'click button.destroy-photo' : 'destroyPhoto',
   },
@@ -53,14 +52,23 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       )
   },
 
-  openEditForm: function (event) {
-    console.log('open edit form')
-    var form = this.form_template({
-      photo: this.model
-    });
+  // OLD VERSION
+  // openEditForm: function (event) {
+  //   console.log('open edit form')
+  //   var form = this.form_template({
+  //     photo: this.model
+  //   });
 
-    this.$buttons = this.$('.photo-buttons');
-    this.$buttons.replaceWith(form);
+  //   this.$buttons = this.$('.photo-buttons');
+  //   this.$buttons.replaceWith(form);
+  // },
+
+  openEditForm: function (event) {
+    console.log('new open edit form');
+    $('#photo-edit').removeClass('invisible');
+    Geofotr.photoToEdit.set(this.model.attributes);
+    // this.$buttons = this.$('.photo-buttons');
+    // this.$buttons.replaceWith(form);
   },
 
   submitForm: function (event) {

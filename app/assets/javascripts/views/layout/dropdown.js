@@ -43,7 +43,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     });
     this.$el.html(renderedContent);
 
-    this.mapEl = this.$('#dropdown-map-canvas')[0];
+    this.mapEl = this.$('.dropdown-map-canvas')[0];
     this.initializeMap();
     this.bindMapEvents();
     return this;

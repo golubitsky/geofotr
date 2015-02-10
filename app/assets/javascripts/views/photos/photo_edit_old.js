@@ -1,6 +1,6 @@
-Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
+Geofotr.Views.PhotoEditOld = Backbone.CompositeView.extend({
 
-  template: JST['photos/photo_edit'],
+  template: JST['photos/photo_edit_form'],
 
   events: {
     'click button.submit' : 'submitForm'
@@ -8,12 +8,12 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render)
-    this.listenTo(this.model, 'change', this.render)
   },
 
   render: function () {
     this.$el.html(this.template({
-      photo: Geofotr.photoToEdit
+      photo: this.model,
+      buttonText: "Update Photo"
     }));
     this.attachSubviews();
     return this;

@@ -1,0 +1,83 @@
+<div class="dropdown-map-canvas"></div>
+
+<form class="form-horizontal create-photo" enctype="multipart/form-data">
+
+<div class="form-group">
+<label for="caption" class="col-sm-2 control-label">Caption</label>
+  <div class="col-sm-10">
+    <input type="text"
+          name="caption"
+          id="caption"
+          value='<%= photo.escape('caption') %>'
+          placeholder="enter a caption.."
+          value="<%= photo.get('caption') %>"
+          class="form-control">
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="location" class="col-sm-2 control-label">Location</label>
+    <div class="col-sm-10">
+      <input type="text"
+            name="location"
+            id="location"
+            placeholder="type a location or click on the map to reset lat/long.."
+            class="form-control">
+    </div>
+</div>
+
+<div class="form-group">
+  <label for="latitude" class="col-sm-2 control-label">Latitude</label>
+    <div class="col-sm-10">
+      <input type="text"
+            name="latitude"
+            id="latitude"
+            data-geo="lat"
+            placeholder="e.g. 37.7749"
+            value="<%= photo.get('latitude') %>"
+            class="form-control">
+    </div>
+</div>
+
+<div class="form-group">
+  <label for="longitude" class="col-sm-2 control-label">Longitude</label>
+    <div class="col-sm-10">
+      <input type="text"
+            name="longitude"
+            id="longitude"
+            data-geo="lng"
+            placeholder="e.g. -122.4194"
+            value="<%= photo.get('longitude') %>"
+            class="form-control">
+    </div>
+</div>
+
+<div class="radios">
+  <label for="visibility">Visibility</label>
+  <input type="radio"
+        name="visibility"
+        id="visibility-public"
+        value='public'
+        <% if (photo.get('visibility') === "public") { %>
+          checked
+        <% } %>
+        >Public
+  <input type="radio"
+        name="visibility"
+        id="visibility-followers"
+        value='followers'
+        <% if (photo.get('visibility') === "followers") { %>
+          checked
+        <% } %>
+        >Followers only
+  <input type="radio"
+        name="visibility"
+        id="visibility-private"
+        value='private'
+        <% if (photo.get('visibility') === "private") { %>
+          checked
+        <% } %>
+        >Private (only me)
+</div>
+
+<input type="submit" value="Update photo" class='btn btn-success'>

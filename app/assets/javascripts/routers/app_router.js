@@ -1,9 +1,10 @@
 Geofotr.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     Geofotr.photos = new Geofotr.Collections.Photos();
+    Geofotr.photoToEdit = new Geofotr.Models.Photo;
 
     this.addNavBarView();
-    // this.addDropDownView();
+    this.addPhotoEditView();
 
     this.$rootEl = options.$rootEl;
   },
@@ -25,6 +26,15 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     Geofotr.navBar.render();
+  },
+
+  addPhotoEditView: function () {
+    Geofotr.PhotoEdit = new Geofotr.Views.PhotoEdit({
+      model: Geofotr.photoToEdit,
+      el: $('#photo-edit')
+    });
+
+    Geofotr.PhotoEdit.render();
   },
 
   signIn: function () {

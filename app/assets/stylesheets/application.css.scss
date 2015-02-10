@@ -25,8 +25,6 @@ body {
   width: 600px;
 }
 
-
-
 html, body, #content, #map-canvas, #dropdown-map-canvas {
   height: 100%;
   width: 100%;
@@ -43,6 +41,21 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 #content figure {
   margin: auto;
 }
+
+//edit-form styling
+#photo-edit {
+  position: fixed;
+  width: 500px;
+  height: 520px;
+  z-index: 1;
+  background: $lightgrey;
+  right: 0;
+  top: 20%;
+  bottom: 30%;
+  right: 10px;
+  border: 2px solid $darkergrey;
+}
+
 //map styling
 #map-canvas {
   opacity: 100;
@@ -52,7 +65,8 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 #map-canvas.invisible {
   opacity: 0;
 }
- // #create-photo-dropdown,
+
+// #create-photo-dropdown,
 // #photo-dropdown-container,
 nav.navbar.navbar-default {
   margin: 0;
@@ -74,7 +88,7 @@ nav.navbar.navbar-default {
   height: 100%;
   }
 
-#dropdown-map-canvas {
+.dropdown-map-canvas {
   width: 100%;
   height: 200px;
 }
