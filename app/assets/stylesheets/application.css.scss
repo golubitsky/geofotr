@@ -99,9 +99,19 @@ nav.navbar.navbar-default {
 
 //photo/photo-overlay
 
+.photo {
+  position: relative;
+}
+
+.photo-list figcaption {
+  position: absolute;
+  bottom: 20px;
+}
+
 .photo-list > li {
   position: relative;
-  }
+}
+
 .photo-overlay {
   position: absolute;
   width: 100%;
@@ -111,17 +121,27 @@ nav.navbar.navbar-default {
   opacity: 0;
   transition: opacity 0.35s ease;
 }
-.photo-overlay:hover {
+.photo:hover .photo-overlay {
   opacity: 100;
 }
 
-
 .photo-overlay .photo-buttons{
-  bottom: 80px;
+  bottom: 20px;
   position: absolute;
   right: 0px;
 }
 
 .photo-buttons > *{
   display: inline-block;
+}
+
+.list-group-item figcaption {
+  transition: opacity 0.35s ease;
+  opacity: 0;
+}
+.photo:hover figcaption {
+  font-weight: bold;
+  color: red;
+  font-size: 24px;
+  opacity: 100;
 }

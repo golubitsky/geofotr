@@ -14,8 +14,8 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   events: {
     'click button.view-photo' : 'viewPhoto',
-    'click button.edit-photo' : 'addEditForm',
-    'click .cancel' : 'removeEditForm',
+    'click button.edit-photo' : 'toggleEditForm',
+    'click .cancel' : 'toggleEditForm',
     'submit .update-photo' : 'submitForm',
     'click button.destroy-photo' : 'destroyPhoto',
   },
@@ -47,10 +47,17 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.addSubview('div.like-button', likeButtonView);
   },
 
-  addEditForm: function (event) {
-    this.$editButton = $(event.target);
-    this.$editButton.attr('disabled', 'disabled');
+  toggleEditForm: function (event) {
+    if (this.editOpen) {
+      this.removeEditForm(event);
+      this.editOpen = false
+    } else {
+      this.addEditForm(event);
+      this.editOpen = true
+    }
+  },
 
+  addEditForm: function (event) {
     this.editFormView = new Geofotr.Views.PhotoEdit({
       model: this.model,
       collection: this.collection
@@ -62,13 +69,9 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.$editContainer = this.$('.photo-edit-container');
     this.$editParent = this.$editContainer.parent();
     Geofotr.scroll(this.$editContainer[0], this.$editParent[0]);
-
-    // this.scroll($photoContainer[0], $photoContainer.parent()[0])
   },
 
   removeEditForm: function () {
-    // $container = this.$el;
-    // $parent = $container.parent();
     var editForm = this.editFormView;
 
     $photoEditContainer = this.$('.photo-edit-container')
@@ -79,8 +82,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       function () {
       }.bind(this)
     );
-    this.$editButton.removeAttr('disabled');
-    // Geofotr.scroll($container[0], $parent[0], editForm.remove.bind(editForm));
   },
 
   viewPhoto: function () {
