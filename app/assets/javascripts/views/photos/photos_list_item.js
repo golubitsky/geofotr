@@ -49,7 +49,8 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   addEditForm: function () {
     var editFormView = new Geofotr.Views.PhotoEdit({
-      model: this.model
+      model: this.model,
+      collection: this.collection
     });
 
     this.addSubview('div.photo-edit-container', editFormView);
@@ -62,16 +63,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       )
   },
 
-  // OLD VERSION
-  // openEditForm: function (event) {
-  //   console.log('open edit form')
-  //   var form = this.form_template({
-  //     photo: this.model
-  //   });
-
-  //   this.$buttons = this.$('.photo-buttons');
-  //   this.$buttons.replaceWith(form);
-  // },
   openEditForm: function (event) {
     console.log('new open edit form');
 
@@ -86,6 +77,28 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     // this.$buttons = this.$('.photo-buttons');
     // this.$buttons.replaceWith(form);
   },
+
+  //   toggleDropdown: function (event) {
+  //   // var $dropdown =
+  //   this.$('.map-form').removeClass('hidden');
+  //   if ($dropdown.hasClass('hidden')) {
+  //     $dropdown.removeClass('hidden')
+
+  //     $dropdown.click(function (event) {
+  //       event.stopPropagation();
+  //     });
+
+  //     setTimeout(function () {
+  //       $('html').click(function() {
+  //         $dropdown.addClass('hidden');
+  //         $('html').off('click');
+  //         $dropdown.off('click');
+  //       })
+  //     }, 0);
+  //   } else {
+  //     $dropdown.addClass('hidden')
+  //   };
+  // },
 
   submitForm: function (event) {
     event.preventDefault();

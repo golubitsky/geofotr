@@ -5,42 +5,17 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'change', this.render)
   },
 
-  toggleDropdown: function (event) {
-    // var $dropdown =
-    this.$('.map-form').removeClass('hidden');
-    if ($dropdown.hasClass('hidden')) {
-      $dropdown.removeClass('hidden')
-
-      $dropdown.click(function (event) {
-        event.stopPropagation();
-      });
-
-      setTimeout(function () {
-        $('html').click(function() {
-          $dropdown.addClass('hidden');
-          $('html').off('click');
-          $dropdown.off('click');
-        })
-      }, 0);
-    } else {
-      $dropdown.addClass('hidden')
-    };
-  },
-
   template: JST['layout/photo_update_form'],
+  thumbTemplate: JST['maps/maps_photo'],
 
   events: {
     'change #photo': 'handleFile',
     'submit .update-photo' : 'updatePhoto',
-    'click .toggle-dropdown' : 'toggleDropdown'
   },
 
   render: function() {
     var renderedContent = this.template({
       photo: this.model,
-      formClass: 'update-photo',
-      submitButton: "Update photo!",
-      upload: false
     });
     this.$el.html(renderedContent);
 
@@ -73,6 +48,34 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
     // );
 
     $location = this.$('#location-update-form');
+
+    this.placeExistingMarker();
+
+    var that = this;
+      google.maps.event.addListenerOnce(this._map, 'idle', function() {
+        google.maps.event.trigger(that._map, 'resize');
+        that.positionAndShowMap();
+      });
+  },
+
+  placeExistingMarker: function () {
+    var latLng = new google.maps.LatLng(
+      this.model.get('latitude'),
+      this.model.get('longitude')
+    );
+
+    this.marker = new google.maps.Marker({
+      position: latLng,
+      map: this._map,
+      draggable: true,
+      title: this.model.get('caption')
+    });
+  },
+
+  positionAndShowMap: function () {
+    // setTimeout(function(){ this.$el.removeClass('transparent')}.bind(this), 1000);
+    this._map.setCenter({ lat: 0, lng: 0 });
+    this._map.setZoom(1);
   },
 
   bindMapEvents: function () {
@@ -84,21 +87,32 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
       var location = autocomplete.getPlace().geometry.location
 
       that.placeMarker(location);
-      var lat = location.k;
-      var lng = location.D;
+      var lat = location.lat();
+      var lng = location.lng();
       that.setFormLocation({ lat: lat, lng: lng });
     });
 
     //allow clicking on map to place a marker unless one exists
     google.maps.event.addListener(this._map, 'click', function(event) {
       that.placeMarker(event.latLng);
-      var lat = event.latLng.k;
-      var lng = event.latLng.D;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
+      that.setFormLocation({ lat: lat, lng: lng });
+    });
+
+    this.bindMarkerDragListener();
+  },
+
+  bindMarkerDragListener: function () {
+    var that = this;
+    google.maps.event.addListener(that.marker, 'dragend', function () {
+      var lat = that.marker.position.lat();
+      var lng = that.marker.position.lng();
       that.setFormLocation({ lat: lat, lng: lng });
     });
   },
 
-  placeMarker: function (location, reset) {
+  placeMarker: function (location) {
     if (this.marker) { this.marker.setMap(null) };
 
     this.marker = new google.maps.Marker({
@@ -112,51 +126,13 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
     this._map.setZoom(3);
 
     //set up drag listen!
-    var that = this;
-    google.maps.event.addListener(that.marker, 'dragend', function () {
-      var lat = that.marker.position.k;
-      var lng = that.marker.position.D;
-      that.setFormLocation({ lat: lat, lng: lng });
-    });
+    this.bindMarkerDragListener();
   },
 
   setFormLocation: function (location) {
     $('#latitude-update-form').val(location.lat);
     $('#longitude-update-form').val(location.lng);
     $('#altitude-update-form').val(location.alt);
-  },
-
-  handleFile: function (event) {
-    var file = event.currentTarget.files[0];
-    var that = this;
-    var reader = new FileReader();
-
-    $(event.target).fileExif(this.handleExif.bind(this));
-
-    reader.onload = function(e) {
-      // note that this isn't saving
-      that.model.set('photo', this.result);
-    }
-
-    reader.readAsDataURL(file);
-  },
-
-  handleExif: function (exif) {
-    var lat = exif.GPSLatitude[0] + (exif.GPSLatitude[1]/60) + (exif.GPSLatitude[2]/3600)
-    var lng = exif.GPSLongitude[0] + (exif.GPSLongitude[1]/60) + (exif.GPSLongitude[2]/3600)
-    if (exif.GPSLatitudeRef === "S") { lat *= -1 };
-    if (exif.GPSLongitudeRef === "W") { lng *= -1 };
-
-    this.setFormLocation({
-      lat: lat,
-      lng: lng,
-      alt: exif.GPSAltitude
-    });
-
-    this.placeMarker({
-      lat: lat,
-      lng: lng
-    });
   },
 
   reset: function() {

@@ -7,7 +7,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   events: {
-    'change #photo': 'handleFile',
+    'change #photo-create-form': 'handleFile',
     'submit .create-photo' : 'createPhoto',
     'click .toggle-dropdown' : 'toggleDropdown'
   },
@@ -91,6 +91,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     autocomplete = new google.maps.places.Autocomplete($location[0]);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
+
       //problems when pressing enter in form (as opposed to clicking on result)
       var location = autocomplete.getPlace().geometry.location
 
@@ -98,6 +99,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       var lat = location.lat();
       var lng = location.lng();
       that.setFormLocation({ lat: lat, lng: lng });
+      stopPropagation();
     });
 
     //allow clicking on map to place a marker unless one exists
@@ -109,7 +111,8 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     });
   },
 
-  placeMarker: function (location, reset) {
+  placeMarker: function (location) {
+    debugger
     if (this.marker) { this.marker.setMap(null) };
 
     this.marker = new google.maps.Marker({
@@ -153,6 +156,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   handleExif: function (exif) {
+    debugger
     var lat = exif.GPSLatitude[0] + (exif.GPSLatitude[1]/60) + (exif.GPSLatitude[2]/3600)
     var lng = exif.GPSLongitude[0] + (exif.GPSLongitude[1]/60) + (exif.GPSLongitude[2]/3600)
     if (exif.GPSLatitudeRef === "S") { lat *= -1 };

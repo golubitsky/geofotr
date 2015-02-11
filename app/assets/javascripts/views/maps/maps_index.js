@@ -63,8 +63,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
 
   addMarker: function (photo) {
     console.log("add marker");
-    console.log(photo.get('latitude'));
-    console.log(photo.get('longitude'));
+
     if (this._markers[photo.id]) { return };
     var that = this;
 
@@ -94,7 +93,6 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   },
 
   showMarkerInfo: function (event, marker) {
-    this.template({ photo: marker.photo });
     var infoWindow = new google.maps.InfoWindow({
       content: this.template({ photo: marker.photo })
     });
