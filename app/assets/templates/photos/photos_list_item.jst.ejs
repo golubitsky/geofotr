@@ -3,22 +3,7 @@
   <figcaption><%= photo.escape('caption') %></figcaption>
 
   <div class="photo-overlay">
-    user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a>
 
-    <div class="photo-buttons">
-      <span class="view-photo">View photo</span>
-
-      <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
-        <span class="edit-photo">Edit photo</span>
-        <span class="destroy-photo">Remove photo</span>
-      <% } %>
-
-      <div class="like-button"></div>
-    </div>
-
-    <div class="likes">
-      Likes: <div class="count"><%= photo.get('likeCount') %></div>
-    </div>
   </div>
 
 </figure>

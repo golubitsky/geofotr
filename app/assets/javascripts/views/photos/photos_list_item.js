@@ -6,10 +6,9 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.addCommentsIndex();
-    this.addLikeButton();
-
-    this.listenTo(this.model, 'change', this.render)
-    this.listenTo(this.model, 'change:likeCount', this.render)
+    this.createLikeButton();
+    this.addPhotoOverlay();
+    //  this.listenTo(this.model, 'change', this.render)
   },
 
   events: {
@@ -25,17 +24,26 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.$el.html(this.template({
       photo: this.model
     }));
+    // this.addLikeButton();
+    this.attachLikeButton();
 
     this.attachSubviews();
     return this;
   },
 
-  addLikeButton: function () {
-    var likeButtonView = new Geofotr.Views.Like({
+  attachLikeButton: function(){
+    this.$('.photo-buttons').append(this.likeButtonView.$el);
+    this.likeButtonView.delegateEvents();
+  },
+
+  createLikeButton: function () {
+    this.likeButtonView = new Geofotr.Views.Like({
       model: this.model.currentUserLike,
       photo: this.model
     });
-    this.addSubview('div.like-button', likeButtonView);
+    this.likeButtonView.render();
+    // this.$('.photo-buttons').append(likeButtonView.render().$el);
+    // this.addSubview('div.like-button', likeButtonView);
   },
 
   toggleCommentView: function (event) {
@@ -64,7 +72,14 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
 
   removeCommentView: function () {
+    $commentContainer = this.$('.photo-edit-container')
+    $commentContainer.on('transitionend', this.commentsIndex.remove.bind(this.commentsIndex));
+    $commentContainer.toggleClass('transparent');
 
+    Geofotr.scroll(this.$editParent[0], this.$editContainer[0],
+      function () {
+      }.bind(this)
+    );
   },
 
   addCommentsIndex: function () {
@@ -100,17 +115,26 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     Geofotr.scroll(this.$editContainer[0], this.$editParent[0]);
   },
 
+  addPhotoOverlay: function () {
+    var photoOverlay = new Geofotr.Views.PhotoOverlay({
+      model: this.model,
+      collection: this.collection
+    });
+
+    this.addSubview('div.photo-overlay', photoOverlay);
+  },
+
   removeEditForm: function () {
-    var editForm = this.editFormView;
+    // var editForm = this.editFormView;
 
-    $photoEditContainer = this.$('.photo-edit-container')
-    $photoEditContainer.on('transitionend', editForm.remove.bind(editForm));
-    $photoEditContainer.toggleClass('transparent');
+    // $photoEditContainer = this.$('.photo-edit-container')
+    // $photoEditContainer.on('transitionend', editForm.remove.bind(editForm));
+    // $photoEditContainer.toggleClass('transparent');
 
-    Geofotr.scroll(this.$editParent[0], this.$editContainer[0],
-      function () {
-      }.bind(this)
-    );
+    // Geofotr.scroll(this.$editParent[0], this.$editContainer[0],
+    //   function () {
+    //   }.bind(this)
+    // );
   },
 
   viewPhoto: function () {

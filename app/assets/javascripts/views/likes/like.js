@@ -1,28 +1,60 @@
 Geofotr.Views.Like = Backbone.CompositeView.extend({
 
-  template: JST['likes/like'],
+  tagName: 'span',
 
   events: {
-    'click span.like-photo' : 'likePhoto',
-    'click span.unlike-photo' : 'unlikePhoto'
+    'click' : 'toggleLike'
+  },
+
+  attributes: function () {
+    var attrs = {};
+    if (Geofotr.CURRENT_USER){
+      if (this.likeable()){
+        attrs.class = "like-photo";
+        } else {
+        attrs.class = "unlike-photo";
+      }
+    } else {
+      attrs.class = "hidden";
+    }
+    return attrs;
+  },
+
+  likeable: function(){
+    return this.model.isNew();
   },
 
   initialize: function (options) {
     this.photo = options.photo;
-    this.listenTo(this.model, 'sync', this.render)
   },
 
   render: function () {
-    this.$el.html(this.template({ like: this.model }));
+    console.log('like render');
+    this.$el.empty();
+    var text = '';
+    if(Geofotr.CURRENT_USER){
+      if(this.likeable()){
+        text = "Like";
+      } else {
+        text = "Unlike";
+      }
+    }
+    this.$el.html(text);
     return this;
   },
 
-  likePhoto: function (event) {
+  toggleLike: function(event){
     event.preventDefault();
+    if(this.likeable()){
+      this.likePhoto();
+    } else {
+      this.unlikePhoto();
+    }
+  },
 
-    var $button = $(event.target);
-    $button.text('liking..');
-    $button.attr('disabled', 'disabled');
+  likePhoto: function () {
+    event.preventDefault();
+    this.$el.attr('disabled', 'disabled');
 
     var that = this;
 
@@ -36,12 +68,9 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
     });
   },
 
-  unlikePhoto: function (event) {
+  unlikePhoto: function () {
     event.preventDefault();
-
-    var $button = $(event.target);
-    $button.text('unliking..');
-    $button.attr('disabled', 'disabled');
+    this.$el.attr('disabled', 'disabled');
 
     var that = this;
 
