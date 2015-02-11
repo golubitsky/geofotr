@@ -1,0 +1,102 @@
+<div class="map-form transparent">
+  <div class="error-container"></div>
+  <div class="dropdown-map-canvas"></div>
+
+  <form class="form-horizontal create-photo" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <label for="caption-update-form" class="col-sm-2 control-label"> Caption</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="caption-update-form"
+          name="caption"
+          value='<%= photo.escape('caption') %>'
+          placeholder="Caption this photo!"
+          value='<%= photo.escape('caption') %>'
+          class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location-update-form" class="col-sm-2 control-label">Location</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="location-update-form"
+          name="location"
+          placeholder="Type a place or click on the map to set location."
+          value='<%= photo.escape('location') %>'
+          class="location form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="latitude-update-form" class="col-sm-2 control-label">Latitude</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="latitude-update-form"
+          name="latitude"
+          data-geo="lat"
+          placeholder="e.g. 37.7749"
+          value='<%= photo.escape('latitude') %>'
+          class="latitude form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="longitude-update-form" class="col-sm-2 control-label">Longitude</label>
+      <div class="col-sm-10">
+        <input type="text"
+        id="longitude-update-form"
+        name="longitude"
+        data-geo="lng"
+        placeholder="e.g. -122.4194"
+        value='<%= photo.escape('longitude') %>'
+        class="form-control">
+      </div>
+    </div>
+
+    <input type="hidden"
+                name="altitude"
+                id="altitude-update-form">
+
+    <div class="form-inline">
+      <div class="controls-row">
+        <label class="col-sm-2 control-label">Visibility</label>
+        <label class="radio inline">
+          <input type="radio"
+            id="visibility-public-update-form"
+            name="visibility"
+            value="public"
+            <% if (photo.get('visibility') === 'public') { %>
+              checked
+            <% } %>
+          >Public
+        </label>
+
+        <label class="radio inline">
+          <input type="radio"
+            id="visibility-followers-update-form"
+            name="visibility"
+            value="followers"
+            <% if (photo.get('visibility') === 'followers') { %>
+              checked
+            <% } %>
+          >Followers only
+        </label>
+
+        <label class="radio inline">
+          <input type="radio"
+            id="visibility-private-update-form"
+            name="visibility"
+            value="private"
+            <% if (photo.get('visibility') === 'private') { %>
+              checked
+            <% } %>
+          >Private
+        </label>
+      </div>
+    </div>
+
+    <input type="submit" value="Update my photo!" class='btn btn-success'>
+  </form>
+</div>

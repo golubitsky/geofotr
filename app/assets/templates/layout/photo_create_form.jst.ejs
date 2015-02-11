@@ -1,0 +1,112 @@
+<button class='navbar-btn btn btn-primary toggle-dropdown'>
+  Geofotr a photo!
+</button>
+
+<div class="map-form transparent">
+  <div class="error-container"></div>
+  <div class="dropdown-map-canvas"></div>
+
+  <form class="form-horizontal create-photo" enctype="multipart/form-data">
+
+    <div class="form-group">
+    <label for="photo-create-form" class="col-sm-2 control-label">File</label>
+      <div class="col-sm-10">
+        <input type="file"
+          id="photo-create-form"
+          name="photo"
+          class="photo form-control">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="caption-create-form" class="col-sm-2 control-label"> Caption</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="caption-create-form"
+          name="caption"
+          placeholder="Caption this photo!"
+          class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location-create-form" class="col-sm-2 control-label">Location</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="location-create-form"
+          name="location"
+          placeholder="Type a place or click on the map to set location."
+          class="location form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="latitude-create-form" class="col-sm-2 control-label">Latitude</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="latitude-create-form"
+          name="latitude"
+          data-geo="lat"
+          placeholder="e.g. 37.7749"
+          class="latitude form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="longitude-create-form" class="col-sm-2 control-label">Longitude</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="longitude-create-form"
+          name="longitude"
+          data-geo="lng"
+          placeholder="e.g. -122.4194"
+          class="form-control">
+      </div>
+    </div>
+
+    <input type="hidden"
+                name="altitude"
+                id="altitude-create-form">
+
+    <div class="form-inline">
+      <div class="controls-row">
+        <label class="col-sm-2 control-label">Visibility</label>
+        <label class="radio inline">
+          <input type="radio"
+            id="visibility-public-create-form"
+            name="visibility"
+            value="public"
+            <% if (photo.get('visibility') === 'public') { %>
+              checked
+            <% } %>
+          >Public
+        </label>
+
+        <label class="radio inline">
+          <input type="radio"
+            id="visibility-followers-create-form"
+            name="visibility"
+            value="followers"
+            <% if (photo.get('visibility') === 'followers') { %>
+              checked
+            <% } %>
+          >Followers only
+        </label>
+
+        <label class="radio inline">
+          <input type="radio"
+            id="visibility-private-create-form"
+            name="visibility"
+            value="private"
+            <% if (photo.get('visibility') === 'private') { %>
+              checked
+            <% } %>
+          >Private
+        </label>
+      </div>
+    </div>
+
+    <input type="submit" value="Geofotr my photo!" class='btn btn-success'>
+  </form>
+</div>

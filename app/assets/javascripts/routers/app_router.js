@@ -29,12 +29,12 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   addPhotoEditView: function () {
-    Geofotr.PhotoEdit = new Geofotr.Views.PhotoEdit({
-      model: Geofotr.photoToEdit,
-      el: $('#photo-edit')
-    });
+    // Geofotr.PhotoEdit = new Geofotr.Views.PhotoEdit({
+    //   model: Geofotr.photoToEdit,
+    //   el: $('#photo-edit')
+    // });
 
-    Geofotr.PhotoEdit.render();
+    // Geofotr.PhotoEdit.render();
   },
 
   signIn: function () {

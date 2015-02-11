@@ -1,6 +1,6 @@
 Geofotr.Views.DropDownView = Backbone.View.extend({
 
-  template: JST['layout/dropdown_form'],
+  template: JST['layout/photo_create_form'],
 
   attributes: {
     id: "dropdown-view"
@@ -16,23 +16,31 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   toggleDropdown: function (event) {
-    var $dropdown = $('#dropdown-main')
+    var $dropdown = this.$('.map-form')
+
     if ($dropdown.hasClass('hidden')) {
-      $dropdown.removeClass('hidden')
+      $dropdown.removeClass('hidden');
+
+      setTimeout(function () {
+        $dropdown.removeClass('transparent')
+      }, 50);
 
       $dropdown.click(function (event) {
         event.stopPropagation();
       });
 
       setTimeout(function () {
-        $('html').click(function() {
-          $dropdown.addClass('hidden');
-          $('html').off('click');
+        $('html').one('click', function() {
+          // $dropdown.addClass('hidden');
+          $dropdown.addClass('transparent');
+          $dropdown.one('transitionend', function () {
+            $dropdown.addClass('hidden');
+          });
           $dropdown.off('click');
         })
       }, 0);
     } else {
-      $dropdown.addClass('hidden')
+      // $dropdown.addClass('hidden')
     };
   },
 
@@ -41,7 +49,9 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     var renderedContent = this.template({
       photo: this.model
     });
+
     this.$el.html(renderedContent);
+    this.$('.map-form').addClass('hidden')
 
     this.mapEl = this.$('.dropdown-map-canvas')[0];
     this.initializeMap();
@@ -71,32 +81,30 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
     );
 
-    //prevent disappearing bootstrap dropdown
-    $location = this.$('#location');
-    // $location.on('click', function (event) {
-    //   event.stopPropagation();
-    // });
+    $location = this.$('#location-upload-form');
+
   },
 
   bindMapEvents: function () {
     var that = this;
     //autocomplete map/marker logic
+
     autocomplete = new google.maps.places.Autocomplete($location[0]);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
       //problems when pressing enter in form (as opposed to clicking on result)
       var location = autocomplete.getPlace().geometry.location
 
       that.placeMarker(location);
-      var lat = location.k;
-      var lng = location.D;
+      var lat = location.lat();
+      var lng = location.lng();
       that.setFormLocation({ lat: lat, lng: lng });
     });
 
     //allow clicking on map to place a marker unless one exists
     google.maps.event.addListener(this._map, 'click', function(event) {
       that.placeMarker(event.latLng);
-      var lat = event.latLng.k;
-      var lng = event.latLng.D;
+      var lat = event.latLng.lat();
+      var lng = event.latLng.lng();
       that.setFormLocation({ lat: lat, lng: lng });
     });
   },
@@ -117,16 +125,16 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     //set up drag listen!
     var that = this;
     google.maps.event.addListener(that.marker, 'dragend', function () {
-      var lat = that.marker.position.k;
-      var lng = that.marker.position.D;
+      var lat = that.marker.position.lat();
+      var lng = that.marker.position.lng();
       that.setFormLocation({ lat: lat, lng: lng });
     });
   },
 
   setFormLocation: function (location) {
-    $('#latitude').val(location.lat);
-    $('#longitude').val(location.lng);
-    $('#altitude').val(location.alt);
+    this.$('#latitude-create-form').val(location.lat);
+    this.$('#longitude-create-form').val(location.lng);
+    this.$('#altitude-create-form').val(location.alt);
   },
 
   handleFile: function (event) {
@@ -167,15 +175,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     this.render();
     this.$el.parent().removeClass('open');
   },
-
-  // showForm: function() {
-  //   console.log("showForm")
-  //   this.$el.html(this.formTemplate({
-  //     photo: this.model
-  //   }));
-
-  //   return false;
-  // },
 
   createPhoto: function(event) {
     console.log("form submit");

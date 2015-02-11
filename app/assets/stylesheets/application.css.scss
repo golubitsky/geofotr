@@ -32,56 +32,40 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   padding: 0;
 }
 
-//photo feed
-#content .photo-feed {
-  width: 830px;
-  margin: auto;
-  }
-
-#content figure {
-  margin: auto;
-}
-
-//edit-form styling
-#photo-edit {
-  position: fixed;
-  width: 500px;
-  height: 520px;
-  z-index: 1;
-  background: $lightgrey;
-  right: 0;
-  top: 20%;
-  bottom: 30%;
-  right: 10px;
-  border: 2px solid $darkergrey;
-}
-
-//map styling
+//main map page
 #map-canvas {
   opacity: 100;
   transition: opacity 1s;
 }
 
-#map-canvas.invisible {
+#map-canvas.transparent {
   opacity: 0;
 }
 
-// #create-photo-dropdown,
-// #photo-dropdown-container,
 nav.navbar.navbar-default {
   margin: 0;
 }
 
-#dropdown-main {
+//dropdown form
+#dropdown-view .map-form {
   position: absolute;
   width: 500px;
   height: 520px;
   z-index: 1;
-  background: $lightgrey;
+  background: #eee;
   right: 0px;
-  border: 2px solid $darkergrey;
+  border-radius: 10px;
+  opacity: 100;
+  transition: opacity .74s;
 }
 
+#dropdown-view form {
+  margin: 10px
+}
+
+#dropdown-view .map-form.transparent {
+  opacity: 0;
+}
 
 #create-photo-dropdown div {
   width: 100%;
@@ -93,3 +77,31 @@ nav.navbar.navbar-default {
   height: 200px;
 }
 
+//photo feed
+#content .photo-feed {
+  width: 830px;
+  margin: auto;
+  }
+
+#content figure {
+  margin: auto;
+}
+
+//edit-form
+#photo-edit {
+  position: fixed;
+  width: 500px;
+  height: 520px;
+  z-index: 1;
+  background: $lightgrey;
+  right: 0;
+  top: 20%;
+  bottom: 40%;
+  right: 15px;
+  border: 2px solid $darkergrey;
+  transition: opacity 1s;
+}
+
+#photo-edit.transparent {
+  opacity: 0;
+}

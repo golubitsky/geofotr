@@ -5,7 +5,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   attributes: {
     id: "map-canvas"
   },
-  className: "invisible",
+  className: "transparent",
 
   events: {
     'click figure' : 'viewPhoto'
@@ -23,16 +23,12 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   initialize: function () {
     this.initializeMap();
 
-
-
     this.listenTo(this.collection, 'add', this.addMarker);
     this.listenTo(this.collection, 'remove', this.removeMarker);
-
-
   },
 
   positionAndShowMap: function () {
-    setTimeout(function(){ this.$el.removeClass('invisible')}.bind(this), 1000  );
+    setTimeout(function(){ this.$el.removeClass('transparent')}.bind(this), 1000);
     this._map.setCenter({ lat: 0, lng: 0 });
     this._map.setZoom(3);
   },

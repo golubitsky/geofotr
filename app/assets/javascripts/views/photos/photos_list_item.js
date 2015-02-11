@@ -65,7 +65,14 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   openEditForm: function (event) {
     console.log('new open edit form');
-    $('#photo-edit').removeClass('invisible');
+
+    $photoForm = $('#photo-edit')
+    $photoForm.removeClass('hidden');
+
+    setTimeout(function () {
+        $photoForm.removeClass('transparent')
+      }, 50);
+
     Geofotr.photoToEdit.set(this.model.attributes);
     // this.$buttons = this.$('.photo-buttons');
     // this.$buttons.replaceWith(form);
