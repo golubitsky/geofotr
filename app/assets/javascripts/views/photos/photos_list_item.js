@@ -47,22 +47,40 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.addSubview('div.like-button', likeButtonView);
   },
 
-  addEditForm: function () {
+  addEditForm: function (event) {
+    this.$editButton = $(event.target);
+    this.$editButton.attr('disabled', 'disabled');
+
     this.editFormView = new Geofotr.Views.PhotoEdit({
       model: this.model,
       collection: this.collection
     });
 
-    $photoContainer = this.$('div.photo-edit-container')
+    var $photoContainer = this.$('div.photo-edit-container');
     $photoContainer.html(this.editFormView.render().$el);
+
+    this.$editContainer = this.$('.photo-edit-container');
+    this.$editParent = this.$editContainer.parent();
+    Geofotr.scroll(this.$editContainer[0], this.$editParent[0]);
 
     // this.scroll($photoContainer[0], $photoContainer.parent()[0])
   },
 
   removeEditForm: function () {
-    $container = this.$el
-    $parent = $container.parent();
-    Geofotr.scroll($container[0], $parent[0], this.editFormView.remove.bind(this))
+    // $container = this.$el;
+    // $parent = $container.parent();
+    var editForm = this.editFormView;
+
+    $photoEditContainer = this.$('.photo-edit-container')
+    $photoEditContainer.on('transitionend', editForm.remove.bind(editForm));
+    $photoEditContainer.toggleClass('transparent');
+
+    Geofotr.scroll(this.$editParent[0], this.$editContainer[0],
+      function () {
+      }.bind(this)
+    );
+    this.$editButton.removeAttr('disabled');
+    // Geofotr.scroll($container[0], $parent[0], editForm.remove.bind(editForm));
   },
 
   viewPhoto: function () {

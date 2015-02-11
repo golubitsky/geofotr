@@ -10,12 +10,11 @@ Geofotr.scroll = function (parent, element, callback) {
     easing: 'swing',
     complete: function() {
         console.log('hey')
-        debugger
         callback && callback();
       }
   });
  $('html,body').animate({ scrollTop: $(parent).offset().top }, {
-    duration: 550,
+    duration: 500,
     easing: 'swing'
   });
 

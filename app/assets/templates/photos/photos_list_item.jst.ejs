@@ -1,23 +1,25 @@
-<figure class="photo">
+<div class="photo-overlay">
+  <figure class="photo">
     <%= photo.get('feedUrl') %>
     <figcaption><%= photo.escape('caption') %></figcaption>
-</figure>
-user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
+  </figure>
+  user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
 
-<div class="photo-buttons">
-  <button class="view-photo">View photo</button>
+  <div class="photo-buttons">
+    <button class="view-photo">View photo</button>
 
-  <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
-    <button class="edit-photo">Edit photo</button>
-    <button class="destroy-photo">Remove photo</button>
-  <% } %>
+    <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
+      <button class="edit-photo">Edit photo</button>
+      <button class="destroy-photo">Remove photo</button>
+    <% } %>
 
-  <div class="like-button"></div>
-</div>
+    <div class="like-button"></div>
+  </div>
 
-<div class="likes" style="display: inline">
-  Likes: <div class="count" style="display: inline"><%= photo.get('likeCount') %></div>
-  <br>
+  <div class="likes" style="display: inline">
+    Likes: <div class="count" style="display: inline"><%= photo.get('likeCount') %></div>
+    <br>
+  </div>
 </div>
 
 <div class="photo-edit-container transparent"></div>

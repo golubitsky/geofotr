@@ -3,10 +3,6 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render)
     this.listenTo(this.model, 'change', this.render)
-
-    $container = $('.photo-edit-container');
-    $parent = $container.parent();
-    Geofotr.scroll($container[0], $parent[0])
   },
 
   template: JST['layout/photo_update_form'],
@@ -22,10 +18,6 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
       photo: this.model,
     });
     this.$el.html(renderedContent);
-
-    // $container = $.('.photo-edit-container');
-    // $parent = $container.parent();
-    // this.scroll($container[0], $parent[0])
 
     this.mapEl = this.$('.dropdown-map-canvas')[0];
     this.initializeMap();
@@ -77,12 +69,13 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   positionAndShowMap: function () {
     this._map.setCenter({ lat: 0, lng: 0 });
     this._map.setZoom(1);
-    setTimeout(
-      function () {
-        this.$el.parent().toggleClass('transparent')
-      }.bind(this), 0
-    );
+    this.$el.parent().toggleClass('transparent')
+  },
 
+  scrollToForm: function () {
+    $container = $('.photo-edit-container');
+    $parent = $container.parent();
+    Geofotr.scroll($container[0], $parent[0])
   },
 
   bindMapEvents: function () {

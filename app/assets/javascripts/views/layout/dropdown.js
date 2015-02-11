@@ -156,7 +156,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   handleExif: function (exif) {
-    debugger
     var lat = exif.GPSLatitude[0] + (exif.GPSLatitude[1]/60) + (exif.GPSLatitude[2]/3600)
     var lng = exif.GPSLongitude[0] + (exif.GPSLongitude[1]/60) + (exif.GPSLongitude[2]/3600)
     if (exif.GPSLatitudeRef === "S") { lat *= -1 };
