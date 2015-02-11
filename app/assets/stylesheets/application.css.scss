@@ -56,7 +56,7 @@ nav.navbar.navbar-default {
   right: 0px;
   border-radius: 10px;
   opacity: 100;
-  transition: opacity .74s;
+  transition: opacity .35s;
 }
 
 #dropdown-view form {
@@ -90,9 +90,38 @@ nav.navbar.navbar-default {
 //edit-form
 .photo-edit-container {
   opacity: 1;
-  transition: opacity .5s;
+  transition: opacity .35s;
 }
 
 .photo-edit-container.transparent {
   opacity: 0;
+}
+
+//photo/photo-overlay
+
+.photo-list > li {
+  position: relative;
+  }
+.photo-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  bottom: 0px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.photo-overlay:hover {
+  opacity: 100;
+}
+
+
+.photo-overlay .photo-buttons{
+  bottom: 80px;
+  position: absolute;
+  right: 0px;
+}
+
+.photo-buttons > *{
+  display: inline-block;
 }

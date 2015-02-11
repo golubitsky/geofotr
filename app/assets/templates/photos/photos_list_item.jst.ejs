@@ -1,8 +1,9 @@
+<figure class="photo">
+  <%= photo.get('feedUrl') %>
+  <figcaption><%= photo.escape('caption') %></figcaption>
+</figure>
+
 <div class="photo-overlay">
-  <figure class="photo">
-    <%= photo.get('feedUrl') %>
-    <figcaption><%= photo.escape('caption') %></figcaption>
-  </figure>
   user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a><br>
 
   <div class="photo-buttons">
@@ -16,8 +17,8 @@
     <div class="like-button"></div>
   </div>
 
-  <div class="likes" style="display: inline">
-    Likes: <div class="count" style="display: inline"><%= photo.get('likeCount') %></div>
+  <div class="likes">
+    Likes: <div class="count"><%= photo.get('likeCount') %></div>
     <br>
   </div>
 </div>

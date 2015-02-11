@@ -14,9 +14,7 @@ Geofotr.scroll = function (parent, element, callback) {
       }
   });
  $('html,body').animate({ scrollTop: $(parent).offset().top }, {
-    duration: 500,
+    duration: 350,
     easing: 'swing'
   });
-
-
 }
