@@ -27,21 +27,17 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
     };
   },
 
-  template: JST['layout/photo_form'],
-
-  attributes: {
-    id: "dropdown-view"
-  },
+  template: JST['layout/photo_update_form'],
 
   events: {
     'change #photo': 'handleFile',
-    'submit .update-photo' : 'updatecreatePhoto',
+    'submit .update-photo' : 'updatePhoto',
     'click .toggle-dropdown' : 'toggleDropdown'
   },
 
   render: function() {
     var renderedContent = this.template({
-      photo: Geofotr.photoToEdit,
+      photo: this.model,
       formClass: 'update-photo',
       submitButton: "Update photo!",
       upload: false
@@ -76,7 +72,7 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
     //   }
     // );
 
-    $location = this.$('#location');
+    $location = this.$('#location-update-form');
   },
 
   bindMapEvents: function () {
@@ -125,9 +121,9 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   },
 
   setFormLocation: function (location) {
-    $('#latitude').val(location.lat);
-    $('#longitude').val(location.lng);
-    $('#altitude').val(location.alt);
+    $('#latitude-update-form').val(location.lat);
+    $('#longitude-update-form').val(location.lng);
+    $('#altitude-update-form').val(location.alt);
   },
 
   handleFile: function (event) {

@@ -7,6 +7,8 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   initialize: function () {
     this.addCommentsIndex();
     this.addLikeButton();
+    this.addEditForm();
+
     this.listenTo(this.model, 'change', this.render)
     this.listenTo(this.model, 'change:likeCount', this.render)
   },
@@ -45,6 +47,14 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.addSubview('div.like-button', likeButtonView);
   },
 
+  addEditForm: function () {
+    var editFormView = new Geofotr.Views.PhotoEdit({
+      model: this.model
+    });
+
+    this.addSubview('div.photo-edit-container', editFormView);
+  },
+
   viewPhoto: function () {
     Backbone.history.navigate(
       '#photos/' + this.model.id,
@@ -62,16 +72,15 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   //   this.$buttons = this.$('.photo-buttons');
   //   this.$buttons.replaceWith(form);
   // },
-
   openEditForm: function (event) {
     console.log('new open edit form');
 
-    $photoForm = $('#photo-edit')
-    $photoForm.removeClass('hidden');
+    Geofotr.PhotoEdit = new Geofotr.Views.PhotoEdit({
+      model: Geofotr.photoToEdit,
+      el: $('#photo-edit')
+    });
 
-    setTimeout(function () {
-        $photoForm.removeClass('transparent')
-      }, 50);
+    Geofotr.PhotoEdit.render();
 
     Geofotr.photoToEdit.set(this.model.attributes);
     // this.$buttons = this.$('.photo-buttons');

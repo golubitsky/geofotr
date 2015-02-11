@@ -2,7 +2,7 @@
   <div class="error-container"></div>
   <div class="dropdown-map-canvas"></div>
 
-  <form class="form-horizontal create-photo" enctype="multipart/form-data">
+  <form class="form-horizontal update-photo">
 
     <div class="form-group">
       <label for="caption-update-form" class="col-sm-2 control-label"> Caption</label>
@@ -25,7 +25,7 @@
           name="location"
           placeholder="Type a place or click on the map to set location."
           value='<%= photo.escape('location') %>'
-          class="location form-control">
+          class="form-control">
       </div>
     </div>
 
@@ -38,7 +38,7 @@
           data-geo="lat"
           placeholder="e.g. 37.7749"
           value='<%= photo.escape('latitude') %>'
-          class="latitude form-control">
+          class="form-control">
       </div>
     </div>
 

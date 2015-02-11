@@ -81,7 +81,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
     );
 
-    $location = this.$('#location-upload-form');
+    $location = this.$('#location-create-form');
 
   },
 

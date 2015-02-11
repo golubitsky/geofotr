@@ -14,7 +14,7 @@
         <input type="file"
           id="photo-create-form"
           name="photo"
-          class="photo form-control">
+          class="form-control">
       </div>
     </div>
 
@@ -37,7 +37,7 @@
           id="location-create-form"
           name="location"
           placeholder="Type a place or click on the map to set location."
-          class="location form-control">
+          class="form-control">
       </div>
     </div>
 
@@ -49,7 +49,7 @@
           name="latitude"
           data-geo="lat"
           placeholder="e.g. 37.7749"
-          class="latitude form-control">
+          class="form-control">
       </div>
     </div>
 
@@ -77,32 +77,21 @@
             id="visibility-public-create-form"
             name="visibility"
             value="public"
-            <% if (photo.get('visibility') === 'public') { %>
-              checked
-            <% } %>
-          >Public
+            checked>Public
         </label>
 
         <label class="radio inline">
           <input type="radio"
             id="visibility-followers-create-form"
             name="visibility"
-            value="followers"
-            <% if (photo.get('visibility') === 'followers') { %>
-              checked
-            <% } %>
-          >Followers only
+            value="followers">Followers only
         </label>
 
         <label class="radio inline">
           <input type="radio"
             id="visibility-private-create-form"
             name="visibility"
-            value="private"
-            <% if (photo.get('visibility') === 'private') { %>
-              checked
-            <% } %>
-          >Private
+            value="private">Private
         </label>
       </div>
     </div>

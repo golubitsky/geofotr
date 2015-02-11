@@ -88,20 +88,4 @@ nav.navbar.navbar-default {
 }
 
 //edit-form
-#photo-edit {
-  position: fixed;
-  width: 500px;
-  height: 520px;
-  z-index: 1;
-  background: $lightgrey;
-  right: 0;
-  top: 20%;
-  bottom: 40%;
-  right: 15px;
-  border: 2px solid $darkergrey;
-  transition: opacity 1s;
-}
 
-#photo-edit.transparent {
-  opacity: 0;
-}
