@@ -88,4 +88,11 @@ nav.navbar.navbar-default {
 }
 
 //edit-form
+.photo-edit-container {
+  opacity: 1;
+  transition: opacity .2s;
+}
 
+.photo-edit-container.transparent {
+  opacity: 0;
+}

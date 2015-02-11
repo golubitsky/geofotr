@@ -7,7 +7,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   initialize: function () {
     this.addCommentsIndex();
     this.addLikeButton();
-    this.addEditForm();
 
     this.listenTo(this.model, 'change', this.render)
     this.listenTo(this.model, 'change:likeCount', this.render)
@@ -15,7 +14,8 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
   events: {
     'click button.view-photo' : 'viewPhoto',
-    'click button.edit-photo' : 'openEditForm',
+    'click button.edit-photo' : 'addEditForm',
+    'click .cancel' : 'removeEditForm',
     'submit .update-photo' : 'submitForm',
     'click button.destroy-photo' : 'destroyPhoto',
   },
@@ -48,12 +48,21 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   addEditForm: function () {
-    var editFormView = new Geofotr.Views.PhotoEdit({
+    this.editFormView = new Geofotr.Views.PhotoEdit({
       model: this.model,
       collection: this.collection
     });
 
-    this.addSubview('div.photo-edit-container', editFormView);
+    $photoContainer = this.$('div.photo-edit-container')
+    $photoContainer.html(this.editFormView.render().$el);
+
+    // this.scroll($photoContainer[0], $photoContainer.parent()[0])
+  },
+
+  removeEditForm: function () {
+    $container = this.$el
+    $parent = $container.parent();
+    Geofotr.scroll($container[0], $parent[0], this.editFormView.remove.bind(this))
   },
 
   viewPhoto: function () {
@@ -61,63 +70,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       '#photos/' + this.model.id,
       { trigger: true }
       )
-  },
-
-  openEditForm: function (event) {
-    console.log('new open edit form');
-
-    Geofotr.PhotoEdit = new Geofotr.Views.PhotoEdit({
-      model: Geofotr.photoToEdit,
-      el: $('#photo-edit')
-    });
-
-    Geofotr.PhotoEdit.render();
-
-    Geofotr.photoToEdit.set(this.model.attributes);
-    // this.$buttons = this.$('.photo-buttons');
-    // this.$buttons.replaceWith(form);
-  },
-
-  //   toggleDropdown: function (event) {
-  //   // var $dropdown =
-  //   this.$('.map-form').removeClass('hidden');
-  //   if ($dropdown.hasClass('hidden')) {
-  //     $dropdown.removeClass('hidden')
-
-  //     $dropdown.click(function (event) {
-  //       event.stopPropagation();
-  //     });
-
-  //     setTimeout(function () {
-  //       $('html').click(function() {
-  //         $dropdown.addClass('hidden');
-  //         $('html').off('click');
-  //         $dropdown.off('click');
-  //       })
-  //     }, 0);
-  //   } else {
-  //     $dropdown.addClass('hidden')
-  //   };
-  // },
-
-  submitForm: function (event) {
-    event.preventDefault();
-    params = this.$('form').serializeJSON();
-    var that = this;
-
-    var success = function (model) {
-      that.collection.add(model, { merge: true });
-      that.$('form.update-photo').replaceWith(that.$buttons);
-    };
-
-    var error = function (model) {
-      console.log('error')
-    }
-
-    this.model.save(params, {
-      success: success,
-      error: error
-    });
   },
 
   destroyPhoto: function (event) {

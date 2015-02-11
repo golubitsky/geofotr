@@ -3,6 +3,10 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render)
     this.listenTo(this.model, 'change', this.render)
+
+    $container = $('.photo-edit-container');
+    $parent = $container.parent();
+    Geofotr.scroll($container[0], $parent[0])
   },
 
   template: JST['layout/photo_update_form'],
@@ -19,9 +23,14 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
     });
     this.$el.html(renderedContent);
 
+    // $container = $.('.photo-edit-container');
+    // $parent = $container.parent();
+    // this.scroll($container[0], $parent[0])
+
     this.mapEl = this.$('.dropdown-map-canvas')[0];
     this.initializeMap();
     this.bindMapEvents();
+
     return this;
   },
 
@@ -35,17 +44,10 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
 
     this._map = new google.maps.Map(this.mapEl, mapOptions);
 
+
     //size/center map on dropdown
     var that = this;
-    // var dropButton = this.$('.toggle-dropdown')[0]
 
-    // google.maps.event.addDomListener(dropButton, 'click', function() {
-    //     setTimeout(function () {
-    //       google.maps.event.trigger(that._map, 'resize');
-    //       that._map.setCenter({ lat: 0, lng: 0 });
-    //     }, 0);
-    //   }
-    // );
 
     $location = this.$('#location-update-form');
 
@@ -73,9 +75,14 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   },
 
   positionAndShowMap: function () {
-    // setTimeout(function(){ this.$el.removeClass('transparent')}.bind(this), 1000);
     this._map.setCenter({ lat: 0, lng: 0 });
     this._map.setZoom(1);
+    setTimeout(
+      function () {
+        this.$el.parent().toggleClass('transparent')
+      }.bind(this), 0
+    );
+
   },
 
   bindMapEvents: function () {
@@ -173,26 +180,5 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
       success: success,
       error: error
     });
-  },
-
-  // submitForm: function () {
-  //   event.preventDefault();
-  //   params = this.$('form').serializeJSON();
-  //   var that = this;
-
-  //   var success = function (model) {
-  //     that.collection.add(model, { merge: true });
-  //     Backbone.history.navigate('', { trigger: true })
-  //   };
-
-  //   var error = function (model) {
-  //     console.log('error')
-  //   }
-
-  //   this.model.save(params, {
-  //     success: success,
-  //     error: error
-  //   });
-  // },
-
+  }
 });

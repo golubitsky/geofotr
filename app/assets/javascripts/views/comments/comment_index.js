@@ -34,7 +34,7 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   },
 
   submitForm: function (event) {
-    if (event.type === "submit" || isEnterKeypress(event)) {
+    if (event.type === "submit" || Geofotr.isEnterKeypress(event)) {
       event.preventDefault();
       params = this.$('form').serializeJSON();
       var that = this;
