@@ -6,11 +6,11 @@
     user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('user') %></a>
 
     <div class="photo-buttons">
-      <button class="view-photo">View photo</button>
+      <span class="view-photo">View photo</span>
 
       <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
-        <button class="edit-photo">Edit photo</button>
-        <button class="destroy-photo">Remove photo</button>
+        <span class="edit-photo">Edit photo</span>
+        <span class="destroy-photo">Remove photo</span>
       <% } %>
 
       <div class="like-button"></div>

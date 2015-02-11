@@ -13,11 +13,11 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click button.view-photo' : 'viewPhoto',
-    'click button.edit-photo' : 'toggleEditForm',
+    'click span.view-photo' : 'viewPhoto',
+    'click span.edit-photo' : 'toggleEditForm',
     'click .cancel' : 'toggleEditForm',
     'submit .update-photo' : 'submitForm',
-    'click button.destroy-photo' : 'destroyPhoto',
+    'click span.destroy-photo' : 'destroyPhoto',
   },
 
   render: function () {
@@ -30,6 +30,43 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     return this;
   },
 
+  addLikeButton: function () {
+    var likeButtonView = new Geofotr.Views.Like({
+      model: this.model.currentUserLike,
+      photo: this.model
+    });
+    this.addSubview('div.like-button', likeButtonView);
+  },
+
+  toggleCommentView: function (event) {
+    if (this.commentOpen) {
+      this.removeCommentView(event);
+      this.commentOpen = false
+    } else {
+      this.addCommentView(event);
+      this.commentOpen = true
+    }
+  },
+
+  addCommentView: function (event) {
+    this.commentsIndex = new Geofotr.Views.CommentsIndex({
+      collection: this.model.comments(),
+      model: this.model,
+      photos: this.collection
+    });
+
+    this.$commentsContainer = this.$('div.comments-container');
+    this.$commentsParent = this.$editContainer.parent();
+
+    $commentsContainer.html(this.commentsIndex.render().$el);
+    Geofotr.scroll(this.$commentsContainer[0], this.$commentsParent[0]);
+  },
+
+
+  removeCommentView: function () {
+
+  },
+
   addCommentsIndex: function () {
     var commentsIndex = new Geofotr.Views.CommentsIndex({
       collection: this.model.comments(),
@@ -39,13 +76,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.addSubview('div.comments-container', commentsIndex);
   },
 
-  addLikeButton: function () {
-    var likeButtonView = new Geofotr.Views.Like({
-      model: this.model.currentUserLike,
-      photo: this.model
-    });
-    this.addSubview('div.like-button', likeButtonView);
-  },
 
   toggleEditForm: function (event) {
     if (this.editOpen) {
@@ -63,11 +93,10 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       collection: this.collection
     });
 
-    var $photoContainer = this.$('div.photo-edit-container');
-    $photoContainer.html(this.editFormView.render().$el);
-
     this.$editContainer = this.$('.photo-edit-container');
     this.$editParent = this.$editContainer.parent();
+
+    this.$editContainer.html(this.editFormView.render().$el);
     Geofotr.scroll(this.$editContainer[0], this.$editParent[0]);
   },
 

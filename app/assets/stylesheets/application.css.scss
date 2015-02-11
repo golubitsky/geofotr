@@ -108,10 +108,6 @@ nav.navbar.navbar-default {
   bottom: 20px;
 }
 
-.photo-list > li {
-  position: relative;
-}
-
 .photo-overlay {
   position: absolute;
   width: 100%;
@@ -135,13 +131,33 @@ nav.navbar.navbar-default {
   display: inline-block;
 }
 
+//photo links
+.list-group-item span {
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  margin: 3px;
+  padding: 3px;
+  border: 1px solid white;
+  border-radius: 5px;
+  opacity: 100;
+  cursor: pointer;
+  cursor: hand;
+  -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
 .list-group-item figcaption {
   transition: opacity 0.35s ease;
   opacity: 0;
 }
 .photo:hover figcaption {
   font-weight: bold;
-  color: red;
+  color: white;
+  font-size: 16px;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   font-size: 24px;
   opacity: 100;
 }

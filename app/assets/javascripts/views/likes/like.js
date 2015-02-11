@@ -3,8 +3,8 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   template: JST['likes/like'],
 
   events: {
-    'click button.like-photo' : 'likePhoto',
-    'click button.unlike-photo' : 'unlikePhoto'
+    'click span.like-photo' : 'likePhoto',
+    'click span.unlike-photo' : 'unlikePhoto'
   },
 
   initialize: function (options) {
