@@ -3,18 +3,14 @@ Geofotr.isEnterKeypress = function (event) {
   return event.keycode === 13;
 }
 
-//figure out why the arguments have to be reversed?
-Geofotr.scroll = function (parent, element, callback) {
- $(parent).animate({ scrollTop: $(parent).scrollTop() + $(element).offset().top - $(parent).offset().top }, {
-    duration: 'slow',
-    easing: 'swing',
-    complete: function() {
-        console.log('hey')
-        callback && callback();
-      }
-  });
- $('html,body').animate({ scrollTop: $(parent).offset().top }, {
-    duration: 350,
-    easing: 'swing'
-  });
+Geofotr.scrollToEdit = function($element){
+  $("html, body").animate({
+      scrollTop: $element.offset().top + $element.outerHeight(true)
+    }, 350);
+}
+
+Geofotr.scrollFromEdit = function($element){
+  $("html, body").animate({
+      scrollTop: $element.offset().top
+    }, 350);
 }

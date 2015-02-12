@@ -7,7 +7,10 @@ user: <a href= <%= "#users/" + photo.escape('user_id') %> ><%= photo.escape('use
     <span class="edit-photo">Edit photo</span>
     <span class="destroy-photo">Remove photo</span>
   <% } %>
-  <span class="like-button"></span>
+
+  <% if (Geofotr.CURRENT_USER) { %>
+    <span class="like-button"></span>
+  <% } %>
 </div>
 
 <div class="likes">

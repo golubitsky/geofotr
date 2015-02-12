@@ -90,24 +90,19 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       collection: this.collection
     });
 
+    Geofotr.scrollToEdit($('div.photo-overlay'));
     this.$editContainer = this.$('.photo-edit-container');
-    this.$editParent = this.$editContainer.parent();
-    debugger
+
     this.$editContainer.html(this.editFormView.render().$el);
-    Geofotr.scroll(this.$editContainer[0], this.$editParent[0]);
   },
 
   removeEditForm: function () {
     var editForm = this.editFormView;
 
+    Geofotr.scrollFromEdit($('div.photo-overlay'));
     $photoEditContainer = this.$('.photo-edit-container')
     $photoEditContainer.on('transitionend', editForm.remove.bind(editForm));
     $photoEditContainer.toggleClass('transparent');
-
-    Geofotr.scroll(this.$editParent[0], this.$editContainer[0],
-      function () {
-      }.bind(this)
-    );
   },
 
   addPhotoOverlay: function () {
