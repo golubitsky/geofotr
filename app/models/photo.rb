@@ -22,7 +22,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :comments
 
-  default_scope { order('updated_at DESC') }
+  default_scope { order('created_at DESC') }
 
   def Photo.public_photos
     Photo.where(visibility: "public")

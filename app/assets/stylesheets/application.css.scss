@@ -20,6 +20,9 @@
 $lightgrey: #ccc;
 $darkergrey: darken($lightgrey, 20%);
 
+$dialog-font-size: 16px;
+$form-background: #eee;
+
 // body {
 //   height: 800px;
 //   width: 600px;
@@ -52,10 +55,10 @@ nav.navbar.navbar-default {
   width: 500px;
   height: 540px;
   z-index: 1;
-  background: #eee;
+  background: $form-background;
   right: 0px;
   border-radius: 10px;
-  opacity: 100;
+  opacity: 1;
   transition: opacity .35s;
 }
 
@@ -78,11 +81,17 @@ nav.navbar.navbar-default {
 }
 
 //photo feed
-#content .photo-feed {
+.photo-feed {
   width: 830px;
   margin: auto;
+  position: relative;
   }
 
+.photo-feed h1 {
+  position: absolute;
+  left: -201px;
+  top: -16px;
+}
 
 //edit-form
 .photo-edit-container {
@@ -99,32 +108,43 @@ nav.navbar.navbar-default {
 .photo-list-item {
   list-style: none;
   width: 820px;
-  border: 10px solid black;
+  // border: 10px solid black;
+  padding: 10px;
+  margin-bottom: -8px;
+  background: black;
+  transition: background .35s ease;
 }
 
-.photo-list-item:first-of-type {
-  list-style: none;
+// .photo-list-item:first-of-type {
+//   list-style: none;
 
-  border-left: 10px solid black;
-  border-right: 10px solid black;
-  border-top: 10px solid black;
-  border-bottom: 5px solid black;
-}
+//   border-left: 10px solid black;
+//   border-right: 10px solid black;
+//   border-top: 10px solid black;
+//   border-bottom: 5px solid black;
+// }
 
-.photo-list-item:last-of-type {
-  list-style: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-left: 10px solid black;
-  border-right: 10px solid black;
-  border-top: 5px solid black;
-  border-bottom: 10px solid black;
-}
+// .photo-list-item:last-of-type {
+//   list-style: none;
+//   border-bottom-left-radius: 10px;
+//   border-bottom-right-radius: 10px;
+//   border-left: 10px solid black;
+//   border-right: 10px solid black;
+//   border-top: 5px solid black;
+//   border-bottom: 10px solid black;
+// }
+
+//photo centering
 
 figure.photo {
+  position: relative;
   margin: auto;
   width: 100%;
-  position: relative;
+}
+
+figure.photo > img {
+  margin: 0 auto;
+  display: block;
 }
 
 .photo-overlay {
@@ -138,7 +158,7 @@ figure.photo {
   transition: opacity 0.35s ease;
 }
 .photo:hover .photo-overlay {
-  opacity: 100;
+  opacity: 1;
 }
 
 .photo-overlay .photo-buttons{
@@ -176,7 +196,7 @@ figure.photo {
   opacity: 0;
 }
 .photo:hover figcaption {
-  opacity: 100;
+  opacity: 1;
 }
 //photo links
 .photo-buttons span:not(.username) {
@@ -220,7 +240,7 @@ figure.photo {
 
 .photo-list .comments-container {
   transition: opacity 0.35s ease;
-  opacity: 100;
+  opacity: 1;
   }
 
 .photo-list .comments-container.transparent {
@@ -229,59 +249,77 @@ figure.photo {
 
 //photo remove confirmation
 .remove-confirm {
-  transition: opacity 0.35s ease;
-  opacity: 100;
+  height: 35px;
+  transition: opacity .35s ease;
+  opacity: 1;
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background: black;
   padding: 10px 10px 0px 10px;
+  background: black;
   }
 
 .remove-confirm.transparent {
   opacity: 0;
+  background: black;
 }
 
 .remove-confirm-view {
   position: relative;
+  height: 100%;
+  background: black;
 }
 
 .remove-confirm-view > span.text {
   position: absolute;
   left: 5px;
-  bottom: 5px;
+  bottom: 1px;
 }
 
 .remove-confirm span.confirm-remove-photo {
   position: absolute;
-  left: 400px;
-  bottom: 5px;
+  right: -13px;
+  bottom: -6px;
   font-weight: bold;
   color: red;
-  background: black;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 5px;
   border: 1px solid red;
   border-radius: 5px;
-  opacity: 100;
+  opacity: 1;
   cursor: pointer;
   cursor: hand;
 }
 
 .remove-confirm span.cancel-remove-photo {
   position: absolute;
-  right: 200px;
-  bottom: 5px;
+  right: 175px;
+  bottom: -6px;
   font-weight: bold;
   color: white;
-  background: black;
+  // background: black;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 5px;
   border: 1px solid white;
   border-radius: 5px;
-  opacity: 100;
+  opacity: 1;
   cursor: pointer;
   cursor: hand;
+}
+
+//edit form
+
+.photo-edit-container .dropdown-map-canvas {
+  width: 500px;
+  margin: 10px auto;
+  }
+
+.photo-edit-container > div {
+  color: white;
+}
+
+.photo-list-item.flash-success {
+  background: #47DB67;
 }

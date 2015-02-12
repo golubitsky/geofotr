@@ -2,7 +2,7 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
 
   template: JST['comments/comments_index'],
   form_template: JST['comments/comment_form'],
-  tagClass: 'comments-container',
+  className: 'comments-container',
 
   events: {
     // 'click button.new-comment' : 'openNewForm',

@@ -2,7 +2,7 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
   template: JST['comments/comments_list_item'],
   form_template: JST['comments/comment_form'],
   tagName: 'li',
-  className: 'list-group-item',
+  className: 'comment-list-item',
 
   events: {
     'click button.edit-comment' : 'openEditForm',

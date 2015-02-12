@@ -65,20 +65,34 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
 //edit form
-  toggleEditForm: function (event) {
+  toggleEditForm: function (event, flashSuccess) {
     if (this.editOpen) {
-      this.removeEditForm(event);
+      this.removeEditForm(flashSuccess);
       this.editOpen = false
     } else {
-      this.addEditForm(event);
+      this.addEditForm();
       this.editOpen = true
     }
+
+    // if (flashSuccess) {
+    //   setTimeout(this.flashSuccess(), 0);
+    // }
   },
 
-  addEditForm: function (event) {
+  flashSuccess: function () {
+    this.$el.addClass('flash-success');
+    this.$el.one('transitionend',
+      function () {
+        this.$el.removeClass('flash-success')
+      }.bind(this)
+    );
+  },
+
+  addEditForm: function () {
     this.editFormView = new Geofotr.Views.PhotoEdit({
       model: this.model,
-      collection: this.collection
+      collection: this.collection,
+      photoView: this
     });
 
     Geofotr.scrollTo($('div.photo-overlay'));
@@ -87,13 +101,19 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     this.$editContainer.html(this.editFormView.render().$el);
   },
 
-  removeEditForm: function () {
+  removeEditForm: function (flashSuccess) {
     var editForm = this.editFormView;
 
     Geofotr.scrollFrom($('div.photo-overlay'));
 
     $photoEditContainer = this.$('.photo-edit-container')
-    $photoEditContainer.on('transitionend', editForm.remove.bind(editForm));
+    $photoEditContainer.one('transitionend',
+      function () {
+        editForm.remove();
+        if (flashSuccess) {
+          setTimeout(this.flashSuccess.bind(this), 0);
+        }
+      }.bind(this));
     $photoEditContainer.toggleClass('transparent');
   },
 //photo overlay
@@ -134,16 +154,21 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     });
 
     this.$removeContainer = this.$('.remove-confirm');
+    this.$removeContainer.removeClass('hidden');
+    setTimeout(function () {
     this.$removeContainer.html(this.photoRemoveConfirm.render().$el);
-    this.$removeContainer.toggleClass('transparent');
-    this.$removeContainer.toggleClass('hidden');
+      this.$removeContainer.removeClass('transparent');
+    }.bind(this), 0);
   },
 
   removeRemoveConfirm: function () {
     var removeView = this.photoRemoveConfirm;
 
-    this.$removeContainer.on('transitionend', removeView.remove.bind(removeView));
-    this.$removeContainer.toggleClass('transparent');
-    this.$removeContainer.toggleClass('hidden');
+
+    this.$removeContainer.addClass('transparent');
+    this.$removeContainer.one('transitionend', function () {
+      this.$removeContainer.addClass('hidden');
+      removeView.remove.bind(removeView);
+    }.bind(this));
   },
 });

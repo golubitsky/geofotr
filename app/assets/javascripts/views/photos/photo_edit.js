@@ -1,8 +1,9 @@
 Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
 
-  initialize: function () {
+  initialize: function (options) {
     this.listenTo(this.model, 'sync', this.render)
     this.listenTo(this.model, 'change', this.render)
+    this.photoView = options.photoView
   },
 
   template: JST['layout/photo_update_form'],
@@ -160,10 +161,7 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
       that.$('div.photo-errors').empty();
       that.collection.add(model, { merge: true });
       that.reset();
-      Backbone.history.navigate(
-        '#photos/' + model.id,
-        { trigger: true }
-        )
+      that.photoView.toggleEditForm('',true);
     };
 
     var error = function (model) {
