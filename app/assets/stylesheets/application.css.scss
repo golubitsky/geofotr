@@ -238,13 +238,18 @@ figure.photo > img {
 
 //comments
 
-.photo-list .comments-container {
+.comments-container {
   transition: opacity 0.35s ease;
   opacity: 1;
   }
 
-.photo-list .comments-container.transparent {
+.comments-container.transparent {
   opacity: 0;
+}
+
+.comment-list-item {
+  color: white;
+  font-size: 16px;
 }
 
 //photo remove confirmation
