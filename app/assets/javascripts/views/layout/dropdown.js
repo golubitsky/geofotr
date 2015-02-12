@@ -112,7 +112,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   placeMarker: function (location) {
-    debugger
     if (this.marker) { this.marker.setMap(null) };
 
     this.marker = new google.maps.Marker({
@@ -199,8 +198,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         that.collection.add(model, { merge: true });
         that.reset();
         Backbone.history.navigate(
-          '#photos/' + model.id,
-          { trigger: true }
+          '#', { trigger: true }
           )
       };
 

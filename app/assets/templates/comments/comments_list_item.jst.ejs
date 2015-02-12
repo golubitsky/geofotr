@@ -1,4 +1,8 @@
-<div class="comment-text"><%= comment.escape('user') %>: <%= comment.escape('body') %></div>
+<div class="row comment-text">
+  <span class="col-sm-8"><%= comment.escape('body') %></span>
+  <span class="col-sm-2"><%= comment.escape('user') %></span>
+  <span class="col-sm-2"><%= comment.escape('time_ago') %></span>
+</div>
 
 <% if (Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
   <button class="edit-comment">Edit</button>

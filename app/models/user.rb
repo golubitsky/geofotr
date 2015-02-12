@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def follower_photos
+    follower_ids = User.find(user_id).following_users.pluck(:id)
     photos.where.not(visibility: "private")
   end
 

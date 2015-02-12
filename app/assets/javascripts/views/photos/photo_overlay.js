@@ -13,6 +13,15 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
 
   events: {
     'submit .update-photo' : 'submitForm',
+    'click .username' : 'navigateToShow'
+  },
+
+  navigateToShow: function () {
+    console.log("test")
+    Backbone.history.navigate(
+      "#users/" + this.model.get('user_id'),
+      {trigger: true}
+    );
   },
 
   render: function () {
@@ -33,6 +42,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   updateLikeCount: function () {
-    this.$('.count').html(this.model.get('likeCount'));
+    this.$('.like-count span').text(this.model.get('likeCount'));
   }
 });

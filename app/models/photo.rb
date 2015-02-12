@@ -22,9 +22,17 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :comments
 
+  default_scope { order('updated_at DESC') }
+
   def Photo.public_photos
     Photo.where(visibility: "public")
   end
+
+  def Photo.user_feed_photos(current_user)
+    follow_ids = User.find(1).following.pluck(:id) + [current_user.id]
+    Photo.where('user_id IN (?)', follow_ids)
+  end
+
 
   #photo uploads using paperclip
   has_attached_file :photo, :styles => {

@@ -2,10 +2,10 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   template: JST['photos/photos_list_item'],
   form_template: JST['photos/photo_edit_form'],
   tagName: 'li',
-  className: 'list-group-item',
+  className: 'photo-list-item',
 
   initialize: function () {
-    this.addCommentsIndex();
+    // this.addCommentsIndex();
     this.addPhotoOverlay();
     //if ever change=>render is necessary need to make sure not to listen on change:likeCount;
     // this.listenTo(this.model, 'change', this.render)
@@ -14,8 +14,11 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   events: {
     'click span.view-photo' : 'viewPhoto',
     'click span.edit-photo' : 'toggleEditForm',
-    'click span.destroy-photo' : 'destroyPhoto',
+    'click span.comment-photo' : 'toggleCommentView',
     'click .cancel' : 'toggleEditForm',
+    'click span.remove-photo' : 'toggleConfirmRemovePhoto',
+    'click span.confirm-remove-photo' : 'destroyPhoto',
+    'click span.cancel-remove-photo' : 'toggleConfirmRemovePhoto'
   },
 
   render: function () {
@@ -28,6 +31,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     return this;
   },
 
+//comments
   toggleCommentView: function (event) {
     if (this.commentOpen) {
       this.removeCommentView(event);
@@ -45,35 +49,22 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       photos: this.collection
     });
 
+    Geofotr.scrollTo($('div.photo-overlay'));
     this.$commentsContainer = this.$('div.comments-container');
-    this.$commentsParent = this.$editContainer.parent();
 
-    $commentsContainer.html(this.commentsIndex.render().$el);
-    Geofotr.scroll(this.$commentsContainer[0], this.$commentsParent[0]);
+    this.$commentsContainer.toggleClass('transparent');
+    this.$commentsContainer.html(this.commentsIndex.render().$el);
   },
 
 
   removeCommentView: function () {
-    // $commentContainer = this.$('.photo-edit-container')
-    // $commentContainer.on('transitionend', this.commentsIndex.remove.bind(this.commentsIndex));
-    // $commentContainer.toggleClass('transparent');
+    Geofotr.scrollFrom($('div.photo-overlay'));
 
-    // Geofotr.scroll(this.$editParent[0], this.$editContainer[0],
-    //   function () {
-    //   }.bind(this)
-    // );
+    this.$commentsContainer.on('transitionend', this.commentsIndex.remove.bind(this.commentsIndex));
+    this.$commentsContainer.toggleClass('transparent');
   },
 
-  addCommentsIndex: function () {
-    var commentsIndex = new Geofotr.Views.CommentsIndex({
-      collection: this.model.comments(),
-      model: this.model,
-      photos: this.collection
-    });
-    this.addSubview('div.comments-container', commentsIndex);
-  },
-
-
+//edit form
   toggleEditForm: function (event) {
     if (this.editOpen) {
       this.removeEditForm(event);
@@ -90,21 +81,22 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       collection: this.collection
     });
 
-    Geofotr.scrollToEdit($('div.photo-overlay'));
-    this.$editContainer = this.$('.photo-edit-container');
+    Geofotr.scrollTo($('div.photo-overlay'));
 
+    this.$editContainer = this.$('.photo-edit-container');
     this.$editContainer.html(this.editFormView.render().$el);
   },
 
   removeEditForm: function () {
     var editForm = this.editFormView;
 
-    Geofotr.scrollFromEdit($('div.photo-overlay'));
+    Geofotr.scrollFrom($('div.photo-overlay'));
+
     $photoEditContainer = this.$('.photo-edit-container')
     $photoEditContainer.on('transitionend', editForm.remove.bind(editForm));
     $photoEditContainer.toggleClass('transparent');
   },
-
+//photo overlay
   addPhotoOverlay: function () {
     var photoOverlay = new Geofotr.Views.PhotoOverlay({
       model: this.model,
@@ -124,5 +116,34 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   destroyPhoto: function (event) {
     event.preventDefault();
     this.model.destroy();
-  }
+  },
+
+  toggleConfirmRemovePhoto: function (event) {
+    console.log('test')
+    if (this.removeOpen) {
+      this.removeRemoveConfirm(event);
+      this.removeOpen = false
+    } else {
+      this.addRemoveConfirm(event);
+      this.removeOpen = true
+    }
+  },
+
+  addRemoveConfirm: function (event) {
+    this.photoRemoveConfirm = new Geofotr.Views.PhotoRemoveConfirm({
+    });
+
+    this.$removeContainer = this.$('.remove-confirm');
+    this.$removeContainer.html(this.photoRemoveConfirm.render().$el);
+    this.$removeContainer.toggleClass('transparent');
+    this.$removeContainer.toggleClass('hidden');
+  },
+
+  removeRemoveConfirm: function () {
+    var removeView = this.photoRemoveConfirm;
+
+    this.$removeContainer.on('transitionend', removeView.remove.bind(removeView));
+    this.$removeContainer.toggleClass('transparent');
+    this.$removeContainer.toggleClass('hidden');
+  },
 });

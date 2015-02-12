@@ -15,7 +15,8 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
         Geofotr.CURRENT_USER = ""
         Geofotr.CURRENT_USER_ID = ""
         Geofotr.navBar.render();
-        Backbone.history.navigate('', { trigger: true })
+        Geofotr.photos.fetch();
+        Backbone.history.navigate('#', { trigger: true })
       },
     });
   },

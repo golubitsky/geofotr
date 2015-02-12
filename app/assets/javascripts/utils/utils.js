@@ -3,13 +3,13 @@ Geofotr.isEnterKeypress = function (event) {
   return event.keycode === 13;
 }
 
-Geofotr.scrollToEdit = function($element){
+Geofotr.scrollTo = function($element){
   $("html, body").animate({
       scrollTop: $element.offset().top + $element.outerHeight(true)
     }, 350);
 }
 
-Geofotr.scrollFromEdit = function($element){
+Geofotr.scrollFrom = function($element){
   $("html, body").animate({
       scrollTop: $element.offset().top
     }, 350);

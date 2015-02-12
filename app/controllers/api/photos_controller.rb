@@ -30,12 +30,10 @@ class Api::PhotosController < ApplicationController
       end
 
       generate_subscription_id
+    elsif current_user
+      @photos = Photo.user_feed_photos(current_user)
     else
       @photos = Photo.public_photos
-
-      if current_user
-        @photos += current_user.photos
-      end
     end
   end
 

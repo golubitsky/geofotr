@@ -5,7 +5,7 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   tagClass: 'comments-container',
 
   events: {
-    'click button.new-comment' : 'openNewForm',
+    // 'click button.new-comment' : 'openNewForm',
     'submit .create-comment' : 'submitForm'
   },
 
@@ -19,18 +19,6 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
     }, this);
 
     this.newComment = new Geofotr.Models.Comment();
-  },
-
-  openNewForm: function (event) {
-    var form = this.form_template({
-      photo_id: this.model.id,
-      comment: this.newComment,
-      buttonText: "Add comment",
-      className: "create-comment"
-    });
-
-    this.$newButton = $(event.target);
-    $(event.target).replaceWith(form);
   },
 
   submitForm: function (event) {
@@ -73,11 +61,24 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
     }.bind(this));
   },
 
+  addNewCommentForm: function (event) {
+    var form = this.form_template({
+      photo_id: this.model.id,
+      comment: this.newComment,
+      buttonText: "Add comment",
+      className: "create-comment"
+    });
+
+    this.$('.new-comment').html(form);
+  },
+
   render: function () {
     console.log('comment index render');
     this.$el.html(this.template({
       comments: this.collection
     }));
+
+    this.addNewCommentForm();
     this.attachSubviews();
     return this;
   }
