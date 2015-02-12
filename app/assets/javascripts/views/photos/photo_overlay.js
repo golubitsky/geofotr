@@ -42,6 +42,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   updateLikeCount: function () {
-    this.$('.like-count span').text(this.model.get('likeCount'));
+    this.$('.like-count .count').text(this.model.get('likeCount'));
   }
 });

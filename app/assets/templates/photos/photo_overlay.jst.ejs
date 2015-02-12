@@ -2,6 +2,7 @@
 
 <div class="photo-buttons">
     <span class="view-photo">View full size</span>
+    <span class="view-user">View user&#39s photos</span>
     <span class="comment-photo">Comments</span>
 
   <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
@@ -13,10 +14,11 @@
     <span class="like-button"></span>
   <% } %>
 
+  <div class="like-count">
+      <div class="glyphicon glyphicon-heart"/>
+      <div class="count"><%= photo.get('likeCount') %></div>
+  </div>
+
 </div>
 
-<div class="like-count">
-    <div class="glyphicon glyphicon-heart"/>
-    <span class="count"><%= photo.get('likeCount') %></span>
-</div>
 

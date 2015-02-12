@@ -174,17 +174,17 @@ figure.photo > img {
 .photo-overlay .photo-buttons{
   bottom: 5px;
   position: absolute;
-  right: 40px;
+  right: -6px;
 }
 
 .photo-overlay .like-count{
-  bottom: 5px;
-  position: absolute;
-  right: 0px;
-  color: red;
+  position: relative;
+  right: 6px;
+  top: 5px;
 }
 
-.like-count span {
+.like-count > div {
+  color: red;
   }
 
 .photo-buttons > *{
@@ -195,7 +195,7 @@ figure.photo > img {
 .photo-list figcaption {
   position: absolute;
   right: 3px;
-  bottom: 35px;
+  bottom: 38px;
   font-weight: bold;
   color: white;
   font-size: 24px;
@@ -216,14 +216,25 @@ figure.photo > img {
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 3px;
-  border: 1px solid white;
+  // border: 1px solid white;
   border-radius: 5px;
   opacity: 100;
   cursor: pointer;
   cursor: hand;
-  -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
-  box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  // -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  // -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  // box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.photo-buttons span:not(.username):hover {
+  color: #eee;
+}
+
+.photo-buttons div.count {
+  display: inline;
+  position: relative;
+  bottom: 2px;
+  left: -2px;
 }
 
 //extra span created for like button subview
@@ -273,12 +284,36 @@ figure.photo > img {
 }
 
 .comment-list-item span.username {
+
 }
 
 .comment-list-item span.timestamp {
   color: grey;
   font-size: 14px;
 
+}
+
+span.edit-comment, span.destroy-comment {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  margin: 3px;
+  padding: 3px;
+  border: 1px solid white;
+  border-radius: 5px;
+  opacity: 100;
+  cursor: pointer;
+  cursor: hand;
+  -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+span.destroy-comment {
+  color: red;
+  border: 1px solid red;
 }
 
 //photo remove confirmation

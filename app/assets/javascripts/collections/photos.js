@@ -3,7 +3,7 @@ Geofotr.Collections.Photos = Backbone.Collection.extend({
   model: Geofotr.Models.Photo,
 
   comparator: function(photo) {
-    return photo.get('updated_at');
+    return -photo.get('updated_at');
   },
 
   getOrFetch: function (id) {

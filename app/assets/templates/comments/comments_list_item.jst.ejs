@@ -5,17 +5,18 @@
 
   <div class="col-sm-5">
     <div class="row">
-      <span class="username col-sm-2"><%= comment.escape('user') %></span>
-      <span class="timestamp col-sm-3"><%= comment.escape('time_ago') %></span>
+      <span class="username col-sm-6"><%= comment.escape('user') %></span>
+      <span class="timestamp col-sm-6"><%= comment.escape('time_ago') %></span>
     </div>
 
     <div class="row">
+      <span class="col-sm-offset-5 col-sm-1"></span>
       <% if (Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
-        <span class="edit-comment">Edit</span>
+        <span class="edit-comment col-sm-2">Edit</span>
       <% } %>
 
       <% if (Geofotr.CURRENT_USER_ID == photo.get('user_id') || Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
-        <span class="destroy-comment">X</span>
+        <span class="destroy-comment col-sm-1">X</span>
       <% } %>
     </div>
 
