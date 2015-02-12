@@ -35,6 +35,16 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   padding: 0;
 }
 
+body {
+  position: fixed;
+  bottom: 0;
+  padding: 0 0 30px 0;
+}
+
+#content {
+  overflow: scroll;
+}
+
 //main map page
 #map-canvas {
   opacity: 100;
@@ -223,9 +233,9 @@ figure.photo > img {
   padding: 0;
 }
 
-//username display
+//photo username display
 
-.username {
+.photo-overlay > div > span.username {
   position: absolute;
   left: 3px;
   bottom: 35px;
@@ -250,6 +260,25 @@ figure.photo > img {
 .comment-list-item {
   color: white;
   font-size: 16px;
+}
+
+.comment-list-item > div {
+  position: relative;
+}
+
+.comment-list-item p {
+  position: relative;
+  left: 5px;
+  font-weight: bold;
+}
+
+.comment-list-item span.username {
+}
+
+.comment-list-item span.timestamp {
+  color: grey;
+  font-size: 14px;
+
 }
 
 //photo remove confirmation

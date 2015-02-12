@@ -1,15 +1,28 @@
 <div class="row comment-text">
-  <span class="col-sm-8"><%= comment.escape('body') %></span>
-  <span class="col-sm-2"><%= comment.escape('user') %></span>
-  <span class="col-sm-2"><%= comment.escape('time_ago') %></span>
+  <span class="body col-sm-7">
+    <p><%= comment.escape('body') %></p>
+  </span>
+
+  <div class="col-sm-5">
+    <div class="row">
+      <span class="username col-sm-2"><%= comment.escape('user') %></span>
+      <span class="timestamp col-sm-3"><%= comment.escape('time_ago') %></span>
+    </div>
+
+    <div class="row">
+      <% if (Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
+        <span class="edit-comment">Edit</span>
+      <% } %>
+
+      <% if (Geofotr.CURRENT_USER_ID == photo.get('user_id') || Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
+        <span class="destroy-comment">X</span>
+      <% } %>
+    </div>
+
+  </div>
 </div>
 
-<% if (Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
-  <button class="edit-comment">Edit</button>
-<% } %>
 
-<% if (Geofotr.CURRENT_USER_ID == photo.get('user_id') || Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
-  <button class="destroy-comment">X</button>
-<% } %>
+
 
 

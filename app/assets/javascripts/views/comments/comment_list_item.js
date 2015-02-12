@@ -5,9 +5,9 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
   className: 'comment-list-item',
 
   events: {
-    'click button.edit-comment' : 'openEditForm',
+    'click span.edit-comment' : 'openEditForm',
     'submit .update-comment' : 'submitForm',
-    'click button.destroy-comment' : 'destroyComment',
+    'click span.destroy-comment' : 'destroyComment',
   },
 
   initialize: function (options) {

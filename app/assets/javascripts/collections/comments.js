@@ -3,6 +3,6 @@ Geofotr.Collections.Comments = Backbone.Collection.extend({
   model: Geofotr.Models.Comment,
 
   comparator: function(comment) {
-    return comment.get('created_at');
+    return -comment.get('created_at');
   },
 });
