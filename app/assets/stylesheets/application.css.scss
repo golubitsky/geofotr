@@ -132,7 +132,7 @@ nav.navbar.navbar-default {
 }
 
 //photo links
-.list-group-item span, .like-photo, .unlike-photo {
+.list-group-item span {
   font-weight: bold;
   color: white;
   font-size: 16px;
@@ -147,6 +147,10 @@ nav.navbar.navbar-default {
   -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
   box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.list-group-item span.inner-like-span {
+  border: none
 }
 
 .list-group-item figcaption {

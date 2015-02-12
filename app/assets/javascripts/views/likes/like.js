@@ -1,9 +1,11 @@
 Geofotr.Views.Like = Backbone.CompositeView.extend({
 
   tagName: 'span',
+  className: 'inner-like-span',
 
   events: {
-    'click' : 'toggleLike'
+    'click' : 'toggleLike',
+    // 'click .unlike-photo' : 'toggleLike'
   },
 
   attributes: function () {
