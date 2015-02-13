@@ -3,8 +3,8 @@ Geofotr.Views.Subscription = Backbone.CompositeView.extend({
     template: JST['subscriptions/subscription'],
 
     events: {
-      'click button.follow' : 'followUser',
-      'click button.unfollow' : 'unfollowUser'
+      'click span.follow' : 'followUser',
+      'click span.unfollow' : 'unfollowUser'
     },
 
     initialize: function () {

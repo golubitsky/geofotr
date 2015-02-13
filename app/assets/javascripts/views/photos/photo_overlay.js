@@ -2,8 +2,10 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
 
   template: JST['photos/photo_overlay'],
 
+  className: 'photo-overlay-view',
   initialize: function () {
       this.createLikeButton();
+      this.createFollowButton();
       this.addSubview('.like-button', this.likeButtonView);
 
     this.listenTo(this.model, 'change:likeCount', this.updateLikeCount);
@@ -38,6 +40,14 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
       photo: this.model
     });
     this.likeButtonView.render();
+  },
+
+  createFollowButton: function () {
+    this.subscriptionButtonView = new Geofotr.Views.Subscription({
+      model: this.model,
+      collection: this.collection
+    });
+    this.subscriptionButtonView.render();
   },
 
   updateLikeCount: function () {

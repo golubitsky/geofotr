@@ -1,5 +1,5 @@
 <% if (Geofotr.CURRENT_USER && user.get('subscriptionId') != undefined) { %>
-  <button class="unfollow">Unfollow user</button>
+  <span class="unfollow">Unfollow user</span>
 <% } else if (Geofotr.CURRENT_USER && (user.id != Geofotr.CURRENT_USER_ID)) { %>
-  <button class="follow">Follow user</button>
+  <span class="follow">Follow user</span>
 <% } %>

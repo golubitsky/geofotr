@@ -29,6 +29,11 @@ $smallButtonFadeTime: .07s;
 //   width: 600px;
 // }
 
+.navbar-brand img {
+height: 50px;
+top: -15px;
+position: relative;
+}
 html, body, #content, #map-canvas, #dropdown-map-canvas {
   height: 100%;
   width: 100%;
@@ -36,6 +41,15 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   padding: 0;
 }
 
+// #content
+#map-canvas {
+  background: url("geofotr-logo-edit.png") no-repeat center center fixed;//
+  background-color: #fff;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+}
 body {
   position: fixed;
   bottom: 0;
@@ -67,7 +81,18 @@ nav.navbar.navbar-default {
 
 //navbar
 .navbar-highlight {
-  background: green;
+  background: #E6E6E6;
+}
+
+.geofotr-logo {
+  background: url("geofotr-logo-navbar.png") no-repeat; //center center fixed;
+  position: fixed;
+  top: 20px;
+  left: 0;
+
+  /* Preserve aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 //dropdown form
@@ -171,20 +196,24 @@ figure.photo > img {
   bottom: 5px;
   position: absolute;
   right: -22px;
+  z-index: 1;
 }
 
 .photo-overlay .like-count{
   position: relative;
   right: 6px;
   top: 2px;
+  z-index: 1;
 }
 
 .like-count > div {
   color: red;
+  z-index: 1;
   }
 
 .photo-buttons > *{
   display: inline-block;
+  z-index: 1;
 }
 
 //photo caption
@@ -200,6 +229,7 @@ figure.photo > img {
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   transition: opacity 0.35s ease;
   opacity: 0;
+  z-index: 1;
 }
 .photo:hover figcaption {
   opacity: 1;
@@ -217,12 +247,14 @@ figure.photo > img {
   cursor: pointer;
   cursor: hand;
   transition: color $smallButtonFadeTime ease;
+  z-index: 1;
 }
 
 .photo-overlay > div > span.view-user {
   position: absolute;
   left: -3px;
   bottom: 6px;
+  z-index: 1;
 }
 
 .photo-buttons span:not(.username):hover, .photo-overlay > div > span.view-user:hover {
@@ -237,6 +269,7 @@ figure.photo > img {
   font-size: 20px;
   font-weight: bold;
   transition: color $smallButtonFadeTime ease;
+  z-index: 1;
 }
 
 .like-button, .unlike-button {
@@ -252,6 +285,7 @@ figure.photo > img {
   text-shadow: 0px 0px 0px #000;
   transition: color 0.2s ease;
   transition: text-shadow $smallButtonFadeTime ease;
+  z-index: 1;
 }
 .glyphicon-heart-empty:hover:before, .glyphicon-heart:hover:before {
   color: red;
@@ -275,6 +309,7 @@ figure.photo > img {
   color: white;
   cursor: pointer;
   cursor: hand;
+  z-index: 1;
 }
 
 .photo-overlay > div > span.by {
@@ -282,13 +317,31 @@ position: absolute;
 left: 5px;
 bottom: 61px;
 font-size: 12px;
-/* font-weight: bold; */
 color: white;
+z-index: 1;
+}
+
+.photo-overlay-view {
+  // position: relative;
+}
+
+.buttons-background {
+  height: 78px;
+  background: black;
+  bottom: 0px;
+  position: absolute;
+  width: 806px;
+  opacity: .4;
+  z-index: 0;
+  margin: 5px;
+  padding: 4px;
+  border-radius: 5px;
+  left: -8px;
+
 }
 
 //comments
 .photo-comments {
-  // margin-bottom: 20px;
   padding-left: 0;
   border: 1px solid white;
   border-radius: 5px;
@@ -370,7 +423,7 @@ span.edit-comment, span.remove-comment, form > span {
 .create-comment > span.submit {
   color: #eee;
   left: 71px;
-  bottom: -30px;
+  bottom: -33px;
   transition: color $smallButtonFadeTime ease;
   }
 
@@ -421,7 +474,6 @@ span.remove-comment:hover {
   font-weight: bold;
   color: white;
   padding: 10px 10px 0px 10px;
-  // background: black;
   }
 
 .remove-confirm.transparent {
@@ -466,7 +518,6 @@ span.remove-comment:hover {
   bottom: -6px;
   font-weight: bold;
   color: #eee;
-  // background: black;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 5px;
