@@ -14,7 +14,6 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
 
   likeClass: function(){
     var likeClass = "";
-
     if (Geofotr.CURRENT_USER){
       if (this.likeable()){
         likeClass = "like-photo glyphicon glyphicon-heart-empty";
@@ -59,7 +58,7 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
     this.$el.attr('disabled', 'disabled');
 
     var that = this;
-
+    this.model.set('user_id', Geofotr.CURRENT_USER_ID);
     this.model.save({}, {
       success: function () {
         var likeCount = that.photo.get('likeCount');

@@ -421,7 +421,7 @@ span.remove-comment:hover {
   font-weight: bold;
   color: white;
   padding: 10px 10px 0px 10px;
-  background: black;
+  // background: black;
   }
 
 .remove-confirm.transparent {
@@ -437,8 +437,8 @@ span.remove-comment:hover {
 
 .remove-confirm-view > span.text {
   position: absolute;
-  left: 5px;
-  bottom: 1px;
+  left: 264px;
+  bottom: 3px;
 }
 
 .remove-confirm span.confirm-remove-photo {
@@ -482,6 +482,11 @@ span.remove-comment:hover {
 }
 
 //comment remove confirmation
+.comment-remove-view {
+  position: relative;
+  height: 25px;
+}
+
 .comment-remove-confirm {
   height: 35px;
   transition: opacity .35s ease;
@@ -493,7 +498,7 @@ span.remove-comment:hover {
   background: black;
   position: relative;
   bottom: 8px;
-  right: -119px;
+  margin: 0;
   }
 
 .comment-remove-confirm.transparent {
@@ -508,16 +513,17 @@ span.remove-comment:hover {
 
 }
 
-.comment-remove-confirm > span.text {
-  // position: absolute;
-  left: 5px;
-  bottom: 1px;
+.comment-remove-view > span.text {
+  position: absolute;
+  left: 213px;
+  bottom: 3px;
 }
 
 .comment-remove-confirm span.confirm-remove-comment{
-  // position: absolute;
-  // right: -13px;
-  // bottom: -6px;
+  position: absolute;
+  right: 5px;
+  bottom: -6px;
+
   font-weight: bold;
   color: #E00;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
@@ -534,8 +540,8 @@ span.remove-comment:hover {
 }
 
 .comment-remove-confirm span.cancel-remove-comment {
-  // position: absolute;
-  // right: 175px;
+  position: absolute;
+  right: 221px;
   bottom: -6px;
   font-weight: bold;
   color: #eee;
