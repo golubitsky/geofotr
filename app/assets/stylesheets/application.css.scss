@@ -180,7 +180,7 @@ figure.photo > img {
 .photo-overlay .like-count{
   position: relative;
   right: 6px;
-  top: 5px;
+  top: 2px;
 }
 
 .like-count > div {
@@ -211,7 +211,7 @@ figure.photo > img {
 //photo links
 .photo-buttons span:not(.username) {
   font-weight: bold;
-  color: white;
+  color: #eee;
   font-size: 16px;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
@@ -221,20 +221,35 @@ figure.photo > img {
   opacity: 100;
   cursor: pointer;
   cursor: hand;
+  // text-shadow: 0.5px .3px 1.5px #898989;
+
   // -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
   // -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
   // box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
 .photo-buttons span:not(.username):hover {
-  color: #eee;
+  color: white;
 }
 
 .photo-buttons div.count {
   display: inline;
   position: relative;
-  bottom: 2px;
-  left: -2px;
+  bottom: 1px;
+  left: -18px;
+  font-size: 18px;
+}
+
+.like-button, .unlike-button {
+
+}
+
+.glyphicon-heart-empty:before, .glyphicon-heart:before {
+  font-size: 22px;
+  color: red;
+  position: relative;
+  left: -16px;
+  bottom: -3px;
 }
 
 //extra span created for like button subview

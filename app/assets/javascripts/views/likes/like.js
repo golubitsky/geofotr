@@ -1,7 +1,7 @@
 Geofotr.Views.Like = Backbone.CompositeView.extend({
 
   tagName: 'span',
-  className: 'inner-like-span',
+  // className: 'inner-like-span',
 
   events: {
     'click' : 'toggleLike',
@@ -9,17 +9,22 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   },
 
   attributes: function () {
-    var attrs = {};
+    return { class: this.likeClass() };
+  },
+
+  likeClass: function(){
+    var likeClass = "";
+
     if (Geofotr.CURRENT_USER){
       if (this.likeable()){
-        attrs.class = "like-photo";
+        likeClass = "like-photo glyphicon glyphicon-heart-empty";
         } else {
-        attrs.class = "unlike-photo";
+        likeClass = "unlike-photo glyphicon glyphicon-heart";
       }
     } else {
-      attrs.class = "hidden";
+      likeClass = "hidden";
     }
-    return attrs;
+    return likeClass;
   },
 
   likeable: function(){
@@ -28,20 +33,13 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.photo = options.photo;
+    this.listenTo(this.model, 'change', this.render);
+    this.likeObject = options.model;
   },
 
   render: function () {
     console.log('like render');
-    this.$el.empty();
-    var text = '';
-    if(Geofotr.CURRENT_USER){
-      if(this.likeable()){
-        text = "Like";
-      } else {
-        text = "Unlike";
-      }
-    }
-    this.$el.html(text);
+
     return this;
   },
 
@@ -65,7 +63,12 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
         var likeCount = that.photo.get('likeCount');
         var newLikeCount = likeCount + 1;
         that.photo.set('likeCount', newLikeCount);
-        that.render();
+
+        that.$el.removeClass();
+        that.$el.addClass(that.likeClass());
+
+        console.log(that.model.attributes);
+        console.log(that.likeable());
       }
     });
   },
@@ -82,7 +85,8 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
         var newLikeCount = likeCount - 1
         that.photo.set('likeCount', newLikeCount);
         that.model.unset('id');
-        that.render();
+        that.$el.removeClass();
+        that.$el.addClass(that.likeClass());
       }
     });
   }
