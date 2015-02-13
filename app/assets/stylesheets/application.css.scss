@@ -125,25 +125,6 @@ nav.navbar.navbar-default {
   transition: background .35s ease;
 }
 
-// .photo-list-item:first-of-type {
-//   list-style: none;
-
-//   border-left: 10px solid black;
-//   border-right: 10px solid black;
-//   border-top: 10px solid black;
-//   border-bottom: 5px solid black;
-// }
-
-// .photo-list-item:last-of-type {
-//   list-style: none;
-//   border-bottom-left-radius: 10px;
-//   border-bottom-right-radius: 10px;
-//   border-left: 10px solid black;
-//   border-right: 10px solid black;
-//   border-top: 5px solid black;
-//   border-bottom: 10px solid black;
-// }
-
 //photo centering
 
 figure.photo {
@@ -174,7 +155,7 @@ figure.photo > img {
 .photo-overlay .photo-buttons{
   bottom: 5px;
   position: absolute;
-  right: -6px;
+  right: -22px;
 }
 
 .photo-overlay .like-count{
@@ -209,26 +190,26 @@ figure.photo > img {
   opacity: 1;
 }
 //photo links
-.photo-buttons span:not(.username) {
+.photo-buttons span:not(.username), .photo-overlay > div > span.view-user {
   font-weight: bold;
   color: #eee;
   font-size: 16px;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 3px;
-  // border: 1px solid white;
   border-radius: 5px;
   opacity: 100;
   cursor: pointer;
   cursor: hand;
-  // text-shadow: 0.5px .3px 1.5px #898989;
-
-  // -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
-  // -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
-  // box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
-.photo-buttons span:not(.username):hover {
+.photo-overlay > div > span.view-user {
+  position: absolute;
+  left: -3px;
+  bottom: 6px;
+}
+
+.photo-buttons span:not(.username):hover, .photo-overlay > div > span.view-user:hover {
   color: white;
 }
 
@@ -236,8 +217,9 @@ figure.photo > img {
   display: inline;
   position: relative;
   bottom: 1px;
-  left: -18px;
-  font-size: 18px;
+  left: -20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .like-button, .unlike-button {
@@ -246,12 +228,18 @@ figure.photo > img {
 
 .glyphicon-heart-empty:before, .glyphicon-heart:before {
   font-size: 22px;
-  color: red;
+  color: #D00;
   position: relative;
   left: -16px;
   bottom: -3px;
+  text-shadow: 0px 0px 0px #000;
+  transition: color 0.2s ease;
+  transition: text-shadow 0.2s ease;
 }
-
+.glyphicon-heart-empty:hover:before, .glyphicon-heart:hover:before {
+  color: red;
+  text-shadow: 0px 1px 24px #F00;
+}
 //extra span created for like button subview
 .photo-list-item span.inner-like-span {
   border: none;
@@ -272,8 +260,24 @@ figure.photo > img {
   cursor: hand;
 }
 
-//comments
+.photo-overlay > div > span.by {
+position: absolute;
+left: 5px;
+bottom: 61px;
+font-size: 12px;
+/* font-weight: bold; */
+color: white;
+}
 
+//comments
+.photo-comments {
+  margin-bottom: 20px;
+  padding-left: 0;
+  border: 1px solid white;
+  border-radius: 5px;
+  position: relative;
+  top: 25px;
+}
 .comments-container {
   transition: opacity 0.35s ease;
   opacity: 1;
@@ -283,6 +287,11 @@ figure.photo > img {
   opacity: 0;
 }
 
+.row.comment-text {
+  position: relative;
+  left: 0;
+  top: -20px;
+}
 .comment-list-item {
   color: white;
   font-size: 16px;
@@ -305,30 +314,58 @@ figure.photo > img {
 .comment-list-item span.timestamp {
   color: grey;
   font-size: 14px;
-
 }
 
-span.edit-comment, span.destroy-comment {
+textarea {
+  resize: none;
   font-weight: bold;
-  color: white;
+  font-size: 16px;
+  position: relative;
+  left: 188px;
+  top: 13px;
+  background: #eee;
+  color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+span.edit-comment, span.destroy-comment, form > span.submit {
+  font-weight: bold;
+
   text-align: center;
   font-size: 16px;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 3px;
-  border: 1px solid white;
-  border-radius: 5px;
+  // border-radius: 5px;
   opacity: 100;
   cursor: pointer;
   cursor: hand;
-  -webkit-box-shadow: 3px 2px 5px 0px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    3px 2px 5px 0px rgba(50, 50, 50, 0.75);
-  box-shadow:         3px 2px 5px 0px rgba(50, 50, 50, 0.75);
+  position: relative;
 }
 
+.create-comment {
+  height: 69px
+}
+
+.create-comment > span.submit {
+  color: #eee;
+  left: 71px;
+  bottom: -30px;
+  }
+
+form > span.submit:hover {
+  color: white;
+}
+span.edit-comment {
+  color: #eee;
+  left: -3px;
+  bottom: 9px;
+
+}
 span.destroy-comment {
-  color: red;
-  border: 1px solid red;
+  color: #F00;
+  left: -20px;
+  bottom: 9px;
 }
 
 //photo remove confirmation
@@ -365,7 +402,7 @@ span.destroy-comment {
   right: -13px;
   bottom: -6px;
   font-weight: bold;
-  color: red;
+  color: #E00;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
   padding: 5px;
@@ -375,13 +412,16 @@ span.destroy-comment {
   cursor: pointer;
   cursor: hand;
 }
+.remove-confirm span.confirm-remove-photo:hover {
+  color: #F00;
+}
 
 .remove-confirm span.cancel-remove-photo {
   position: absolute;
   right: 175px;
   bottom: -6px;
   font-weight: bold;
-  color: white;
+  color: #eee;
   // background: black;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
   margin: 3px;
@@ -393,6 +433,9 @@ span.destroy-comment {
   cursor: hand;
 }
 
+.remove-confirm span.cancel-remove-photo:hover {
+  color: white;
+}
 //edit form
 
 .photo-edit-container .dropdown-map-canvas {

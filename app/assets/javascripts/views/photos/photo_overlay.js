@@ -13,7 +13,8 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
 
   events: {
     'submit .update-photo' : 'submitForm',
-    'click .username' : 'navigateToShow'
+    'click .username' : 'navigateToShow',
+    'click .view-user' : 'navigateToShow'
   },
 
   navigateToShow: function () {

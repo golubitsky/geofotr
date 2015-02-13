@@ -1,8 +1,9 @@
+<span class="by">shared by</span>
 <span class="username"><%= photo.escape('user') %></span>
+<span class="view-user">View user&#39s photos</span>
 
 <div class="photo-buttons">
     <span class="view-photo">View full size</span>
-    <span class="view-user">View user&#39s photos</span>
     <span class="comment-photo">Comments</span>
 
   <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>

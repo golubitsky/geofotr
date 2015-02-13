@@ -9,11 +9,12 @@
       value='<%= Geofotr.CURRENT_USER_ID %>'>
 
 <label for="body"></label>
-<input type="text"
+<textarea
       name="body"
       id="body"
-      value='<%= comment.escape('body') %>'
-      placeholder="Add your thoughts..">
+      cols="40"
+      placeholder="Compose a new comment!"><%= comment.escape('body') %></textarea>
 
-<input type="submit" value='<%= buttonText %>'>
+<span class="submit <%= className %>"><%= buttonText %></span>
+
 </form>

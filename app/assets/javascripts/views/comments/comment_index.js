@@ -6,7 +6,7 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
 
   events: {
     // 'click button.new-comment' : 'openNewForm',
-    'submit .create-comment' : 'submitForm'
+    'click span.create-comment' : 'submitForm'
   },
 
   initialize: function (options) {
@@ -22,7 +22,6 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   },
 
   submitForm: function (event) {
-    if (event.type === "submit" || Geofotr.isEnterKeypress(event)) {
       event.preventDefault();
       params = this.$('form').serializeJSON();
       var that = this;
@@ -41,7 +40,6 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
         success: success,
         error: error
       });
-    }
   },
 
   addCommentSubview: function (comment) {
