@@ -6,14 +6,19 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   unshiftSubview: function (selector, subview) {
+    console.log('unshift subview');
     this.subviews(selector).unshift(subview);
     // Try to attach the subview. Render it as a convenience.
-    this.attachSubview(selector, subview.render());
+    this.attachSubview(selector, subview.render(), true);
   },
 
-  attachSubview: function (selector, subview) {
+  attachSubview: function (selector, subview, prepend) {
     // this.$el.find(selector).append(subview.$el)
-    this.$(selector).append(subview.$el);
+    if (prepend) {
+      this.$(selector).prepend(subview.$el);
+    } else {
+      this.$(selector).append(subview.$el);
+    }
     // Bind events in case `subview` has previously been removed from
     // DOM.
     subview.delegateEvents();
@@ -34,7 +39,7 @@ Backbone.CompositeView = Backbone.View.extend({
     //
     // All that is necessary is "attaching" the subview `$el`s to the
     // relevant points in the parent CompositeView.
-
+    console.log('attach subviews')
     var view = this;
     _(this.subviews()).each(function (subviews, selector) {
       // view.$el.find(selector).empty();

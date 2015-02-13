@@ -44,7 +44,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 // #content
 #map-canvas {
   background: url("geofotr-logo-edit.png") no-repeat center center fixed;//
-  background-color: #fff;
+  background-color: white;
   // -webkit-background-size: cover;
   // -moz-background-size: cover;
   // -o-background-size: cover;
@@ -63,7 +63,7 @@ body {
 //main map page
 #map-canvas {
   opacity: 100;
-  transition: opacity 1s;
+  transition: opacity 1.5s ease;
 }
 
 #map-canvas.transparent {

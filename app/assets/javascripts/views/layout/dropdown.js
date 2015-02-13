@@ -195,7 +195,8 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       var success = function (model) {
 
         that.$('div.photo-errors').empty();
-        that.collection.add(model, { merge: true });
+        that.collection.add(model, { merge: true, silent: true });
+        that.collection.trigger('photo:success', model);
         that.reset();
         Backbone.history.navigate(
           '#', { trigger: true }

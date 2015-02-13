@@ -19,6 +19,9 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
     }, this);
 
     this.newComment = new Geofotr.Models.Comment();
+
+    _.extend(this, Backbone.Events);
+    this.listenTo(this.collection, 'comment:success', this.unshiftCommentSubview);
   },
 
   submitForm: function (event) {
@@ -27,7 +30,8 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       var that = this;
 
       var success = function (model) {
-        that.collection.add(model, { merge: true });
+        that.collection.add(model, { merge: true, silent: true });
+        that.collection.trigger('comment:success', model);
         that.$('form.create-comment').replaceWith(that.$newButton);
         that.newComment = new Geofotr.Models.Comment();
       };
@@ -49,6 +53,16 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       collection: this.collection
     });
     this.addSubview('ul.photo-comments', commentListItem);
+  },
+
+  unshiftCommentSubview: function (comment) {
+    console.log('unshift');
+    var commentListItem = new Geofotr.Views.CommentsListItem({
+      model: comment,
+      photo: this.model,
+      collection: this.collection
+    });
+    this.unshiftSubview('ul.photo-comments', commentListItem);
   },
 
   removeCommentSubview: function (comment) {

@@ -64,7 +64,7 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
     var that = this;
 
     var success = function (model) {
-      that.collection.add(model, { merge: true });
+      that.collection.add(model, { merge: true});
       that.$('form.update-comment').replaceWith(that.$commentText);
     };
 

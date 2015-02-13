@@ -1,7 +1,6 @@
 Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
 
-  template: JST['maps/maps_index'],
-  popup_template: JST['maps/maps_photo'],
+  template: JST['maps/maps_photo'],
 
   attributes: {
     id: "map-canvas"
@@ -22,20 +21,19 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
-    // this.initializeMap();
+    this.initializeMap();
 
     this.listenTo(this.collection, 'add', this.addMarker);
     this.listenTo(this.collection, 'remove', this.removeMarker);
   },
 
   positionAndShowMap: function () {
-    // setTimeout(function(){ this.$el.removeClass('transparent')}.bind(this), 1000);
+    setTimeout(function(){ this.$el.removeClass('transparent')}.bind(this), 0);
     this._map.setCenter({ lat: 0, lng: 0 });
     this._map.setZoom(3);
   },
 
   render: function () {
-    console.log('map render');
     this.$el.empty();
     this.initializeMap();
     return this;
@@ -96,7 +94,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
 
   showMarkerInfo: function (event, marker) {
     var infoWindow = new google.maps.InfoWindow({
-      content: this.popup_template({ photo: marker.photo })
+      content: this.template({ photo: marker.photo })
     });
 
     infoWindow.open(this._map, marker);
