@@ -4,6 +4,18 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
 
   events: {
     'click .sign-out' : 'signout',
+    'click .navbar-map' : 'highlightSelected',
+    'click .navbar-feed' : 'highlightSelected',
+    'click .navbar-current-user' : 'highlightSelected',
+    'click .navbar-users' : 'highlightSelected',
+    'click .navbar-signup' : 'highlightSelected',
+    'click .navbar-signin' : 'highlightSelected'
+  },
+
+  highlightSelected: function (event) {
+    this.$highlighted.removeClass('navbar-highlight');
+    this.$highlighted = this.$(event.currentTarget);
+    this.$highlighted.addClass('navbar-highlight');
   },
 
   signout: function () {
@@ -22,6 +34,7 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
+    this.$highlighted = this.$('div');
     this.dropdownView = new Geofotr.Views.DropDownView({
       collection: Geofotr.photos,
       model: new Geofotr.Models.Photo()

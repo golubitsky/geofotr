@@ -4,13 +4,13 @@ Geofotr.isEnterKeypress = function (event) {
 }
 
 Geofotr.scrollTo = function($element){
-  $("html, body").animate({
+  $("body").animate({
       scrollTop: $element.offset().top + $element.outerHeight(true)
     }, 350);
 }
 
 Geofotr.scrollFrom = function($element){
-  $("html, body").animate({
+  $("body").animate({
       scrollTop: $element.offset().top
     }, 350);
 }

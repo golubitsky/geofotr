@@ -60,6 +60,16 @@ nav.navbar.navbar-default {
   margin: 0;
 }
 
+//photo show page
+.original-size-image img{
+  max-width: 100%;
+}
+
+//navbar
+.navbar-highlight {
+  background: green;
+}
+
 //dropdown form
 #dropdown-view .map-form {
   position: absolute;
@@ -482,8 +492,8 @@ span.remove-comment:hover {
   // padding: 10px 10px 0px 10px;
   background: black;
   position: relative;
-  bottom: 0;
-  left: 0;
+  bottom: 8px;
+  right: -119px;
   }
 
 .comment-remove-confirm.transparent {
@@ -495,6 +505,7 @@ span.remove-comment:hover {
   // position: relative;
   height: 100%;
   background: black;
+
 }
 
 .comment-remove-confirm > span.text {

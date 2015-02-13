@@ -16,16 +16,15 @@
       <ul class="nav navbar-nav navbar-right">
         <% if (Geofotr.CURRENT_USER) { %>
           <li id='photo-dropdown-container' class='dropdown-closed'>
-
           </li>
-          <li><a href="#/map">Map</a></li>
-          <li><a href="#">Feed</a></li>
-          <li><a href= "<%= '#/users/' + Geofotr.CURRENT_USER_ID %>">Your photos</a></li>
-          <li><a href="#/users">Users</a></li>
+          <li class="navbar-map"><a href="#/map">Map</a></li>
+          <li class="navbar-feed"><a href="#">Feed</a></li>
+          <li class="navbar-current-user"><a href= "<%= '#/users/' + Geofotr.CURRENT_USER_ID %>">Your photos</a></li>
+          <li class="navbar-users"><a href="#/users">Users</a></li>
           <li><a href="#" class="sign-out">Sign Out</a></li>
         <% } else { %>
-          <li><a href="#/users/signup">Sign Up</a></li>
-          <li><a href="#/users/signin">Sign In</a></li>
+          <li class="navbar-signup"><a href="#/users/signup">Sign Up</a></li>
+          <li class="navbar-signin"><a href="#/users/signin">Sign In</a></li>
         <% } %>
       </ul>
     </div>
