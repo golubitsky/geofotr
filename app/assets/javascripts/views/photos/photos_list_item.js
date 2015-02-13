@@ -74,10 +74,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       this.addEditForm();
       this.editOpen = true
     }
-
-    // if (flashSuccess) {
-    //   setTimeout(this.flashSuccess(), 0);
-    // }
   },
 
   flashSuccess: function () {

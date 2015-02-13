@@ -343,11 +343,16 @@ z-index: 1;
 //comments
 .photo-comments {
   padding-left: 0;
-  border: 1px solid white;
+
   border-radius: 5px;
   position: relative;
   top: 25px;
 }
+
+.photo-comments.border {
+  border: 1px solid white;
+}
+
 .comments-container {
   transition: opacity 0.35s ease;
   opacity: 1;

@@ -160,6 +160,7 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
 
       that.$('div.photo-errors').empty();
       that.collection.add(model, { merge: true });
+      Geofotr.photos = that.collection;
       that.reset();
       that.photoView.toggleEditForm('');
     };

@@ -52,6 +52,8 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       photo: this.model,
       collection: this.collection
     });
+
+    this.addBorder();
     this.addSubview('ul.photo-comments', commentListItem);
   },
 
@@ -62,6 +64,8 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       photo: this.model,
       collection: this.collection
     });
+
+    this.addBorder();
     this.unshiftSubview('ul.photo-comments', commentListItem);
   },
 
@@ -70,6 +74,8 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       if (subview.model === comment) {
         this.removeSubview('ul.photo-comments', subview);
       }
+
+    this.addBorder();
     }.bind(this));
   },
 
@@ -91,9 +97,18 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       comments: this.collection
     }));
 
+    this.addBorder();
     this.addNewCommentForm();
     this.attachSubviews();
     return this;
+  },
+
+  addBorder: function () {
+    if (this.collection.length) {
+      this.$('.photo-comments').addClass('border')
+    } else {
+      this.$('.photo-comments').removeClass('border')
+    }
   }
 });
 

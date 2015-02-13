@@ -18,6 +18,9 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     }, this);
 
     this.addSubscriptionButton();
+
+    _.extend(this, Backbone.Events);
+    this.listenTo(this.collection, 'photo:success', this.unshiftPhotoSubview);
   },
 
   addSubscriptionButton: function () {
@@ -35,6 +38,16 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       collection: this.collection
     });
     this.addSubview('ul.photo-list', photoListItem);
+  },
+
+  unshiftPhotoSubview: function (photo) {
+    console.log('unshift');
+    var photoListItem = new Geofotr.Views.PhotosListItem({
+      model: photo,
+      collection: this.collection
+    });
+
+    this.unshiftSubview('ul.photo-list', photoListItem);
   },
 
   removePhotoSubview: function (photo) {
