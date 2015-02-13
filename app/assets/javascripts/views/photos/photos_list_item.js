@@ -140,7 +140,6 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   toggleConfirmRemovePhoto: function (event) {
-    console.log('test')
     if (this.removeOpen) {
       this.removeRemoveConfirm(event);
       this.removeOpen = false
@@ -151,8 +150,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   },
 
   addRemoveConfirm: function (event) {
-    this.photoRemoveConfirm = new Geofotr.Views.PhotoRemoveConfirm({
-    });
+    this.photoRemoveConfirm = new Geofotr.Views.PhotoRemoveConfirm();
 
     this.$removeContainer = this.$('.remove-confirm');
     this.$removeContainer.removeClass('hidden');

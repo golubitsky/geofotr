@@ -337,7 +337,8 @@ textarea {
   border: 1px solid white;
   border-radius: 5px;
 }
-span.edit-comment, span.destroy-comment, form > span {
+
+span.edit-comment, span.remove-comment, form > span {
   font-weight: bold;
 
   text-align: center;
@@ -387,7 +388,7 @@ span.edit-comment {
   transition: color $smallButtonFadeTime ease;
 }
 
-span.destroy-comment {
+span.remove-comment {
   color: #D00;
   bottom: 9px;
   transition: color $smallButtonFadeTime ease;
@@ -397,7 +398,7 @@ span.edit-comment:hover {
   color: #fff;
 }
 
-span.destroy-comment:hover {
+span.remove-comment:hover {
   color: #F00;
 }
 
@@ -469,6 +470,79 @@ span.destroy-comment:hover {
 .remove-confirm span.cancel-remove-photo:hover {
   color: white;
 }
+
+//comment remove confirmation
+.comment-remove-confirm {
+  height: 35px;
+  transition: opacity .35s ease;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  // padding: 10px 10px 0px 10px;
+  background: black;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  }
+
+.comment-remove-confirm.transparent {
+  opacity: 0;
+  background: black;
+}
+
+.comment-remove-confirm {
+  // position: relative;
+  height: 100%;
+  background: black;
+}
+
+.comment-remove-confirm > span.text {
+  // position: absolute;
+  left: 5px;
+  bottom: 1px;
+}
+
+.comment-remove-confirm span.confirm-remove-comment{
+  // position: absolute;
+  // right: -13px;
+  // bottom: -6px;
+  font-weight: bold;
+  color: #E00;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  margin: 3px;
+  padding: 5px;
+  border: 1px solid red;
+  border-radius: 5px;
+  opacity: 1;
+  cursor: pointer;
+  cursor: hand;
+}
+.comment-remove-confirm span.confirm-remove-comment:hover {
+  color: #F00;
+}
+
+.comment-remove-confirm span.cancel-remove-comment {
+  // position: absolute;
+  // right: 175px;
+  bottom: -6px;
+  font-weight: bold;
+  color: #eee;
+  background: black;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  margin: 3px;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+  opacity: 1;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.comment-remove-confirm span.cancel-remove-comment:hover {
+  color: white;
+}
+
 //edit form
 
 .photo-edit-container .dropdown-map-canvas {

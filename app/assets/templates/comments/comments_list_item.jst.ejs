@@ -16,11 +16,12 @@
       <% } %>
 
       <% if (Geofotr.CURRENT_USER_ID == photo.get('user_id') || Geofotr.CURRENT_USER_ID == comment.get('user_id')) { %>
-        <span class="destroy-comment col-sm-1">X</span>
+        <span class="remove-comment col-sm-1">X</span>
       <% } %>
     </div>
 
   </div>
+  <div class="row comment-remove-confirm transparent hidden">TEST</div>
 </div>
 
 

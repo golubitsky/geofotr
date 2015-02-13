@@ -5,10 +5,13 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
   className: 'comment-list-item',
 
   events: {
-    'click span.edit-comment' : 'openEditForm',
+    'click span.edit-comment' : 'toggleEditForm',
     'click span.update-comment' : 'submitForm',
-    'click span.destroy-comment' : 'destroyComment',
     'click span.cancel-update-comment' : 'closeEditForm',
+
+    'click span.remove-comment' : 'toggleConfirmRemoveComment',
+    'click span.confirm-remove-comment' : 'destroyComment',
+    'click span.cancel-remove-comment' : 'toggleConfirmRemoveComment'
   },
 
   initialize: function (options) {
@@ -25,7 +28,17 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
     return this;
   },
 
-  openEditForm: function (event) {
+  toggleEditForm: function () {
+    if (this.editOpen) {
+      this.closeEditForm();
+      this.editOpen = false
+    } else {
+      this.openEditForm();
+      this.editOpen = true
+    }
+  },
+
+  openEditForm: function () {
     console.log('open edit form')
     var form = this.form_template({
       comment: this.model,
@@ -68,5 +81,37 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
   destroyComment: function (event) {
     event.preventDefault();
     this.model.destroy();
-  }
+  },
+
+
+  toggleConfirmRemoveComment: function (event) {
+    if (this.removeOpen) {
+      this.removeRemoveConfirm(event);
+      this.removeOpen = false
+    } else {
+      this.addRemoveConfirm(event);
+      this.removeOpen = true
+    }
+  },
+
+  addRemoveConfirm: function (event) {
+    this.commentRemoveConfirm = new Geofotr.Views.CommentRemoveConfirm();
+
+    this.$removeContainer = this.$('.comment-remove-confirm');
+    this.$removeContainer.removeClass('hidden');
+    setTimeout(function () {
+    this.$removeContainer.html(this.commentRemoveConfirm.render().$el);
+      this.$removeContainer.removeClass('transparent');
+    }.bind(this), 0);
+  },
+
+  removeRemoveConfirm: function () {
+    var removeView = this.commentRemoveConfirm;
+
+    this.$removeContainer.addClass('transparent');
+    this.$removeContainer.one('transitionend', function () {
+      this.$removeContainer.addClass('hidden');
+      removeView.remove.bind(removeView);
+    }.bind(this));
+  },
 });
