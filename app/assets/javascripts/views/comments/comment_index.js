@@ -64,7 +64,8 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       photo_id: this.model.id,
       comment: this.newComment,
       buttonText: "Add comment",
-      className: "create-comment"
+      className: "create-comment",
+      placeholder: "Compose a new comment!"
     });
 
     this.$('.new-comment').html(form);

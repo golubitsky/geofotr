@@ -6,8 +6,9 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
 
   events: {
     'click span.edit-comment' : 'openEditForm',
-    'submit .update-comment' : 'submitForm',
+    'click span.update-comment' : 'submitForm',
     'click span.destroy-comment' : 'destroyComment',
+    'click span.cancel-update-comment' : 'closeEditForm',
   },
 
   initialize: function (options) {
@@ -31,12 +32,17 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
       buttonText: "Update comment",
       className: "update-comment",
       photo_id: this.photo.id,
-      user_id: Geofotr.CURRENT_USER_ID
+      user_id: Geofotr.CURRENT_USER_ID,
+      placeholder: "Update your comment!"
     });
     this.$commentText = this.$('p');
     this.$commentText.replaceWith(form);
     this.$('textarea').height(this.$('textarea')[0].scrollHeight);
     this.$('span.edit-comment').attr('disabled', 'disabled');
+  },
+
+  closeEditForm: function () {
+    this.$('form').replaceWith(this.$commentText);
   },
 
   submitForm: function (event) {
