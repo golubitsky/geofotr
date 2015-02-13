@@ -16,5 +16,7 @@
       placeholder="Compose a new comment!"><%= comment.escape('body') %></textarea>
 
 <span class="submit <%= className %>"><%= buttonText %></span>
-
+<% if (!comment.isNew()) { %>
+<span class="cancel-update-comment">Cancel</span>
+<% } %>
 </form>

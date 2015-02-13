@@ -22,7 +22,7 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
         likeClass = "unlike-photo glyphicon glyphicon-heart";
       }
     } else {
-      likeClass = "hidden";
+      likeClass = "glyphicon glyphicon-heart";
     }
     return likeClass;
   },
@@ -45,6 +45,8 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
 
   toggleLike: function(event){
     event.preventDefault();
+    if (!Geofotr.CURRENT_USER) { return }
+
     if(this.likeable()){
       this.likePhoto();
     } else {

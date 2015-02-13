@@ -33,8 +33,10 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
       photo_id: this.photo.id,
       user_id: Geofotr.CURRENT_USER_ID
     });
-    this.$commentText = this.$('.comment-text');
+    this.$commentText = this.$('p');
     this.$commentText.replaceWith(form);
+    this.$('textarea').height(this.$('textarea')[0].scrollHeight);
+    this.$('span.edit-comment').attr('disabled', 'disabled');
   },
 
   submitForm: function (event) {

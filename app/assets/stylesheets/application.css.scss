@@ -23,6 +23,7 @@ $darkergrey: darken($lightgrey, 20%);
 $dialog-font-size: 16px;
 $form-background: #eee;
 
+$smallButtonFadeTime: .07s;
 // body {
 //   height: 800px;
 //   width: 600px;
@@ -115,6 +116,10 @@ nav.navbar.navbar-default {
 
 //photo/photo-overlay
 
+.photo-list {
+  padding: 0
+}
+
 .photo-list-item {
   list-style: none;
   width: 820px;
@@ -201,6 +206,7 @@ figure.photo > img {
   opacity: 100;
   cursor: pointer;
   cursor: hand;
+  transition: color $smallButtonFadeTime ease;
 }
 
 .photo-overlay > div > span.view-user {
@@ -220,6 +226,7 @@ figure.photo > img {
   left: -20px;
   font-size: 20px;
   font-weight: bold;
+  transition: color $smallButtonFadeTime ease;
 }
 
 .like-button, .unlike-button {
@@ -234,7 +241,7 @@ figure.photo > img {
   bottom: -3px;
   text-shadow: 0px 0px 0px #000;
   transition: color 0.2s ease;
-  transition: text-shadow 0.2s ease;
+  transition: text-shadow $smallButtonFadeTime ease;
 }
 .glyphicon-heart-empty:hover:before, .glyphicon-heart:hover:before {
   color: red;
@@ -271,7 +278,7 @@ color: white;
 
 //comments
 .photo-comments {
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   padding-left: 0;
   border: 1px solid white;
   border-radius: 5px;
@@ -293,6 +300,7 @@ color: white;
   top: -20px;
 }
 .comment-list-item {
+  // height: 1px;
   color: white;
   font-size: 16px;
 }
@@ -305,6 +313,7 @@ color: white;
   position: relative;
   left: 5px;
   font-weight: bold;
+  margin: 0px;
 }
 
 .comment-list-item span.username {
@@ -323,12 +332,12 @@ textarea {
   position: relative;
   left: 188px;
   top: 13px;
-  background: #eee;
+  background: $form-background;
   color: black;
   border: 1px solid white;
   border-radius: 5px;
 }
-span.edit-comment, span.destroy-comment, form > span.submit {
+span.edit-comment, span.destroy-comment, form > span {
   font-weight: bold;
 
   text-align: center;
@@ -351,8 +360,23 @@ span.edit-comment, span.destroy-comment, form > span.submit {
   color: #eee;
   left: 71px;
   bottom: -30px;
+  transition: color $smallButtonFadeTime ease;
   }
 
+span.submit.update-comment {
+  right: -199px;
+  bottom: -12px;
+}
+
+span.cancel-update-comment {
+  left: 203px;
+  bottom: -12px;
+}
+
+
+.update-comment textarea {
+  left: 0;
+  }
 form > span.submit:hover {
   color: white;
 }
@@ -360,12 +384,21 @@ span.edit-comment {
   color: #eee;
   left: -3px;
   bottom: 9px;
-
+  transition: color $smallButtonFadeTime ease;
 }
+
 span.destroy-comment {
-  color: #F00;
-  left: -20px;
+  color: #D00;
   bottom: 9px;
+  transition: color $smallButtonFadeTime ease;
+}
+
+span.edit-comment:hover {
+  color: #fff;
+}
+
+span.destroy-comment:hover {
+  color: #F00;
 }
 
 //photo remove confirmation
