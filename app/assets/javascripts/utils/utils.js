@@ -6,7 +6,6 @@ Geofotr.isEnterKeypress = function (event) {
 //+ $element.outerHeight(true)
 
 Geofotr.scrollTo = function($element){
-  debugger
   $("#content").animate({
       scrollTop: $element.position().top
     }, 350);

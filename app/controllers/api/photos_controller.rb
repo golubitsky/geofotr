@@ -31,7 +31,11 @@ class Api::PhotosController < ApplicationController
 
       generate_subscription_id
     elsif current_user
+      puts "fetching user photos"
       @photos = Photo.user_feed_photos(current_user)
+      puts "*******************************"
+      @photos.each { |photo| puts photo.like_id(current_user) }
+      puts "*******************************"
     else
       @photos = Photo.public_photos
     end
