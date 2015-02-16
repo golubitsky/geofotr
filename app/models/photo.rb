@@ -30,7 +30,7 @@ class Photo < ActiveRecord::Base
 
   def Photo.user_feed_photos(current_user)
     follow_ids = User.find(current_user.id).following.pluck(:id) + [current_user.id]
-    Photo.where('user_id IN (?)', follow_ids)
+    Photo.where('user_id IN (?) OR visibility = (?)' , follow_ids, "public")
   end
 
 
