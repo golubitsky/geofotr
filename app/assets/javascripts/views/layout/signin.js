@@ -6,6 +6,8 @@ Geofotr.Views.SignIn = Backbone.CompositeView.extend({
     'submit .sign-in' : 'signIn'
   },
 
+  className: "splash-page",
+
   initialize: function () {
     this.model = new Geofotr.Models.User();
   },

@@ -29,6 +29,37 @@ $smallButtonFadeTime: .07s;
 //   width: 600px;
 // }
 
+//signin page
+
+.splash-page {
+  height: 100%;
+  width: 100%;
+}
+
+.splash-page btn {
+  margin: auto
+}
+
+.splash-page .form-container {
+  position: relative;
+  top: 34%;
+}
+
+.splash-page h1 {
+  text-align: center;
+  color: white;
+  text-shadow: 3px 2px 7px black;
+}
+
+.background {
+  background: url("earth.jpg") no-repeat center center fixed;//
+  background-color: black;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 .navbar-brand img {
 height: 50px;
 top: -15px;
@@ -42,9 +73,13 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 }
 
 // #content
-#map-canvas {
+#map-logo {
   background: url("geofotr-logo-edit.png") no-repeat center center fixed;//
   background-color: white;
+  background-size: cover
+}
+
+#map-canvas {
   // -webkit-background-size: cover;
   // -moz-background-size: cover;
   // -o-background-size: cover;
