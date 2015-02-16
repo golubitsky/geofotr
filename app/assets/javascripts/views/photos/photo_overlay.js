@@ -27,7 +27,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    debugger
     console.log('overlay render');
     this.$el.html(this.template({ photo: this.model }));
 
@@ -37,6 +36,7 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   createLikeButton: function () {
+    console.log('create like button');
     this.likeButtonView = new Geofotr.Views.Like({
       model: this.model.currentUserLike,
       photo: this.model

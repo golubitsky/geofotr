@@ -1,11 +1,9 @@
 Geofotr.Views.Like = Backbone.CompositeView.extend({
 
   tagName: 'span',
-  // className: 'inner-like-span',
 
   events: {
     'click' : 'toggleLike',
-    // 'click .unlike-photo' : 'toggleLike'
   },
 
   attributes: function () {
@@ -36,24 +34,26 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.photo = options.photo;
     this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.model, 'sync', this.updateLikeObject);
-    this.likeObject = options.model;
+    this.listenTo(this.photo, 'change', this.updateLikeObject);
   },
 
   updateLikeObject: function () {
-    console.log("updateLikeObject");
+    this.model = this.photo.currentUserLike
+    this.updateClassName();
+  },
+
+  updateClassName: function () {
+    this.$el.removeClass()
+    this.$el.attr('class', this.likeClass());
   },
 
   render: function () {
-    console.log('like render');
-
     return this;
   },
 
   toggleLike: function(event){
     event.preventDefault();
     if (!Geofotr.CURRENT_USER) { return }
-
     if(this.likeable()){
       this.likePhoto();
     } else {
@@ -75,9 +75,6 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
 
         that.$el.removeClass();
         that.$el.addClass(that.likeClass());
-
-        console.log(that.model.attributes);
-        console.log(that.likeable());
       }
     });
   },
