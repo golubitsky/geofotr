@@ -6,14 +6,9 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
     'click' : 'toggleLike',
   },
 
-  attributes: function () {
-    return { class: this.likeClass() };
-  },
-
   likeClass: function(){
     console.log('set like class');
     var likeClass = "";
-    debugger
     if (Geofotr.CURRENT_USER){
       if (this.likeable()){
         likeClass = "like-photo glyphicon glyphicon-heart-empty";
@@ -33,13 +28,14 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    debugger
     this.photo = options.photo;
-    this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.photo, 'change:currentUserLike', this.updateLikeObject);
+    this.listenTo(this.model, 'change', this.updateClassName);
+    // this.listenTo(this.photo, 'change:currentUserLike', this.updateLikeObject);
+    this.updateLikeObject();
   },
 
   updateLikeObject: function () {
+    debugger
     this.model = this.photo.currentUserLike
     this.updateClassName();
   },
@@ -47,6 +43,7 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   updateClassName: function () {
     this.$el.removeClass()
     this.$el.attr('class', this.likeClass());
+    return this;
   },
 
   render: function () {
@@ -91,7 +88,8 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
         var likeCount = that.photo.get('likeCount');
         var newLikeCount = likeCount - 1
         that.photo.set('likeCount', newLikeCount);
-        that.model.unset('id', { silent: true });
+        debugger
+        that.model.unset('id');
         that.$el.removeClass();
         that.$el.addClass(that.likeClass());
       }

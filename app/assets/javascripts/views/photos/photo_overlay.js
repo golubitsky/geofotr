@@ -9,7 +9,7 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
       this.addSubview('.like-button', this.likeButtonView);
 
     this.listenTo(this.model, 'change:likeCount', this.updateLikeCount);
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'sync', this.updateLikeButton);
   },
 
   events: {
@@ -24,6 +24,14 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
       "#users/" + this.model.get('user_id'),
       {trigger: true}
     );
+  },
+
+  updateLikeButton: function () {
+    debugger
+    this.removeSubview('.like-button', this.likeButtonView);
+    this.createLikeButton();
+    this.addSubview('.like-button', this.likeButtonView);
+    this.render();
   },
 
   render: function () {

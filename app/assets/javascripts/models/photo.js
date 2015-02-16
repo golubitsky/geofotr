@@ -11,6 +11,7 @@ Geofotr.Models.Photo = Backbone.Model.extend({
   //parse function
   //take incoming comments and create comments collection
   parse: function (payload) {
+    debugger
     if (payload.comments) {
       this.comments().set(payload.comments);
       delete payload.comments;
