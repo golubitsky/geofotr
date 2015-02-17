@@ -13,11 +13,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
-gem 'newrelic_rpm'
 
-# remove carrier wave and fog after verifying everything works
-# gem 'carrierwave'
-# gem 'fog'
+gem 'newrelic_rpm'
 
 gem 'rmagick'
 gem 'paperclip'
@@ -25,6 +22,8 @@ gem 'aws-sdk'
 gem 'exifr'
 
 gem 'figaro'
+
+gem 'kaminari'
 
 group :development do
   gem 'annotate'
