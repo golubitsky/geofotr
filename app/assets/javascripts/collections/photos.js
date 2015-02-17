@@ -2,6 +2,13 @@ Geofotr.Collections.Photos = Backbone.Collection.extend({
   url: "/api/photos",
   model: Geofotr.Models.Photo,
 
+  parse: function(response) {
+    debugger
+    this.page_number = parseInt(response.page_number);
+    this.total_pages = parseInt(response.total_pages);
+    return response.photos;
+  },
+
   comparator: function(photo) {
     return -photo.get('updated_at');
   },

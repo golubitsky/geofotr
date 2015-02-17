@@ -22,19 +22,27 @@ class Api::PhotosController < ApplicationController
       @user = User.find_by(id: params[:user_id])
 
       if current_user == @user
-        @photos = current_user.photos
+        @photos = current_user.photos.page(params[:page]).per(1)
       elsif current_user && current_user.following?(@user)
-        @photos = @user.follower_photos
+        @photos = @user.follower_photos.page(params[:page]).per(1)
       else
-        @photos = @user.public_photos
+        @photos = @user.public_photos.page(params[:page]).per(1)
       end
 
       generate_subscription_id
     elsif current_user
-      @photos = Photo.user_feed_photos(current_user)
+      @photos = Photo.user_feed_photos(current_user).page(params[:page]).per(1)
     else
-      @photos = Photo.public_photos
+      @photos = Photo.public_photos.page(params[:page]).per(1)
     end
+    @page_number = params[:page].to_i
+    @total_pages = @photos.total_pages
+    puts "*********************************"
+    puts "page number:"
+    p @page_number.to_i
+    puts "total pages:"
+    p @total_pages
+    puts "*********************************"
   end
 
   def show

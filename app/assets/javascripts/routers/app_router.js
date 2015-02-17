@@ -83,7 +83,9 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   photoIndex: function () {
-    Geofotr.photos.fetch();
+    Geofotr.photos.fetch({
+      data: { page: 1 }
+    });
 
     var indexView = new Geofotr.Views.PhotosIndex({
       collection: Geofotr.photos,

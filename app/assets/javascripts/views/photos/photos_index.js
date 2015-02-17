@@ -12,6 +12,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'add', this.addPhotoSubview);
     this.listenTo(this.collection, 'remove', this.removePhotoSubview);
     this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.collection, 'sync', this.test);
 
     this.collection.each(function (photo) {
       this.addPhotoSubview(photo);
@@ -20,7 +21,11 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     this.addSubscriptionButton();
 
     _.extend(this, Backbone.Events);
-    this.listenTo(this.collection, 'photo:success', this.unshiftPhotoSubview);
+    this.listenTo(this.collection, 'photo:createSuccess', this.unshiftPhotoSubview);
+  },
+
+  test: function () {
+    debugger
   },
 
   addSubscriptionButton: function () {
@@ -60,6 +65,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   render: function () {
     console.log('index render');
+    debugger
     if (this.model.isNew() === false) {
       this.$el.html(this.user_template({
         user: this.model
@@ -68,7 +74,26 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       this.$el.html(this.template());
     }
     this.attachSubviews();
+    this.listenForScroll();
     return this;
+  },
+
+  listenForScroll: function () {
+    $(window).off("scroll"); // remove previous listeners
+    var throttledCallback = _.throttle(this.nextPage.bind(this), 200);
+    $(window).on("scroll", throttledCallback);
+  },
+
+  nextPage: function () {
+    var view = this;
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+      if (view.collection.page_number < view.collection.total_pages) {
+        view.collection.fetch({
+          data: { page: view.collection.page_number + 1 },
+          remove: false
+        });
+      }
+    }
   },
 
   navigateBack: function () {
