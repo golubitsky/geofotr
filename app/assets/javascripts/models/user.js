@@ -9,11 +9,15 @@ Geofotr.Models.User = Backbone.Model.extend({
   },
   //parse function
   //take incoming photos and create photos collection
-  parse: function (payload) {
+  parse: function (payload, options) {
+    debugger
     if (payload.photos) {
       this.photos().set(payload.photos, { parse: true });
+      this.photos().page_number = parseInt(payload.page_number);
+      this.photos().total_pages = parseInt(payload.total_pages);
       delete payload.photos;
     }
+
     return payload;
   }
 });
