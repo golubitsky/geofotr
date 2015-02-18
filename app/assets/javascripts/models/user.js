@@ -10,7 +10,6 @@ Geofotr.Models.User = Backbone.Model.extend({
   //parse function
   //take incoming photos and create photos collection
   parse: function (payload, options) {
-    debugger
     if (payload.photos) {
       this.photos().set(payload.photos, { parse: true });
       this.photos().page_number = parseInt(payload.page_number);

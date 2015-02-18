@@ -110,8 +110,14 @@ nav.navbar.navbar-default {
 }
 
 //photo show page
+.original-photo {
+  // position: relative;
+  // left: 25%;
+  // right: 25%;
+}
+
 .original-size-image {
-  position: relative;
+  // position: relative;
 }
 
 .original-size-image img{
@@ -121,22 +127,21 @@ nav.navbar.navbar-default {
   position: absolute;
   left: 25%;
   right: 25%;
-  position: absolute;
 }
 
 figcaption.photo-show {
-  position: absolute;
-  right: 44px;
-  bottom: 39px;
-  font-weight: bold;
-  color: white;
-  font-size: 24px;
-  margin: 0;
-  padding: 0;
-  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
-  transition: opacity 0.35s ease;
-  z-index: 1;
-  opacity: 0;
+  // position: absolute;
+  // right: 44px;
+  // bottom: 39px;
+  // font-weight: bold;
+  // color: white;
+  // font-size: 24px;
+  // margin: 0;
+  // padding: 0;
+  // text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  // transition: opacity 0.35s ease;
+  // z-index: 1;
+  // opacity: 0;
 }
 
 img:hover figcaption.photo-show {

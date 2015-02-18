@@ -24,7 +24,6 @@ Geofotr.Views.SignIn = Backbone.CompositeView.extend({
       type: 'POST',
       data: params,
       success: function (resp) {
-        debugger
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
         Geofotr.navBar.render();

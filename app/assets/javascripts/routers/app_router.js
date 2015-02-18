@@ -61,7 +61,9 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   userShow: function(id) {
     var user = new Geofotr.Models.User({id: id});
-    user.fetch();
+    user.fetch({
+      data: { page: 1 }
+    });
 
     var userShowView = new Geofotr.Views.PhotosIndex({
       collection: user.photos(),

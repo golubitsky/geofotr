@@ -83,12 +83,11 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   nextPage: function () {
-    debugger
-    var view = this;
+    var that = this;
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-      if (view.collection.page_number < view.collection.total_pages) {
-        view.collection.fetch({
-          data: { page: view.collection.page_number + 1 },
+      if (that.collection.page_number < that.collection.total_pages) {
+        that.collection.fetch({
+          data: { page: that.collection.page_number + 1 },
           remove: false
         });
       }

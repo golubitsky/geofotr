@@ -3,10 +3,12 @@ Geofotr.Collections.Photos = Backbone.Collection.extend({
   model: Geofotr.Models.Photo,
 
   parse: function(response, options) {
-    debugger
-    this.page_number = parseInt(response.page_number);
-    this.total_pages = parseInt(response.total_pages);
-    return response.photos;
+    if (response.photos) {
+      this.page_number = parseInt(response.page_number);
+      this.total_pages = parseInt(response.total_pages);
+      return response.photos;
+    }
+    return response;
   },
 
   comparator: function(photo) {
