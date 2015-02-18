@@ -22,12 +22,11 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
     console.log("test")
     Backbone.history.navigate(
       "#users/" + this.model.get('user_id'),
-      {trigger: true}
+      { trigger: true }
     );
   },
 
   updateLikeButton: function () {
-    debugger
     this.removeSubview('.like-button', this.likeButtonView);
     this.createLikeButton();
     this.addSubview('.like-button', this.likeButtonView);

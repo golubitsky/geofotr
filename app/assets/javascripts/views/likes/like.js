@@ -35,7 +35,6 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   },
 
   updateLikeObject: function () {
-    debugger
     this.model = this.photo.currentUserLike
     this.updateClassName();
   },
@@ -88,7 +87,6 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
         var likeCount = that.photo.get('likeCount');
         var newLikeCount = likeCount - 1
         that.photo.set('likeCount', newLikeCount);
-        debugger
         that.model.unset('id');
         that.$el.removeClass();
         that.$el.addClass(that.likeClass());

@@ -198,7 +198,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
         that.$('div.photo-errors').empty();
         that.collection.add(model, { merge: true, silent: true });
-        that.collection.trigger('photo:success', model);
+        that.collection.trigger('photo:createSuccess', model);
         that.reset();
         Backbone.history.navigate(
           '#', { trigger: true }
@@ -206,6 +206,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       };
 
       var error = function (model) {
+        //TO DO error message
         that.$('div.error-container').html($otherErrorMsg);
       }
       this.model.save(params, {

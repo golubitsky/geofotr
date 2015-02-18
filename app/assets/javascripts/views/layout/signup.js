@@ -31,6 +31,7 @@ Geofotr.Views.SignUp = Backbone.CompositeView.extend({
         Backbone.history.navigate('', { trigger: true })
       },
       error: function (resp) {
+        //TO DO error message
         that.render();
       }
     });

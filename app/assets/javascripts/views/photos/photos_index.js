@@ -65,7 +65,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   render: function () {
     console.log('index render');
-    debugger
     if (this.model.isNew() === false) {
       this.$el.html(this.user_template({
         user: this.model
@@ -79,12 +78,17 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   listenForScroll: function () {
-    $(window).off("scroll"); // remove previous listeners
     var throttledCallback = _.throttle(this.nextPage.bind(this), 200);
-    $(window).on("scroll", throttledCallback);
+
+    $('#content').scroll(function() {
+      if($('#content').scrollTop() + $('#content').height() > $('.photo-list').height()) {
+        throttledCallback()
+      }
+    });
   },
 
   nextPage: function () {
+    debugger
     var view = this;
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
       if (view.collection.page_number < view.collection.total_pages) {
