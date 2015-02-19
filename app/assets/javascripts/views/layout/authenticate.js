@@ -3,8 +3,8 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
   template: JST['layout/authenticate'],
 
   events: {
-    'submit .sign-in' : 'submit',
-    'submit .sign-up' : 'submit'
+    'submit .sign-in' : 'validateAndSubmit',
+    'submit .sign-up' : 'validateAndSubmit'
   },
 
   className: "splash-page",
@@ -15,9 +15,25 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
     this.pageTitle = options.pageTitle;
   },
 
-  submit: function (event) {
+  validateAndSubmit: function (event) {
     event.preventDefault();
-    params = this.$('form').serializeJSON();
+    var params = this.$('form').serializeJSON();
+    var pass = params.user.password;
+    if (this.validatePassword(pass)) {
+      this.submit(params)
+    } else {
+      console.log("password too short")
+    }
+  },
+
+  validatePassword: function (password) {
+    if (password.length < 6) {
+      return false;
+    };
+    return true;
+  },
+
+  submit: function (params) {
     $submitButton = this.$('input[type=submit]')
     $submitButton.attr('disabled', 'disabled')
     $submitButton.val('Signing in..')
@@ -27,8 +43,8 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
       url: that.url,
       type: 'POST',
       data: params,
+
       success: function (resp) {
-        debugger
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
         Geofotr.navBar.render();
