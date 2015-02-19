@@ -6,7 +6,10 @@ class Api::SessionsController < ApplicationController
 
     if @user
       log_in! @user
-      render 'api/users/show'
+      render json: {
+        username: @user.username,
+        id: @user.id
+      }
     else
       render json: {}, status: :unprocessable_entity
     end

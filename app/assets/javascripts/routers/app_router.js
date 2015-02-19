@@ -28,13 +28,19 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   signIn: function () {
-    var signInView = new Geofotr.Views.SignIn();
+    var signInView = new Geofotr.Views.Authenticate({
+      url: 'api/session',
+      pageTitle: 'Sign in'
+    });
 
     this._swapView(signInView);
   },
 
   signUp: function () {
-    var signUpView = new Geofotr.Views.SignUp();
+    var signUpView = new Geofotr.Views.Authenticate({
+      url: 'api/users',
+      pageTitle: 'Sign up'
+    });
 
     this._swapView(signUpView);
   },

@@ -1,47 +1,52 @@
-Geofotr.Views.SignUp = Backbone.CompositeView.extend({
+Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
 
-  template: JST['layout/signup'],
+  template: JST['layout/authenticate'],
 
   events: {
-    'submit .sign-up' : 'signUp'
+    'submit .sign-in' : 'submit',
+    'submit .sign-up' : 'submit'
   },
 
   className: "splash-page",
 
-  initialize: function () {
+  initialize: function (options) {
     this.model = new Geofotr.Models.User();
+    this.url = options.url;
+    this.pageTitle = options.pageTitle;
   },
 
-  signUp: function (event) {
+  submit: function (event) {
     event.preventDefault();
     params = this.$('form').serializeJSON();
     $submitButton = this.$('input[type=submit]')
     $submitButton.attr('disabled', 'disabled')
-    $submitButton.val('Signing up..')
+    $submitButton.val('Signing in..')
 
     var that = this;
     $.ajax({
-      url: 'api/users',
+      url: that.url,
       type: 'POST',
       data: params,
       success: function (resp) {
+        debugger
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
         Geofotr.navBar.render();
         Backbone.history.navigate('', { trigger: true })
       },
       error: function (resp) {
+        debugger
         //TO DO error message
         that.render();
       }
     });
   },
 
-
   render: function () {
-    console.log('signup render')
+    console.log('signin render')
     this.$el.html(this.template({
-      user: this.model
+      user: this.model,
+      pageTitle: this.pageTitle
     }));
 
     this.attachSubviews();

@@ -4,17 +4,19 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+    page = params[:page] || 1
+
     @user = User.find(params[:id])
 
     if current_user == @user
-      @photos = current_user.photos.page(params[:page]).per(@per)
+      @photos = current_user.photos.page(page).per(@per)
     elsif current_user && current_user.following?(@user)
-      @photos = @user.follower_photos.page(params[:page]).per(@per)
+      @photos = @user.follower_photos.page(page).per(@per)
     else
-      @photos = @user.public_photos.page(params[:page]).per(@per)
+      @photos = @user.public_photos.page(page).per(@per)
     end
 
-    @page_number = params[:page].to_i
+    @page_number = page.to_i
     @total_pages = @photos.total_pages
   end
 
@@ -23,7 +25,10 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       log_in! @user
-      render :show
+      render json: {
+        username: @user.username,
+        id: @user.id
+      }
     else
       render json: @user.errors.full_messages, status: :unprocessable_entity
     end
