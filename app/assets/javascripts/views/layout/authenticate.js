@@ -22,7 +22,11 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
     if (this.validatePassword(pass)) {
       this.submit(params)
     } else {
-      console.log("password too short")
+      $errors = this.$('.errors');
+      $errors.text("password too short");
+      $errors.removeClass('hidden');
+      setTimeout($errors.removeClass('transparent'), 0);
+
     }
   },
 

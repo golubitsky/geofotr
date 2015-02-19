@@ -24,12 +24,15 @@ $dialog-font-size: 16px;
 $form-background: #eee;
 
 $smallButtonFadeTime: .07s;
-// body {
-//   height: 800px;
-//   width: 600px;
-// }
 
-//signin page
+html, body, #content, #map-canvas, #dropdown-map-canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+//splash/signin/signup pages
 
 .splash-page {
   height: 100%;
@@ -60,16 +63,38 @@ $smallButtonFadeTime: .07s;
   margin: 0;
 }
 
-.navbar-brand img {
-height: 50px;
-top: -15px;
-position: relative;
+//login errors
+
+.splash-page .errors {
+  text-align: center;
+  background: black;
+  border-radius: 5px;
+  border: 1px solid white;
+  color: red;
+  opacity: 1;
+  transition: opacity 4s ease;
 }
-html, body, #content, #map-canvas, #dropdown-map-canvas {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+
+.splash-page .errors.transparent {
+  opacity: 0;
+}
+
+// .splash-page .errors.transparent {
+//   visibility:hidden;
+//   opacity:0;
+//   transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+// }
+// .splash-page .errors.transparent {
+//   visibility:visible;
+//   opacity:1;
+//   transition-delay:0s;
+// }
+//navbar
+
+.navbar-brand img {
+  height: 50px;
+  top: -15px;
+  position: relative;
 }
 
 // #content
