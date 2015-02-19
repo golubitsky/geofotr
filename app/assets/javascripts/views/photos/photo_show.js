@@ -1,7 +1,7 @@
 Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
 
   template: JST['photos/photo_show'],
-
+  className: "photoShow",
   events: {
     'click .navigate-back' : 'navigateBack'
   },
