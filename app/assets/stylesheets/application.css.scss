@@ -72,13 +72,17 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   border: 1px solid white;
   color: red;
   opacity: 1;
-  transition: opacity 4s ease;
+  transition: opacity .3s ease;
+  margin-bottom: 10px;
 }
 
 .splash-page .errors.transparent {
   opacity: 0;
 }
 
+.splash-page .errors > span {
+  margin: 5px;
+}
 // .splash-page .errors.transparent {
 //   visibility:hidden;
 //   opacity:0;

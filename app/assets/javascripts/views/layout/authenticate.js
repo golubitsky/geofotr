@@ -15,19 +15,57 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
     this.pageTitle = options.pageTitle;
   },
 
+  render: function () {
+    console.log('signin render')
+    this.$el.html(this.template({
+      user: this.model,
+      pageTitle: this.pageTitle
+    }));
+
+    this.attachSubviews();
+    return this;
+  },
+
   validateAndSubmit: function (event) {
     event.preventDefault();
+
     var params = this.$('form').serializeJSON();
-    var pass = params.user.password;
-    if (this.validatePassword(pass)) {
+    var password = params.user.password;
+    var passwordConfirmation = params.user.password_confirmation;
+    var submit = true;
+    var errors = [];
+    var $errors = this.$('.errors');
+    $errors.empty();
+    if (!this.validatePassword(password)) {
+      submit = false;
+      var $error = $('<span>');
+      $error.addClass("col-xs-12");
+      $error.text("Please enter a password having at least 6 characters.");
+      errors.push($error);
+    };
+
+    if (!this.validatePasswordConfirmation(password, passwordConfirmation)) {
+      submit = false;
+      var $error = $('<span>');
+      $error.addClass("col-xs-12");
+      $error.text("Please make sure your passwords match.");
+      errors.push($error);
+    }
+
+    if (submit) {
       this.submit(params)
     } else {
-      $errors = this.$('.errors');
-      $errors.text("password too short");
-      $errors.removeClass('hidden');
-      setTimeout($errors.removeClass('transparent'), 0);
+      errors.forEach(function(error){
+        this.$('.errors').append(error);
+      });
 
+      $errors.removeClass('hidden');
+
+      setTimeout(function () {
+        $errors.removeClass('transparent');
+      }, 0);
     }
+
   },
 
   validatePassword: function (password) {
@@ -37,10 +75,17 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
     return true;
   },
 
+  validatePasswordConfirmation: function(password, passwordConfirmation) {
+    if (this.pageTitle === 'Sign in') { return true }
+
+    if (password !== passwordConfirmation) { return false }
+    return true;
+  },
+
   submit: function (params) {
-    $submitButton = this.$('input[type=submit]')
-    $submitButton.attr('disabled', 'disabled')
-    $submitButton.val('Signing in..')
+    $submitButton = this.$('input[type=submit]');
+    $submitButton.attr('disabled', 'disabled');
+    $submitButton.val('Signing in..');
 
     var that = this;
     $.ajax({
@@ -60,16 +105,5 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
         that.render();
       }
     });
-  },
-
-  render: function () {
-    console.log('signin render')
-    this.$el.html(this.template({
-      user: this.model,
-      pageTitle: this.pageTitle
-    }));
-
-    this.attachSubviews();
-    return this;
   }
 });
