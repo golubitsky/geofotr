@@ -4,6 +4,12 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
 
   events: {
     'click .sign-out' : 'signout',
+    'click a.navbar-brand' : 'navigateSplash',
+  },
+
+  navigateSplash: function (event) {
+    event.preventDefault();
+    Backbone.history.navigate('', { trigger: true })
   },
 
   signout: function () {
@@ -16,7 +22,7 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
         Geofotr.CURRENT_USER_ID = ""
         Geofotr.navBar.render();
         Geofotr.photos.fetch();
-        Backbone.history.navigate('#', { trigger: true })
+        Backbone.history.navigate('', { trigger: true })
       },
     });
   },

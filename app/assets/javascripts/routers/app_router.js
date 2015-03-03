@@ -9,7 +9,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
-    '' : 'splash',
+    '' : 'splashRoute',
     'photos' : 'photoIndex',
     'users/signin' : 'signIn',
     'users/signup' : 'signUp',
@@ -26,6 +26,14 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     Geofotr.navBar.render();
+  },
+
+  splashRoute: function () {
+    if (Geofotr.CURRENT_USER) {
+      this.photoIndex();
+    } else {
+      this.splash();
+    }
   },
 
   splash: function () {
