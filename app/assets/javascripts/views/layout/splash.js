@@ -32,7 +32,22 @@ Geofotr.Views.Splash = Backbone.CompositeView.extend({
   },
 
   signinGuest: function (event) {
-    debugger
+    var params = {};
+    params['user'] = {};
+    params['user']['username'] = 'michelangelo';
+    params['user']['password'] = 'password';
+
+    $.ajax({
+      url: 'api/session',
+      type: 'POST',
+      data: params,
+      success: function (resp) {
+        Geofotr.CURRENT_USER = resp.username
+        Geofotr.CURRENT_USER_ID = resp.id
+        Geofotr.navBar.render();
+        Backbone.history.navigate('#/photos', { trigger: true })
+      }
+    });
   },
 
   render: function () {

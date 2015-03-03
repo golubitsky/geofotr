@@ -92,7 +92,6 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
       url: that.url,
       type: 'POST',
       data: params,
-
       success: function (resp) {
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
