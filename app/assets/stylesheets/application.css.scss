@@ -167,27 +167,9 @@ figure.original-photo {
 }
 
 figcaption.photo-show {
-  position: absolute;
-  right: 44px;
-  bottom: 39px;
-  font-weight: bold;
-  color: red;
-  font-size: 24px;
-  margin: 0;
-  padding: 0;
-  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
-  transition: opacity 0.35s ease;
-  z-index: 1;
-  opacity: 1;
-}
-img:hover + figcaption.photo-show{
-  color: yellow;
-  opacity: 1;
+  display: none;
 }
 
-figcaption.photo-show:hover {
-  color: green
-}
 //navbar
 
 .navbar-highlight {
