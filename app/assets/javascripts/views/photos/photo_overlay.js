@@ -35,7 +35,7 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   followUser: function () {
-    debugger
+    var that = this;
     var $button = this.$('.follow-user');
     $button.attr('disabled', 'disabled');
     $button.text('Following..');
@@ -46,8 +46,8 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
     });
 
     this.model.currentUserSubscription.save({}, {
-      success: function () {
-        debugger
+      success: function (resp) {
+        that.model.currentUserSubscription.set('id', resp.get('subscriptionId'));
         $button.removeClass();
         $button.text('Unfollow user');
         $button.addClass('unfollow-user');
@@ -66,7 +66,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
 
     this.model.currentUserSubscription.destroy({
       success: function () {
-        debugger
         that.model.currentUserSubscription.unset('id');
         $button.removeClass();
         $button.text('Follow user');
