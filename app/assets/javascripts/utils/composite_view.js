@@ -6,7 +6,6 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   unshiftSubview: function (selector, subview) {
-    console.log('unshift subview');
     this.subviews(selector).unshift(subview);
     // Try to attach the subview. Render it as a convenience.
     this.attachSubview(selector, subview.render(), true);

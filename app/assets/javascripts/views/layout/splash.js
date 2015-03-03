@@ -51,7 +51,6 @@ Geofotr.Views.Splash = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    console.log('splash render')
     this.$el.html(this.template());
 
     this.attachSubviews();

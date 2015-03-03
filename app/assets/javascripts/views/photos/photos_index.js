@@ -43,7 +43,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   unshiftPhotoSubview: function (photo) {
-    console.log('unshift');
     var photoListItem = new Geofotr.Views.PhotosListItem({
       model: photo,
       collection: this.collection
@@ -61,7 +60,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    console.log('index render');
     if (this.model.isNew() === false) {
       this.$el.html(this.user_template({
         user: this.model

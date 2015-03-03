@@ -37,7 +37,7 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
       };
 
       var error = function (model) {
-        console.log('error')
+        //TO DO error
       }
 
       this.newComment.save(params, {
@@ -58,7 +58,6 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   },
 
   unshiftCommentSubview: function (comment) {
-    console.log('unshift');
     var commentListItem = new Geofotr.Views.CommentsListItem({
       model: comment,
       photo: this.model,
@@ -92,7 +91,6 @@ Geofotr.Views.CommentsIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    console.log('comment index render');
     this.$el.html(this.template({
       comments: this.collection
     }));

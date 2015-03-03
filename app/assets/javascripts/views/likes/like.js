@@ -7,15 +7,12 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   },
 
   likeClass: function(){
-    console.log('set like class');
     var likeClass = "";
     if (Geofotr.CURRENT_USER){
       if (this.likeable()){
         likeClass = "like-photo glyphicon glyphicon-heart-empty";
-        console.log('able to like!');
         } else {
         likeClass = "unlike-photo glyphicon glyphicon-heart";
-        console.log('unable to like!');
       }
     } else {
       likeClass = "glyphicon glyphicon-heart";
@@ -30,7 +27,6 @@ Geofotr.Views.Like = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.photo = options.photo;
     this.listenTo(this.model, 'change', this.updateClassName);
-    // this.listenTo(this.photo, 'change:currentUserLike', this.updateLikeObject);
     this.updateLikeObject();
   },
 

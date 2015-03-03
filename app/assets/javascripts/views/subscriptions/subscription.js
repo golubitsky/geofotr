@@ -8,12 +8,10 @@ Geofotr.Views.Subscription = Backbone.CompositeView.extend({
     },
 
     initialize: function () {
-      // this.listenTo(this.model, 'sync', this.render);
       this.listenTo(this.model, 'change', this.render);
     },
 
     render: function () {
-      console.log('subscription render');
       this.$el.html(this.template({ user: this.model }));
       return this;
     },

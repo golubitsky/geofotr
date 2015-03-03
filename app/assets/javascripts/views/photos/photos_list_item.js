@@ -8,7 +8,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
     // this.addCommentsIndex();
     this.addPhotoOverlay();
 
-    //if ever change=>render is necessary need to make sure not to listen on change:likeCount;
+    //if ever necessary to change render method, need to make sure not to listen on change:likeCount;
     this.listenTo(this.model, 'change:caption location latitude longitude', this.render)
   },
 

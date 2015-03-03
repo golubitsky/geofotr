@@ -31,7 +31,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
       setTimeout(function () {
         $('html').one('click', function() {
-          // $dropdown.addClass('hidden');
           $dropdown.addClass('transparent');
           $dropdown.one('transitionend', function () {
             $dropdown.addClass('hidden');
@@ -39,13 +38,10 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
           $dropdown.off('click');
         })
       }, 0);
-    } else {
-      // $dropdown.addClass('hidden')
-    };
+    }
   },
 
   render: function() {
-    console.log('dropdown render')
     var renderedContent = this.template({
       photo: this.model
     });
@@ -175,13 +171,11 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   reset: function() {
-    console.log('reset')
     this.render();
     this.$el.parent().removeClass('open');
   },
 
   createPhoto: function(event) {
-    console.log("form submit");
     event.preventDefault();
     if (this.model.get('photo') !== undefined) {
       params = this.$('form').serializeJSON();

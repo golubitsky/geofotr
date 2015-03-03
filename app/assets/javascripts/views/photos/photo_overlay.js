@@ -19,7 +19,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   navigateToShow: function () {
-    console.log("test")
     Backbone.history.navigate(
       "#users/" + this.model.get('user_id'),
       { trigger: true }
@@ -34,7 +33,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    console.log('overlay render');
     this.$el.html(this.template({ photo: this.model }));
 
     this.attachSubviews();
@@ -43,7 +41,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
   },
 
   createLikeButton: function () {
-    console.log('create like button');
     this.likeButtonView = new Geofotr.Views.Like({
       model: this.model.currentUserLike,
       photo: this.model

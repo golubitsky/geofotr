@@ -37,10 +37,8 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
 
     this._map = new google.maps.Map(this.mapEl, mapOptions);
 
-
     //size/center map on dropdown
     var that = this;
-
 
     $location = this.$('#location-update-form');
 
@@ -137,13 +135,11 @@ Geofotr.Views.PhotoEdit = Backbone.CompositeView.extend({
   },
 
   reset: function() {
-    console.log('reset')
     this.render();
     this.$el.parent().removeClass('open');
   },
 
   updatePhoto: function(event) {
-    console.log("form submit");
     event.preventDefault();
 
     params = this.$('form').serializeJSON();

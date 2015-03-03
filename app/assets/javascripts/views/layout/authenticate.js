@@ -17,7 +17,6 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    console.log('signin render')
     this.$el.html(this.template({
       user: this.model,
       pageTitle: this.pageTitle

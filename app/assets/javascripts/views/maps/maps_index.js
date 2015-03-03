@@ -50,7 +50,6 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
 
     this._map = new google.maps.Map(this.el, mapOptions);
 
-    console.log('map is on the page');
     this.collection.each(function (photo) {
       this.addMarker(photo);
     }, this);
@@ -63,8 +62,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   },
 
   addMarker: function (photo) {
-    console.log("add marker");
-
+    //TO DO do not add marker if location == 0, 0
     if (this._markers[photo.id]) { return };
     var that = this;
 

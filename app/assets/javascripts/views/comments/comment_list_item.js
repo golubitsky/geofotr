@@ -39,7 +39,6 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
   },
 
   openEditForm: function () {
-    console.log('open edit form')
     var form = this.form_template({
       comment: this.model,
       buttonText: "Update comment",
@@ -69,7 +68,7 @@ Geofotr.Views.CommentsListItem = Backbone.CompositeView.extend({
     };
 
     var error = function (model) {
-      console.log('error');
+      //TO DO error handling
     };
 
     this.model.save(params, {
