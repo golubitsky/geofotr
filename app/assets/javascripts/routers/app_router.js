@@ -6,6 +6,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     this.addNavBarView();
 
     this.$rootEl = options.$rootEl;
+    this.$content = $('#content');
   },
 
   routes: {

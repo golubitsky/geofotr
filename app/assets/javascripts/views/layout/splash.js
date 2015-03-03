@@ -11,10 +11,6 @@ Geofotr.Views.Splash = Backbone.CompositeView.extend({
   },
   className: "splash-page background row",
 
-  initialize: function () {
-    $('#content').css('overflow', 'none');
-  },
-
   navigateToSignin: function (event) {
     Backbone.history.navigate('#/users/signin', { trigger: true })
   },

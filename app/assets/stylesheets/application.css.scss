@@ -133,7 +133,8 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 }
 
 #content {
-  position: relative;
+  overflow: scroll;
+  position: fixed;
   top: 50px;
 }
 
