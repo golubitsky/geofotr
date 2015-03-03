@@ -21,13 +21,14 @@
 </script>
 
 <% if Rails.env.production? %>
-  <% api_key = ENV["GOOGLEMAPS_KEY"] %>
+  <% api_key = "&key=" + ENV["GOOGLEMAPS_KEY"] %>
 <% else %>
-  <% api_key = '' %>
+  <% api_key = "&key=" + ENV["GOOGLEMAPS_KEY"] %>
+  <#% api_key =   '' %>
 <% end %>
 
 <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?libraries=places&key="<%= api_key %>">
+        src="https://maps.googleapis.com/maps/api/js?libraries=places<%= api_key %>">
 </script>
 
 </body>

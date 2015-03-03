@@ -26,6 +26,10 @@ $form-background: #eee;
 
 $smallButtonFadeTime: .07s;
 
+.pac-container {
+    z-index: 1051 !important;
+}
+
 html, body, #content, #map-canvas, #dropdown-map-canvas {
   height: 100%;
   width: 100%;

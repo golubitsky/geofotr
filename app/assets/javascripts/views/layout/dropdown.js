@@ -17,8 +17,10 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
   toggleDropdown: function (event) {
     var $dropdown = this.$('.map-form')
+    var that = this;
 
     if ($dropdown.hasClass('hidden')) {
+      this.bindMapEvents();
       $dropdown.removeClass('hidden');
 
       setTimeout(function () {
@@ -31,6 +33,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
       setTimeout(function () {
         $('html').one('click', function() {
+          that.unbindMapEvents();
           $dropdown.addClass('transparent');
           $dropdown.one('transitionend', function () {
             $dropdown.addClass('hidden');
@@ -51,7 +54,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     this.mapEl = this.$('.dropdown-map-canvas')[0];
     this.initializeMap();
-    this.bindMapEvents();
     return this;
   },
 
@@ -76,19 +78,20 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         }, 0);
       }
     );
-
-    $location = this.$('#location-create-form');
-
   },
 
   bindMapEvents: function () {
     var that = this;
     //autocomplete map/marker logic
 
-    autocomplete = new google.maps.places.Autocomplete($location[0]);
+    var input = document.getElementById('location-create-form');
+    debugger
+    autocomplete = this.autocomplete = new google.maps.places.Autocomplete(input);
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
+      //problems when pressing enter in map-form (as opposed to clicking on result)
+      var place = autocomplete.getPlace();
+      debugger
 
-      //problems when pressing enter in form (as opposed to clicking on result)
       var location = autocomplete.getPlace().geometry.location
 
       that.placeMarker(location);
@@ -105,6 +108,11 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       var lng = event.latLng.lng();
       that.setFormLocation({ lat: lat, lng: lng });
     });
+  },
+
+  unbindMapEvents: function () {
+    this.autocomplete.unbindAll()
+    this._map.unbindAll()
   },
 
   placeMarker: function (location) {
