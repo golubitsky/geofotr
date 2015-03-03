@@ -104,7 +104,8 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
         var $error = $('<span>');
         $error.addClass("col-xs-12");
 
-        if (this.pageTitle === 'Sign up') {
+        if (that.pageTitle === 'Sign up') {
+          debugger
           $error.text(resp.responseJSON);
         } else {
           $error.text("Invalid login. Please try again.");
