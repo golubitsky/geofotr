@@ -18,6 +18,8 @@ json.thumbUrl image_tag photo.photo.url(:thumb)
 json.likeId photo.like_id(current_user)
 json.likeCount photo.like_count
 
+json.subscriptionId photo.subscription_id(current_user)
+
 json.comments do
   json.array!(photo.comments) do |comment|
     json.partial!("api/photos/photo_comment", comment: comment)

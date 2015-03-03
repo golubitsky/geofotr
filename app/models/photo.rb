@@ -74,4 +74,10 @@ class Photo < ActiveRecord::Base
     like ? like.id : ''
 
   end
+
+  def subscription_id(current_user)
+    return '' unless current_user
+    sub = Subscription.find_by(follower_id: current_user.id, followee_id: self.user_id)
+    sub ? sub.id : ''
+  end
 end

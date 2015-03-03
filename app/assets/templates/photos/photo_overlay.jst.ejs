@@ -1,7 +1,12 @@
 <span class="by">shared by</span>
 <span class="username"><%= photo.escape('user') %></span>
 <span class="view-user">View user&#39s photos</span>
-<span class="follow-button"></span>
+
+<% if (photo.currentUserSubscription.isNew()) { %>
+  <span class="follow-user">Follow user</span>
+<% } else { %>
+  <span class="unfollow-user">Unfollow user</span>
+<% } %>
 
 <div class="photo-buttons">
   <% if (Geofotr.CURRENT_USER === photo.get('user')) { %>
@@ -9,7 +14,12 @@
     <span class="remove-photo">Remove</span>
   <% } %>
   <span class="view-photo">View full size</span>
-  <span class="comment-photo">Comments</span>
+
+  <% if (numberOfComments) { %>
+    <span class="comment-photo">Comments (<%=numberOfComments %>)</span>
+  <% } else if (Geofotr.CURRENT_USER) { %>
+    <span class="comment-photo">Add a comment</span>
+  <% } %>
 
   <span class="like-button"></span>
 

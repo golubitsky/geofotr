@@ -25,6 +25,17 @@ Geofotr.Models.Photo = Backbone.Model.extend({
       this.currentUserLike.set({ id: payload.likeId });
     }
 
+    this.currentUserSubscription = new Geofotr.Models.Subscription({
+      follower_id: Geofotr.CURRENT_USER_ID
+    });
+
+    if (payload.subscriptionId) {
+      this.currentUserSubscription.set({
+        id: payload.subscriptionId,
+        followee_id: payload.user_id
+      });
+    }
+
     return payload;
   }
 });
