@@ -1,16 +1,11 @@
 <div class="background row">
 
-  <div class="form-container">
-    <div class="row">
-      <h1 class="col-xs-2 col-xs-offset-5"><%= pageTitle %></h1>
-    </div>
-    <div class="row">
-      <span class="errors row transparent hidden col-xs-4 col-xs-offset-4"></span>
-    </div>
-    <div class="col-xs-2 col-xs-offset-5">
-
+  <div class="form-container row col-xs-5 col-xs-offset-7">
+    <h1 class="row"><%= pageTitle %></h1>
+    <span class="errors row transparent hidden col-xs-8 col-xs-offset-2"></span>
+    <div class="col-xs-6 col-xs-offset-3">
       <form class="form-horizontal sign-in">
-        <div class="form-group">
+        <div class="form-group row">
           <input type="text"
                 name="user[username]"
                 id="user_username"
@@ -36,11 +31,8 @@
         </div>
         <% } %>
 
-        <div class="form-group">
-          <input type="submit" class="btn btn-default center-block" value="<%= pageTitle %>">
-        </div>
+        <input type="submit" class="btn btn-default center-block" value="<%= pageTitle %>">
       </form>
-
-    </div>
+    </div
   </div
 </div>

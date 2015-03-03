@@ -19,6 +19,7 @@
 
 $lightgrey: #ccc;
 $darkergrey: darken($lightgrey, 20%);
+$green: rgb(78, 83, 52);
 
 $dialog-font-size: 16px;
 $form-background: #eee;
@@ -40,7 +41,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 }
 
 .splash-page btn {
-  margin: auto
+  // margin: auto
 }
 
 .splash-page .form-container {
@@ -55,7 +56,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 }
 
 .background {
-  background: url("earth.jpg") no-repeat center center fixed;//
+  background: url("earth.jpg") no-repeat 30% 50% fixed;
   background-color: black;
   background-size: 50%;
   width: 100%;
@@ -63,6 +64,50 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   margin: 0;
 }
 
+.splash-container {
+  height: 100%;
+}
+.splash-container .top{
+  position: relative;
+  top: 32%;
+}
+
+.splash-container .bottom{
+  position: relative;
+  top: 38%;
+}
+
+.splash-container * {
+  display: block;
+  text-align: center;
+}
+
+.splash-container span{
+  cursor: pointer; cursor: hand;
+}
+
+#explore-map-splash {
+  position: relative;
+  top: 10px;
+}
+
+#signin-splash {
+  position: relative;
+  top: 10px;
+}
+
+#signup-splash {
+  position: relative;
+  top: 20px;
+}
+
+// .slash-page .explore {
+//   font-size: 36px;
+//   position: absolute;
+//   background: white;
+//   border: 10px solid grey;
+//   border-radius: 5px;
+// }
 //login errors
 
 .splash-page .errors {
@@ -83,16 +128,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 .splash-page .errors > span {
   margin: 5px;
 }
-// .splash-page .errors.transparent {
-//   visibility:hidden;
-//   opacity:0;
-//   transition:visibility 0s linear 0.5s,opacity 0.5s linear;
-// }
-// .splash-page .errors.transparent {
-//   visibility:visible;
-//   opacity:1;
-//   transition-delay:0s;
-// }
+
 //navbar
 
 .navbar-brand img {
@@ -100,6 +136,76 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   top: -15px;
   position: relative;
 }
+
+// /* navbar */
+// .navbar-default {
+//     background-color: GreenYellow;
+//     border-color: $green;
+// }
+// /* title */
+// .navbar-default .navbar-brand {
+//     color: #777;
+// }
+// .navbar-default .navbar-brand:hover,
+// .navbar-default .navbar-brand:focus {
+//     color: #5E5E5E;
+// }
+// /* link */
+// .navbar-default .navbar-nav > li > a {
+//     color: #777;
+// }
+// .navbar-default .navbar-nav > li > a:hover,
+// .navbar-default .navbar-nav > li > a:focus {
+//     color: #333;
+// }
+// .navbar-default .navbar-nav > .active > a,
+// .navbar-default .navbar-nav > .active > a:hover,
+// .navbar-default .navbar-nav > .active > a:focus {
+//     color: #555;
+//     background-color: #E7E7E7;
+// }
+// .navbar-default .navbar-nav > .open > a,
+// .navbar-default .navbar-nav > .open > a:hover,
+// .navbar-default .navbar-nav > .open > a:focus {
+//     color: #555;
+//     background-color: #D5D5D5;
+// }
+// /* caret */
+// .navbar-default .navbar-nav > .dropdown > a .caret {
+//     border-top-color: #777;
+//     border-bottom-color: #777;
+// }
+// .navbar-default .navbar-nav > .dropdown > a:hover .caret,
+// .navbar-default .navbar-nav > .dropdown > a:focus .caret {
+//     border-top-color: #333;
+//     border-bottom-color: #333;
+// }
+// .navbar-default .navbar-nav > .open > a .caret,
+// .navbar-default .navbar-nav > .open > a:hover .caret,
+// .navbar-default .navbar-nav > .open > a:focus .caret {
+//     border-top-color: #555;
+//     border-bottom-color: #555;
+// }
+// /* mobile version */
+// .navbar-default .navbar-toggle {
+//     border-color: #DDD;
+// }
+// .navbar-default .navbar-toggle:hover,
+// .navbar-default .navbar-toggle:focus {
+//     background-color: #DDD;
+// }
+// .navbar-default .navbar-toggle .icon-bar {
+//     background-color: #CCC;
+// }
+// @media (max-width: 767px) {
+//     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+//         color: #777;
+//     }
+//     .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+//     .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+//         color: #333;
+//     }
+// }
 
 // #content
 #map-logo {
@@ -115,13 +221,14 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   // background-size: cover;
 }
 body {
-  position: fixed;
-  bottom: 0;
-  padding: 0 0 30px 0;
+  // position: fixed;
+  // bottom: 0;
+  // padding: 0 0 30px 0;
 }
 
 #content {
   overflow: scroll;
+  // background-color: GreenYellow;
 }
 
 //main map page

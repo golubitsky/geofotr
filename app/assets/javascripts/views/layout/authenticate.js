@@ -4,7 +4,7 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
 
   events: {
     'submit .sign-in' : 'validateAndSubmit',
-    'submit .sign-up' : 'validateAndSubmit'
+    'submit .sign-up' : 'validateAndSubmit',
   },
 
   className: "splash-page",
@@ -97,12 +97,21 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
         Geofotr.navBar.render();
-        Backbone.history.navigate('', { trigger: true })
+        Backbone.history.navigate('#/photos', { trigger: true })
       },
       error: function (resp) {
-        debugger
-        //TO DO error message
         that.render();
+        var $error = $('<span>');
+        $error.addClass("col-xs-12");
+        $error.text(resp.responseJSON);
+
+        $errors = that.$('.errors')
+        $errors.append($error)
+        $errors.removeClass('hidden');
+
+        setTimeout(function () {
+          $errors.removeClass('transparent');
+        }, 0);
       }
     });
   }
