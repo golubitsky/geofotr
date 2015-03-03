@@ -9,6 +9,8 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
+    $('#content').css('overflow', 'scroll');
+
     this.listenTo(this.collection, 'add', this.addPhotoSubview);
     this.listenTo(this.collection, 'remove', this.removePhotoSubview);
     this.listenTo(this.model, 'sync', this.render);

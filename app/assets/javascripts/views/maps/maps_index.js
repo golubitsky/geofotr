@@ -25,6 +25,7 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
 
     this.listenTo(this.collection, 'add', this.addMarker);
     this.listenTo(this.collection, 'remove', this.removeMarker);
+    $('#content').css('overflow', 'none');
   },
 
   positionAndShowMap: function () {

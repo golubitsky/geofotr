@@ -13,6 +13,7 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
     this.model = new Geofotr.Models.User();
     this.url = options.url;
     this.pageTitle = options.pageTitle;
+    $('#content').css('overflow', 'none');
   },
 
   render: function () {
