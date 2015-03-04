@@ -63,7 +63,10 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
 
   addMarker: function (photo) {
     //TO DO do not add marker if location == 0, 0
+    if (photo.get('latitude') == "0.0" && photo.get('latitude') == "0.0") { return; }
+    if (!photo.get('latitude') && !photo.get('latitude')) { return; }
     if (this._markers[photo.id]) { return };
+
     var that = this;
 
     var latLng = new google.maps.LatLng(

@@ -1,4 +1,3 @@
-require 'byebug'
 class Api::PhotosController < ApplicationController
   wrap_parameters(:posted_photo, include: [:caption, :visibility, :latitude, :longitude, :photo])
 
@@ -59,7 +58,6 @@ class Api::PhotosController < ApplicationController
   private
 
   def photo_params
-    byebug
     params.require(:posted_photo).permit(:caption, :visibility, :latitude, :longitude, :photo)
   end
 

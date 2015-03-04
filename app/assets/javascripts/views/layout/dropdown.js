@@ -230,7 +230,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     event.preventDefault();
     if (this.model.get('photo') !== undefined) {
       params = this.$('form').serializeJSON();
-      debugger
       $submitButton = this.$('input[type=submit]')
       $submitButton.attr('disabled', 'disabled')
       $submitButton.val('Geofotring! (please wait...)')
