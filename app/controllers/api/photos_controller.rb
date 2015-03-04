@@ -1,12 +1,9 @@
+require 'byebug'
 class Api::PhotosController < ApplicationController
   wrap_parameters(:posted_photo, include: [:caption, :visibility, :latitude, :longitude, :photo])
 
   def create
     @photo = current_user.photos.new(photo_params)
-    p "*************************"
-    p @photo.photo
-    p @photo.photo_file_name
-    p "*************************"
     if @photo.save
       render :show
     else
@@ -62,6 +59,7 @@ class Api::PhotosController < ApplicationController
   private
 
   def photo_params
+    byebug
     params.require(:posted_photo).permit(:caption, :visibility, :latitude, :longitude, :photo)
   end
 

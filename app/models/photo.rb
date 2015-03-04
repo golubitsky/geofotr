@@ -48,6 +48,9 @@ class Photo < ActiveRecord::Base
   before_post_process :extract_exif
 
   def extract_exif
+    #if user specified latitude => don't extract EXIF geo-data
+    return if self.latitude || self.longitude
+
     imgfile = EXIFR::JPEG.new(photo.queued_for_write[:original].path)
 
     return unless imgfile
@@ -58,9 +61,10 @@ class Photo < ActiveRecord::Base
     lng = imgfile.gps_longitude.to_f
     lng *= -1 if imgfile.gps_longitude_ref == "W"
 
+    return if lat == 0 || lng == 0 #exif location data doesn't exist
+    #use exif latitude data
     self.latitude = lat.to_s
     self.longitude = lng.to_s
-    #store other attributes later, perhaps?
   end
 
   #like methods
