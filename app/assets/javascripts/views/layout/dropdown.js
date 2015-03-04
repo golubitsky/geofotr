@@ -20,8 +20,12 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     var that = this;
 
     if ($dropdown.hasClass('hidden')) {
-      this.bindMapEvents();
+      //remove all Places Autocomplete divs already appended (if opened dropdown multiple times)
+      $('.pac-container').remove()
+
       $dropdown.removeClass('hidden');
+
+      this.bindMapEvents();
 
       setTimeout(function () {
         $dropdown.removeClass('transparent')
@@ -31,14 +35,21 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         event.stopPropagation();
       });
 
+      $('body').click(function (event) {
+        event.stopPropagation();
+      });
+
+
+
       setTimeout(function () {
-        $('html').one('click', function() {
+        $('html').one('click', function(event) {
           that.unbindMapEvents();
           $dropdown.addClass('transparent');
           $dropdown.one('transitionend', function () {
             $dropdown.addClass('hidden');
           });
           $dropdown.off('click');
+          $('body').off('click');
         })
       }, 0);
     }
@@ -88,6 +99,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
     autocomplete = this.autocomplete = new google.maps.places.Autocomplete(this.input);
 
+    //handle enter keypress to select first autocomplete result
     $('#location-create-form').keydown(function(event) {
       if (event.which == 13) {
 
@@ -106,7 +118,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
                   var lat = details.geometry.location.lat()
                   var lng = details.geometry.location.lng()
                   that.setFormLocation({ lat: lat, lng: lng });
-                  event.stopPropagation();
                 }
               );
             }
@@ -117,7 +128,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
     });
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
       if (that.doNotTrigger) {
         //prevent double handling of 'place_changed' event due to 'enter' keydown event
         that.doNotTrigger = false;
@@ -125,14 +136,12 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
 
       var place = autocomplete.getPlace();
-
       var location = autocomplete.getPlace().geometry.location
 
       that.placeMarker(location);
       var lat = location.lat();
       var lng = location.lng();
       that.setFormLocation({ lat: lat, lng: lng });
-      event.stopPropagation();
     });
 
     //allow clicking on map to place a marker unless one exists
