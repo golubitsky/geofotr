@@ -84,13 +84,47 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     var that = this;
     //autocomplete map/marker logic
 
-    var input = document.getElementById('location-create-form');
-    debugger
-    autocomplete = this.autocomplete = new google.maps.places.Autocomplete(input);
+    this.input = document.getElementById('location-create-form');
+
+    autocomplete = this.autocomplete = new google.maps.places.Autocomplete(this.input);
+
+    $('#location-create-form').keydown(function(event) {
+      if (event.which == 13) {
+
+      that.doNotTrigger = true;
+
+        event.stopPropagation();
+        event.preventDefault();
+        autocomplete = new google.maps.places.AutocompleteService()
+        autocomplete.getPlacePredictions({ input: that.input.value },
+          function (resp) {
+            if (resp.length) {
+              service = new google.maps.places.PlacesService(that.input);
+              service.getDetails({ reference: resp[0].reference },
+                function (details, status) {
+                  that.placeMarker(details.geometry.location);
+                  var lat = details.geometry.location.lat()
+                  var lng = details.geometry.location.lng()
+                  that.setFormLocation({ lat: lat, lng: lng });
+                  event.stopPropagation();
+                }
+              );
+            }
+          }
+        );
+      } else {
+        return;
+      }
+    });
+
     google.maps.event.addListener(autocomplete, 'place_changed', function (event) {
-      //problems when pressing enter in map-form (as opposed to clicking on result)
+      if (that.doNotTrigger) {
+        //prevent double handling of 'place_changed' event due to 'enter' keydown event
+        that.doNotTrigger = false;
+        return;
+      }
+
       var place = autocomplete.getPlace();
-      debugger
 
       var location = autocomplete.getPlace().geometry.location
 
@@ -98,7 +132,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       var lat = location.lat();
       var lng = location.lng();
       that.setFormLocation({ lat: lat, lng: lng });
-      stopPropagation();
+      event.stopPropagation();
     });
 
     //allow clicking on map to place a marker unless one exists

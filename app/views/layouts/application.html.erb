@@ -23,8 +23,7 @@
 <% if Rails.env.production? %>
   <% api_key = "&key=" + ENV["GOOGLEMAPS_KEY"] %>
 <% else %>
-  <% api_key = "&key=" + ENV["GOOGLEMAPS_KEY"] %>
-  <#% api_key =   '' %>
+  <% api_key =   '' %>
 <% end %>
 
 <script type="text/javascript"
