@@ -230,6 +230,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     event.preventDefault();
     if (this.model.get('photo') !== undefined) {
       params = this.$('form').serializeJSON();
+      debugger
       $submitButton = this.$('input[type=submit]')
       $submitButton.attr('disabled', 'disabled')
       $submitButton.val('Geofotring! (please wait...)')
@@ -240,14 +241,11 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       $otherErrorMsg.addClass('alert alert-danger alert-error');
 
       var success = function (model) {
-
         that.$('div.photo-errors').empty();
         that.collection.add(model, { merge: true, silent: true });
         that.collection.trigger('photo:createSuccess', model);
         that.reset();
-        Backbone.history.navigate(
-          '#', { trigger: true }
-          )
+        Backbone.history.navigate('#', { trigger: true })
       };
 
       var error = function (model) {

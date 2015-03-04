@@ -3,7 +3,10 @@ class Api::PhotosController < ApplicationController
 
   def create
     @photo = current_user.photos.new(photo_params)
-
+    p "*************************"
+    p @photo.photo
+    p @photo.photo_file_name
+    p "*************************"
     if @photo.save
       render :show
     else
