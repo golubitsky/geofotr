@@ -3,7 +3,7 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
   template: JST['photos/photo_show'],
   className: "photoShow",
   events: {
-    'click .navigate-back' : 'navigateBack'
+    'click .back' : 'navigateBack'
   },
 
   initialize: function () {
@@ -12,13 +12,30 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
   },
 
   render: function () {
+    console.log('render')
     this.$el.html(this.template({ photo: this.model }));
     this.attachSubviews();
+
+    this.adjustWidthOfBackButton();
+
     return this;
   },
 
   navigateBack: function () {
     Backbone.history.history.back()
-  }
+  },
 
+  adjustWidthOfBackButton: function () {
+    var $backButton = $('.back');
+    var $image = $('figure > img');
+
+    if ($image.length && this.resizeBackButton) {
+      $backButton.width($image.outerWidth())
+    } else {
+      this.resizeBackButton = false;
+      $image.load(function () {
+        $backButton.width($image.outerWidth() - 10)
+      });
+    }
+  }
 });

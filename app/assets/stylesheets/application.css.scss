@@ -168,6 +168,15 @@ figcaption.photo-show {
   display: none;
 }
 
+span.back {
+  display: block;
+  margin: 0 auto;
+  text-align: right;
+  background: black;
+  color: white;
+  padding-right: 10px;
+  font-size: 16px;
+}
 //navbar
 
 .navbar-highlight {
