@@ -36,7 +36,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       });
 
       setTimeout(function () {
-        $('html').one('click', function(event) {
+        $('html').on('click', function(event) {
           //fix .pac-container click event registering on body instead of on .pac-container
           if (event.target == document.getElementsByTagName('body')[0]) { return; }
           that.unbindMapEvents();
@@ -45,7 +45,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
             $dropdown.addClass('hidden');
           });
           $dropdown.off('click');
-          $('body').off('click');
+          $('html').off('click');
         })
       }, 0);
     }
