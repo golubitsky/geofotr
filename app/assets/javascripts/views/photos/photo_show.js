@@ -29,24 +29,9 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
   adjustWidthOfBackButton: function () {
     var $backButton = $('.back');
     var $image = $('figure > img');
-
-    // if ($image.length) {
-    //   debugger
-      // $backButton.width($image.outerWidth() - 10)
-      // $backButton.css('display', 'block');
     $image.load(function () {
-      debugger
-      // $backButton.css('max-width', '90%');
-        $backButton.width($image.outerWidth() - 10);
-        $backButton.css('display', 'block');
+      $backButton.width($image.outerWidth() - 10);
+      $backButton.css('display', 'block');
     });
-    // }
-    // else {
-    //   debugger
-    //   $image.load(function () {
-    //     debugger
-    //     this.resized = true;
-    //   });
-    // }
   }
 });
