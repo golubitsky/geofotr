@@ -10,11 +10,6 @@ Geofotr.Views.UsersListItem = Backbone.CompositeView.extend({
   },
 
   navigateToUser: function () {
-    // Backbone.history.navigate(
-    //   "#users/" + this.model.get('user_id'),
-    //   { trigger: true }
-    // );
-    debugger
     Backbone.history.navigate(
       "#users/" + this.model.id,
       { trigger: true }
