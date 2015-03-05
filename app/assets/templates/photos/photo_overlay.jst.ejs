@@ -2,7 +2,7 @@
 <span class="username"><%= photo.escape('user') %></span>
 <span class="view-user">View user&#39s photos</span>
 
-<% if (photo.get('user_id') != Geofotr.CURRENT_USER_ID) { %>
+<% if (Geofotr.CURRENT_USER_ID && photo.get('user_id') != Geofotr.CURRENT_USER_ID) { %>
   <% if (photo.currentUserSubscription.isNew()) { %>
     <span class="follow-user">Follow user</span>
   <% } else { %>
