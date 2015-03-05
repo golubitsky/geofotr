@@ -2,8 +2,23 @@ Geofotr.Views.UsersListItem = Backbone.CompositeView.extend({
 
   template: JST['users/users_list_item'],
   tagName: 'li',
+  className: 'user-list-item',
 
   events: {
+    'click span.username' : 'navigateToUser',
+    'click span.view-photos' : 'navigateToUser'
+  },
+
+  navigateToUser: function () {
+    // Backbone.history.navigate(
+    //   "#users/" + this.model.get('user_id'),
+    //   { trigger: true }
+    // );
+    debugger
+    Backbone.history.navigate(
+      "#users/" + this.model.id,
+      { trigger: true }
+    );
   },
 
   initialize: function () {

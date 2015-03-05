@@ -169,13 +169,19 @@ figcaption.photo-show {
 }
 
 span.back {
-  display: block;
+  display: none;
   margin: 0 auto;
   text-align: right;
   background: black;
   color: white;
   padding-right: 10px;
   font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+}
+
+span.back:hover {
+  color: white
 }
 //navbar
 
@@ -737,4 +743,58 @@ span.remove-comment:hover {
 
 .photo-list-item.flash-success {
   background: #47DB67;
+}
+
+//users list
+
+.user-list {
+  padding: 0
+}
+
+.user-list-item {
+  list-style: none;
+  width: 820px;
+  height: 47px;
+  position: relative;
+  padding: 10px;
+  margin: 0 auto;
+  background: black;
+  color: white;
+  transition: background .35s ease;
+}
+
+.user-list-item span {
+  transition: color 0.07s ease;
+  cursor: pointer;
+  cursor: hand;
+  color: #eee;
+  z-index: 1;
+}
+.user-list-item span:not(.username) {
+  position: absolute;
+  top: 26%;
+  font-weight: bold;
+  font-size: 16px;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  margin: 3px;
+  padding: 3px;
+  border-radius: 5px;
+  opacity: 100;
+  }
+
+.user-list-item span.username {
+  left: 0px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.user-list-item span:hover {
+  color: white;
+}
+
+.user-list-item span.follow, .user-list-item span.unfollow {
+  right: 165px;
+}
+
+.user-list-item span.view-photos {
+  right: 0px;
 }

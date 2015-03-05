@@ -54,8 +54,6 @@ Geofotr.Views.PhotoOverlay = Backbone.CompositeView.extend({
         $button.removeAttr('disabled');
       }
     });
-
-
   },
 
   unfollowUser: function () {

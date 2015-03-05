@@ -29,13 +29,20 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
     var $backButton = $('.back');
     var $image = $('figure > img');
 
-    if ($image.length && this.resizeBackButton) {
-      $backButton.width($image.outerWidth())
-    } else {
-      this.resizeBackButton = false;
-      $image.load(function () {
-        $backButton.width($image.outerWidth() - 10)
-      });
-    }
+    // if ($image.length) {
+    //   debugger
+      $backButton.width($image.outerWidth() - 10)
+      $backButton.css('display', 'block');
+    // }
+    // else {
+    //   debugger
+    //   $image.load(function () {
+    //     debugger
+    //     $backButton.width($image.outerWidth() - 10);
+    //     $backButton.css('display', 'block');
+    //     this.resized = true;
+    //   });
+    // }
+
   }
 });

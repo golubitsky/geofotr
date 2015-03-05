@@ -2,6 +2,8 @@ Geofotr.Views.UsersIndex = Backbone.CompositeView.extend({
 
   template: JST['users/users_index'],
 
+  className: 'user-list-container',
+
   events: {
   },
 

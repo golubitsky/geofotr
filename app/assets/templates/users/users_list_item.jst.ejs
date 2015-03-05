@@ -1,5 +1,8 @@
-<a href= <%= "#users/" + user.id %> >
-  <%= user.escape('username') %>
-</a>
+<span class="username"><%= user.escape('username') %>
+<% if (user.id == Geofotr.CURRENT_USER_ID) { %>
+  &nbsp;(you)
+<% } %>
+</span>
 
 <div class="subscription-container"></div>
+<span class="view-photos">View user&#39;s photos</span>
