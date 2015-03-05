@@ -150,39 +150,6 @@ nav.navbar.navbar-default {
   margin: 0;
 }
 
-//photo show page
-.original-photo img{
-  max-width: 100%;
-  max-height: 100%;
-  background: black;
-  border: 10px solid black;
-  margin: 0 auto;
-  display: block;
-}
-
-figure.original-photo {
-  position:relative;
-}
-
-figcaption.photo-show {
-  display: none;
-}
-
-span.back {
-  display: none;
-  margin: 0 auto;
-  text-align: right;
-  background: black;
-  color: white;
-  padding-right: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
-}
-
-span.back:hover {
-  color: white
-}
 //navbar
 
 .navbar-highlight {
@@ -797,4 +764,43 @@ span.remove-comment:hover {
 
 .user-list-item span.view-photos {
   right: 0px;
+}
+
+//photo show page
+.photoShow {
+  height: 100%;
+}
+
+.original-photo img{
+  max-width: 90%;
+  max-height: 90%;
+  background: black;
+  border: 10px solid black;
+  margin: 0 auto;
+  display: block;
+}
+
+figure.original-photo {
+  height: 100%;
+  position:relative;
+}
+
+figcaption.photo-show {
+  display: none;
+}
+
+span.back {
+  display: none;
+  margin: 0 auto;
+  text-align: right;
+  background: black;
+  color: white;
+  padding-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+}
+
+span.back:hover {
+  color: white
 }

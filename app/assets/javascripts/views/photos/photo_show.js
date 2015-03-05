@@ -9,6 +9,7 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render)
     this.model.fetch();
+    this.id = 'photo-show';
   },
 
   render: function () {
@@ -31,18 +32,21 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
 
     // if ($image.length) {
     //   debugger
-      $backButton.width($image.outerWidth() - 10)
-      $backButton.css('display', 'block');
+      // $backButton.width($image.outerWidth() - 10)
+      // $backButton.css('display', 'block');
+    $image.load(function () {
+      debugger
+      // $backButton.css('max-width', '90%');
+        $backButton.width($image.outerWidth() - 10);
+        $backButton.css('display', 'block');
+    });
     // }
     // else {
     //   debugger
     //   $image.load(function () {
     //     debugger
-    //     $backButton.width($image.outerWidth() - 10);
-    //     $backButton.css('display', 'block');
     //     this.resized = true;
     //   });
     // }
-
   }
 });
