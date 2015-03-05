@@ -1,12 +1,5 @@
 <div class="subscription-container"></div>
 
-<% if (photos.length) { %>
-  <ul class="photo-list centered" ></ul>
-<% } else if (user.id != Geofotr.CURRENT_USER_ID) { %>
-  <p class="no-photos-message">There&#39;s nothing here. :(</p>
-  <span>Back</span>
-<% } else { %>
-  <p class="no-photos-message">Hey,&nbsp;<%= Geofotr.CURRENT_USER %>&nbsp;Geofotr a photo or two!</p>
-<% } %>
+<p class="no-photos-message"></p>
 
 <ul class="photo-list centered" ></ul>

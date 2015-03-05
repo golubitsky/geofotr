@@ -35,14 +35,10 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         event.stopPropagation();
       });
 
-      $('body').click(function (event) {
-        event.stopPropagation();
-      });
-
-
-
       setTimeout(function () {
         $('html').one('click', function(event) {
+          //fix .pac-container click event registering on body instead of on .pac-container
+          if (event.target == document.getElementsByTagName('body')[0]) { return; }
           that.unbindMapEvents();
           $dropdown.addClass('transparent');
           $dropdown.one('transitionend', function () {
