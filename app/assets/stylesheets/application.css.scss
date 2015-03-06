@@ -789,7 +789,7 @@ figcaption.photo-show {
   display: none;
 }
 
-span.back {
+.show-controls {
   display: none;
   margin: 0 auto;
   text-align: right;
@@ -799,10 +799,38 @@ span.back {
   font-size: 16px;
   font-weight: bold;
   text-shadow: 1.5px 1px 1px rgba(0, 0, 0, 0.71);
+  position: relative;
+  bottom: 25px;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+img:hover + .show-controls {
+  opacity: 1;
+}
+
+.show-controls:hover {
+  opacity: 1;
 }
 
 span.back:hover {
   color: white;
   cursor: pointer;
   cursor: hand;
+}
+
+.show-controls span.info {
+  position: relative;
+  right: 20px;
+  font-weight: normal;
+}
+
+.no-photos-message {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  width: 820px;
+  background: black;
+  color: white;
+  font-size: 24px;
 }

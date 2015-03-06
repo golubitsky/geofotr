@@ -27,11 +27,11 @@ Geofotr.Views.PhotoShow = Backbone.CompositeView.extend({
   },
 
   adjustWidthOfBackButton: function () {
-    var $backButton = $('.back');
+    var $showOverlay = $('.show-controls');
     var $image = $('figure > img');
     $image.load(function () {
-      $backButton.width($image.outerWidth() - 10);
-      $backButton.css('display', 'block');
+      $showOverlay.width($image.outerWidth() - 10);
+      $showOverlay.css('display', 'block');
     });
   }
 });

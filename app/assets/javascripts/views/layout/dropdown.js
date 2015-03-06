@@ -235,12 +235,15 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       $otherErrorMsg.html('There was an error. Please try again!');
       $otherErrorMsg.addClass('alert alert-danger alert-error');
 
-      var success = function (model) {
+      var success = function (newPhoto) {
         that.$('div.photo-errors').empty();
-        that.collection.add(model, { merge: true, silent: true });
-        that.collection.trigger('photo:createSuccess', model);
+        that.collection.add(newPhoto, { merge: true} );
+        that.collection.trigger('photo:createSuccess', newPhoto);
         that.reset();
-        Backbone.history.navigate('#', { trigger: true })
+        Backbone.history.navigate(
+          '#',
+          { trigger: true }
+          )
       };
 
       var error = function (model) {

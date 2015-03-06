@@ -86,13 +86,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     user.fetch({
       data: { page: 1 },
       success: function (user) {
-        if (!user.photos().length && user.id == Geofotr.CURRENT_USER_ID) {
-          $noPhotos = $('.no-photos-message');
-          $noPhotos.html('Hey ' + Geofotr.CURRENT_USER + ', Geofotr a photo or two!');
-        } else if (!user.photos().length) {
-          $noPhotos = $('.no-photos-message');
-          $noPhotos.html('There&#39;s nothing here. :(');
-        }
+        Geofotr.noPhotosMessage(user)
       }
     });
 

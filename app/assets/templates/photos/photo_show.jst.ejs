@@ -1,7 +1,9 @@
 
 <figure class="original-photo">
-  <%= photo.get('originalUrl') %>
   <figcaption class="photo-show"><%= photo.escape('caption') %></figcaption>
-
-  <span class="back">&lt;&lt;Back</span>
+  <%= photo.get('originalUrl') %>
+  <div class="show-controls">
+    <span class="info">(right-click image to access original)</span>
+    <span class="back">Back</span>
+  </div>
 </figure>
