@@ -95,10 +95,12 @@ Geofotr.Views.MapsIndex = Backbone.CompositeView.extend({
   },
 
   showMarkerInfo: function (event, marker) {
-    var infoWindow = new google.maps.InfoWindow({
+    if (this.infoWindow) { this.infoWindow.close() }
+
+    this.infoWindow = new google.maps.InfoWindow({
       content: this.template({ photo: marker.photo })
     });
 
-    infoWindow.open(this._map, marker);
+    this.infoWindow.open(this._map, marker);
   }
 });
