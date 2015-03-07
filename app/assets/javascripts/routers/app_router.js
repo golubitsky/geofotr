@@ -90,8 +90,10 @@ Geofotr.Routers.Router = Backbone.Router.extend({
       }
     });
 
+    Geofotr.photos = user.photos();
+
     var userShowView = new Geofotr.Views.PhotosIndex({
-      collection: user.photos(),
+      collection: Geofotr.photos,
       model: user
     });
 
@@ -110,6 +112,8 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   photoIndex: function () {
+    //re-initialize photos for when navigating from user page
+    Geofotr.photos = new Geofotr.Collections.Photos();
     Geofotr.photos.fetch({
       data: { page: 1 }
     });

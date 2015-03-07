@@ -28,7 +28,6 @@ Geofotr.Views.NavShow = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
-    this.$highlighted = this.$('div');
     this.dropdownView = new Geofotr.Views.DropDownView({
       collection: Geofotr.photos,
       model: new Geofotr.Models.Photo()

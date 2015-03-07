@@ -11,7 +11,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.collection, 'add', this.addPhotoSubview);
     this.listenTo(this.collection, 'remove', this.removePhotoSubview);
-    this.listenTo(this.collection, 'add', this.removeMessage);
+    this.listenTo(this.collection, 'add', this.removeNoPhotosMessage);
 
     this.collection.each(function (photo) {
       this.unshiftPhotoSubview(photo);
@@ -23,7 +23,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'photo:createSuccess', this.unshiftPhotoSubview);
   },
 
-  removeMessage: function () {
+  removeNoPhotosMessage: function () {
     if (this.messageRemoved) { return; }
 
     if (this.collection.length) {
@@ -46,7 +46,7 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       model: photo,
       collection: this.collection
     });
-    this.unshiftSubview('ul.photo-list', photoListItem);
+    this.addSubview('ul.photo-list', photoListItem);
   },
 
   unshiftPhotoSubview: function (photo) {

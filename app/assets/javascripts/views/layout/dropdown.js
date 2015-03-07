@@ -24,7 +24,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       $('.pac-container').remove()
 
       $dropdown.removeClass('hidden');
-
+      debugger
       this.bindMapEvents();
 
       setTimeout(function () {
@@ -88,6 +88,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   bindMapEvents: function () {
+    debugger
     var that = this;
     //autocomplete map/marker logic
 
@@ -125,6 +126,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     });
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      debugger
       if (that.doNotTrigger) {
         //prevent double handling of 'place_changed' event due to 'enter' keydown event
         that.doNotTrigger = false;
@@ -218,12 +220,15 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   reset: function() {
+    this.doNotTrigger = false;
+    this.model = new Geofotr.Models.Photo();
     this.render();
     this.$el.parent().removeClass('open');
   },
 
   createPhoto: function(event) {
     event.preventDefault();
+    debugger
     if (this.model.get('photo') !== undefined) {
       params = this.$('form').serializeJSON();
       $submitButton = this.$('input[type=submit]')
@@ -237,8 +242,11 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
       var success = function (newPhoto) {
         that.$('div.photo-errors').empty();
-        that.collection.add(newPhoto, { merge: true} );
-        that.collection.trigger('photo:createSuccess', newPhoto);
+        //silent add to avoid displaying photo twice in photo_index view
+        Geofotr.photos.add(newPhoto, { silent: true });
+        //createSuccess adds photo at beginning of photo_index
+        Geofotr.photos.trigger('photo:createSuccess', newPhoto);
+        debugger
         that.reset();
         Backbone.history.navigate(
           '#',
