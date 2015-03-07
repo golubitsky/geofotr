@@ -1,4 +1,4 @@
-Geofotr.Views.DropDownView = Backbone.View.extend({
+Geofotr.Views.DropdownView = Backbone.View.extend({
 
   template: JST['layout/photo_create_form'],
 
@@ -24,7 +24,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       $('.pac-container').remove()
 
       $dropdown.removeClass('hidden');
-      debugger
       this.bindMapEvents();
 
       setTimeout(function () {
@@ -88,7 +87,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
   },
 
   bindMapEvents: function () {
-    debugger
     var that = this;
     //autocomplete map/marker logic
 
@@ -97,8 +95,10 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
     autocomplete = this.autocomplete = new google.maps.places.Autocomplete(this.input);
 
     //handle enter keypress to select first autocomplete result
-    $('#location-create-form').keydown(function(event) {
+    var $formField = $('#location-create-form')
+    $formField.keydown(function(event) {
       if (event.which == 13) {
+      debugger
 
       that.doNotTrigger = true;
 
@@ -109,6 +109,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
           function (resp) {
             if (resp.length) {
               service = new google.maps.places.PlacesService(that.input);
+              $formField.val(resp[0].description);
               service.getDetails({ reference: resp[0].reference },
                 function (details, status) {
                   that.placeMarker(details.geometry.location);
@@ -125,6 +126,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
       }
     });
 
+    debugger
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
       debugger
       if (that.doNotTrigger) {
@@ -228,7 +230,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
   createPhoto: function(event) {
     event.preventDefault();
-    debugger
     if (this.model.get('photo') !== undefined) {
       params = this.$('form').serializeJSON();
       $submitButton = this.$('input[type=submit]')
@@ -246,7 +247,6 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
         Geofotr.photos.add(newPhoto, { silent: true });
         //createSuccess adds photo at beginning of photo_index
         Geofotr.photos.trigger('photo:createSuccess', newPhoto);
-        debugger
         that.reset();
         Backbone.history.navigate(
           '#',
@@ -256,6 +256,7 @@ Geofotr.Views.DropDownView = Backbone.View.extend({
 
       var error = function (model) {
         //TO DO error message
+        that.reset();
         that.$('div.error-container').html($otherErrorMsg);
       }
       this.model.save(params, {

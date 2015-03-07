@@ -1,10 +1,3 @@
-Geofotr.isEnterKeypress = function (event) {
-  event.preventDefault();
-  return event.keycode === 13;
-}
-//removed this from line 11
-//+ $element.outerHeight(true)
-
 Geofotr.scrollTo = function($element){
   $("#content").animate({
       scrollTop: $element.position().top
@@ -26,4 +19,8 @@ Geofotr.noPhotosMessage = function(user) {
   } else if (!user.photos().length) {
     $noPhotos.html('There&#39;s nothing here. Check out another user or your photo feed!');
   }
+}
+
+Geofotr.attachNewPhotoDropdown = function () {
+  $('#photo-dropdown-container').html(Geofotr.dropdownView.render().$el);
 }

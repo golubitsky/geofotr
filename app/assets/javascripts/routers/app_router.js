@@ -4,6 +4,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     Geofotr.photoToEdit = new Geofotr.Models.Photo;
 
     this.addNavBarView();
+    this.addDropdownView();
 
     this.$rootEl = options.$rootEl;
     this.$content = $('#content');
@@ -27,6 +28,16 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     });
 
     Geofotr.navBar.render();
+  },
+
+  addDropdownView: function () {
+    Geofotr.dropdownView = new Geofotr.Views.DropdownView({
+      collection: Geofotr.photos,
+      model: new Geofotr.Models.Photo()
+    })
+    if (Geofotr.CURRENT_USER) {
+      Geofotr.attachNewPhotoDropdown();
+    }
   },
 
   splashRoute: function () {

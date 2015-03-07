@@ -84,7 +84,12 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
   submit: function (params) {
     $submitButton = this.$('input[type=submit]');
     $submitButton.attr('disabled', 'disabled');
-    $submitButton.val('Signing in..');
+
+    if (this.pageTitle === 'Sign in') {
+      $submitButton.val('Signing in..');
+    } else {
+      $submitButton.val('Signing up..');
+    }
 
     var that = this;
     $.ajax({
@@ -95,6 +100,7 @@ Geofotr.Views.Authenticate = Backbone.CompositeView.extend({
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
         Geofotr.navBar.render();
+        Geofotr.attachNewPhotoDropdown();
         Backbone.history.navigate('#/photos', { trigger: true })
       },
       error: function (resp) {
