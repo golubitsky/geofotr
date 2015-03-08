@@ -38,10 +38,10 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       data: { page: page },
       success: function (user) {
         that.collection = user.photos();
-        debugger
         if (!that.collection.length && that.collection.page_number == 1) {
           Geofotr.noPhotosMessage(user);
         } else {
+          that.removeNoPhotosMessage();
           that.addExistingPhotos();
           that.bindCollectionEvents();
         }
@@ -51,11 +51,11 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
 
   addExistingPhotos: function () {
     this.collection.each(function (photo) {
-      this.unshiftPhotoSubview(photo);
+      this.addPhotoSubview(photo);
     }, this);
   },
+
   bindCollectionEvents: function () {
-    debugger
     this.listenTo(this.collection, 'add', this.addPhotoSubview);
     this.listenTo(this.collection, 'remove', this.removePhotoSubview);
     this.listenTo(this.collection, 'add', this.removeNoPhotosMessage);
@@ -116,7 +116,6 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
       this.$el.html(this.template());
     }
     this.attachSubviews();
-    this.delegateEvents();
     this.listenForScroll();
     return this;
   },
@@ -135,22 +134,12 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     var that = this;
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
       if (that.collection.page_number < that.collection.total_pages) {
-        if (that.userPhotos) {
-          debugger
-          that.model.fetch({
-            data: { page: that.collection.page_number + 1 },
-            remove: false,
-            success: function (user) {
-              debugger
-              that.collection.add(user.photos());
-            }
-          });
-        } else {
-          that.collection.fetch({
-            data: { page: that.collection.page_number + 1 },
-            remove: false
-          });
-        }
+        //set collection either as user (userShow) or photos (photosIndex)
+        var collection = that.userPhotos ? that.model : that.collection
+        collection.fetch({
+          data: { page: that.collection.page_number + 1 },
+          remove: false
+        });
       }
     }
   },

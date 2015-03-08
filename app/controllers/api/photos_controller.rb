@@ -22,7 +22,8 @@ class Api::PhotosController < ApplicationController
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       if params[:map]
-        @photos = current_user.photos
+        puts "HERE WE ARE IN THE PHOTOS CONTROLLER!!!"
+        @photos = Photo.user_feed_photos(current_user)
       elsif current_user == @user
         @photos = current_user.photos.page(page).per(@per)
       elsif current_user && current_user.following?(@user)
