@@ -23,4 +23,6 @@ Geofotr.noPhotosMessage = function(user) {
 
 Geofotr.attachNewPhotoDropdown = function () {
   $('#photo-dropdown-container').html(Geofotr.dropdownView.render().$el);
+  //events not working on guest login without delegation
+  Geofotr.dropdownView.delegateEvents();
 }

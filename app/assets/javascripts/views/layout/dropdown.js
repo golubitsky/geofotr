@@ -84,6 +84,7 @@ Geofotr.Views.DropdownView = Backbone.View.extend({
   },
 
   bindMapEvents: function () {
+    //TO DO make sure map events work when trying to upload two photos in a row w/o refresh
     var that = this;
     //autocomplete map/marker logic
 

@@ -62,15 +62,16 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 
 .splash-container {
   height: 100%;
+  top: 3%;
 }
 .splash-container .top{
   position: relative;
-  top: 32%;
+  top: 15%;
 }
 
 .splash-container .bottom{
   position: relative;
-  top: 38%;
+  top: 25%;
 }
 
 .splash-container * {
@@ -116,6 +117,24 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   margin: 5px;
 }
 
+.splash-page h1 {
+  font-size: 36px;
+  position: relative;
+  top: 10%;
+}
+.site-description {
+  position: relative;
+  top: 10%;
+  font-size: 24px;
+  color: white;
+}
+
+.site-description-secondary {
+  position: relative;
+  top: 32%;
+  font-size: 24px;
+  color: white;
+}
 //navbar
 
 .navbar-brand img {
