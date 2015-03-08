@@ -57,6 +57,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   signIn: function () {
+    this.$content.addClass('no-scroll');
     var signInView = new Geofotr.Views.Authenticate({
       url: 'api/session',
       pageTitle: 'Sign in'
@@ -66,6 +67,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   signUp: function () {
+    this.$content.addClass('no-scroll');
     var signUpView = new Geofotr.Views.Authenticate({
       url: 'api/users',
       pageTitle: 'Sign up'
@@ -103,23 +105,15 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   userShow: function(id) {
     this.$content.removeClass('no-scroll');
-    var user = new Geofotr.Models.User({id: id});
-    user.fetch({
-      data: { page: 1 },
-      success: function (user) {
-        debugger
-        Geofotr.noPhotosMessage(user)
-      }
+
+    this.userShowView = new Geofotr.Views.PhotosIndex({
+      model: new Geofotr.Models.User({id: id}),
+      userPhotos: true
     });
 
-    Geofotr.photos = user.photos();
     //TO DO fetch subsequent pages of API users collection; not photos collection
-    var userShowView = new Geofotr.Views.PhotosIndex({
-      collection: Geofotr.photos,
-      model: user
-    });
 
-    this._swapView(userShowView);
+    this._swapView(this.userShowView);
   },
 
   userIndex: function () {

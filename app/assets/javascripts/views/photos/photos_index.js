@@ -8,17 +8,57 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     'click .navigate-back' : 'navigateBack'
   },
 
-  initialize: function () {
-    this.listenTo(this.collection, 'add', this.addPhotoSubview);
-    this.listenTo(this.collection, 'remove', this.removePhotoSubview);
-    this.listenTo(this.collection, 'add', this.removeNoPhotosMessage);
+  initialize: function (options) {
+    //set userPhotos for fetching correct collection for pagination
+    this.userPhotos = options.userPhotos;
+    if (this.userPhotos) {
+      this.fetchUserPhotos();
+    } else {
+      this.addExistingPhotos();
+      this.bindCollectionEvents();
+    }
+    // this.collection.page_number = 1;
 
+
+
+    // this.addSubscriptionButton();
+  },
+
+  fetchUserPhotos: function () {
+    var that = this;
+    var page;
+
+    if (this.collection) {
+      page = this.collection.page_number + 1
+    } else {
+      page = 1
+    }
+
+    this.model.fetch({
+      data: { page: page },
+      success: function (user) {
+        that.collection = user.photos();
+        debugger
+        if (!that.collection.length && that.collection.page_number == 1) {
+          Geofotr.noPhotosMessage(user);
+        } else {
+          that.addExistingPhotos();
+          that.bindCollectionEvents();
+        }
+      }
+    });
+  },
+
+  addExistingPhotos: function () {
     this.collection.each(function (photo) {
       this.unshiftPhotoSubview(photo);
     }, this);
-
-    // this.addSubscriptionButton();
-
+  },
+  bindCollectionEvents: function () {
+    debugger
+    this.listenTo(this.collection, 'add', this.addPhotoSubview);
+    this.listenTo(this.collection, 'remove', this.removePhotoSubview);
+    this.listenTo(this.collection, 'add', this.removeNoPhotosMessage);
     _.extend(this, Backbone.Events);
     this.listenTo(this.collection, 'photo:createSuccess', this.unshiftPhotoSubview);
   },
@@ -95,10 +135,22 @@ Geofotr.Views.PhotosIndex = Backbone.CompositeView.extend({
     var that = this;
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
       if (that.collection.page_number < that.collection.total_pages) {
-        that.collection.fetch({
-          data: { page: that.collection.page_number + 1 },
-          remove: false
-        });
+        if (that.userPhotos) {
+          debugger
+          that.model.fetch({
+            data: { page: that.collection.page_number + 1 },
+            remove: false,
+            success: function (user) {
+              debugger
+              that.collection.add(user.photos());
+            }
+          });
+        } else {
+          that.collection.fetch({
+            data: { page: that.collection.page_number + 1 },
+            remove: false
+          });
+        }
       }
     }
   },
