@@ -154,6 +154,10 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
   top: 50px;
 }
 
+#content.no-scroll {
+  overflow: hidden;
+}
+
 //main map page
 #map-canvas {
   opacity: 100;

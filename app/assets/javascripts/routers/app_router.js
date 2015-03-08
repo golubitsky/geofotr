@@ -42,8 +42,10 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   splashRoute: function () {
     if (Geofotr.CURRENT_USER) {
+      this.$content.removeClass('no-scroll');
       this.photoIndex();
     } else {
+      this.$content.addClass('no-scroll');
       this.splash();
     }
   },
@@ -86,7 +88,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
       collection: Geofotr.photos,
     });
 
-    this._swapView(mapIndex, true);
+    this._swapView(mapIndex);
   },
 
   photoEdit: function (id) {
@@ -100,6 +102,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id) {
+    this.$content.removeClass('no-scroll');
     var user = new Geofotr.Models.User({id: id});
     user.fetch({
       data: { page: 1 },
@@ -120,6 +123,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   userIndex: function () {
+    this.$content.removeClass('no-scroll');
     var users = new Geofotr.Collections.Users();
     users.fetch();
 
@@ -131,6 +135,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   photoIndex: function () {
+    this.$content.removeClass('no-scroll');
     //re-initialize photos for when navigating from user page
     Geofotr.photos = new Geofotr.Collections.Photos();
     Geofotr.photos.fetch({
@@ -146,6 +151,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   photoShow: function (id) {
+    this.$content.removeClass('no-scroll');
     var photo = Geofotr.photos.getOrFetch(id);
     var photoShowView = new Geofotr.Views.PhotoShow({
       model: photo
@@ -154,7 +160,7 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     this._swapView(photoShowView);
   },
 
-  _swapView: function (view, googleMap) {
+  _swapView: function (view) {
     this.currentView && this.currentView.remove();
 
     this.$rootEl.html(view.render().$el);
