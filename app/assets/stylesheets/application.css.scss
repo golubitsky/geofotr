@@ -62,8 +62,6 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 
 .splash-container {
   height: 100%;
-  top: 3%;
-  right: -6%;
 }
 .splash-container .top{
   position: relative;
@@ -72,7 +70,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 
 .splash-container .bottom{
   position: relative;
-  top: 25%;
+  top: 24%;
 }
 
 .splash-container * {
@@ -119,7 +117,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 }
 
 .splash-page h1 {
-  font-size: 36px;
+  font-size: 48px;
   position: relative;
   top: 10%;
 }
@@ -132,7 +130,7 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 
 .site-description-secondary {
   position: relative;
-  top: 32%;
+  top: 30%;
   font-size: 24px;
   color: white;
 }
