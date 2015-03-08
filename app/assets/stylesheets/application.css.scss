@@ -734,6 +734,22 @@ span.remove-comment:hover {
   background: #47DB67;
 }
 
+.update-radio-row {
+  margin-bottom: 20px;
+}
+.radio.second {
+  position: relative;
+  left: 10px;
+}
+.radio.third {
+  position: relative;
+  left: 20px;
+}
+button.cancel {
+  position: relative;
+  left: 10px;
+}
+
 //users list
 
 .user-list {
