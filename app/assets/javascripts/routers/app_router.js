@@ -73,7 +73,14 @@ Geofotr.Routers.Router = Backbone.Router.extend({
   },
 
   mapIndex: function () {
-    Geofotr.photos.fetch();
+    //fetch all photos for map view
+    var userId = Geofotr.CURRENT_USER_ID ? Geofotr.CURRENT_USER_ID : undefined;
+    Geofotr.photos.fetch({
+      data: {
+        user_id: userId,
+        map: true
+      }
+    });
 
     var mapIndex = new Geofotr.Views.MapsIndex({
       collection: Geofotr.photos,
@@ -97,12 +104,13 @@ Geofotr.Routers.Router = Backbone.Router.extend({
     user.fetch({
       data: { page: 1 },
       success: function (user) {
+        debugger
         Geofotr.noPhotosMessage(user)
       }
     });
 
     Geofotr.photos = user.photos();
-
+    //TO DO fetch subsequent pages of API users collection; not photos collection
     var userShowView = new Geofotr.Views.PhotosIndex({
       collection: Geofotr.photos,
       model: user

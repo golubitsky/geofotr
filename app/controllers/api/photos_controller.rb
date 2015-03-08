@@ -21,8 +21,9 @@ class Api::PhotosController < ApplicationController
 
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
-
-      if current_user == @user
+      if params[:map]
+        @photos = current_user.photos
+      elsif current_user == @user
         @photos = current_user.photos.page(page).per(@per)
       elsif current_user && current_user.following?(@user)
         @photos = @user.follower_photos.page(page).per(@per)
@@ -34,10 +35,17 @@ class Api::PhotosController < ApplicationController
     elsif current_user
       @photos = Photo.user_feed_photos(current_user).page(page).per(@per)
     else
-      @photos = Photo.public_photos.page(page).per(@per)
+      if params[:map]
+        @photos = Photo.public_photos
+      else
+        @photos = Photo.public_photos.page(page).per(@per)
+      end
     end
-    @page_number = page.to_i
-    @total_pages = @photos.total_pages
+
+    unless params[:map]
+      @page_number = page.to_i
+      @total_pages = @photos.total_pages
+    end
   end
 
   def show
