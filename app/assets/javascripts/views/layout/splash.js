@@ -41,6 +41,7 @@ Geofotr.Views.Splash = Backbone.CompositeView.extend({
         Geofotr.CURRENT_USER = resp.username
         Geofotr.CURRENT_USER_ID = resp.id
         Geofotr.navBar.render();
+        Geofotr.attachNewPhotoDropdown();
         Backbone.history.navigate('#/photos', { trigger: true })
       }
     });

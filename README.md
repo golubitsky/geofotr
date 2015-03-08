@@ -11,14 +11,13 @@ Geophotr is a clone of Flickr built on Rails and Backbone. Users can:
 - [x] Create accounts
 - [x] Create sessions (log in)
 - [x] Upload photos
-- [ ] Tag photos
 - [x] View individual photos
 - [x] Follow other users
 - [x] View public feed without logging in
 - [x] View a feed of individual photos from followed users
 - [x] 'Like' button for signed-in users
 - [x] 'Like' counter on all photos
-
+- [x] GoogleMaps API UI for specifying photo latitude/longitude
 
 ## Design Docs
 * [View Wireframes][views]
@@ -74,16 +73,16 @@ but I'd settle for manually setting lat/long for photos.
 [Details][phase-five]
 
 ### Bonus Features (TBD)
-
+- [ ] Tag photos
 - [ ] users can view all of their liked photos
 - [ ] users can set their profile picture thumbnail
-- [ ] map displays medium size photo
-- [ ] users enter text location and auto-convert to lat/long for map display
-- [ ] Pagination
+- [x] map displays medium size photo
+- [x] users enter text location and auto-convert to lat/long for map display
+- [x] Pagination
 - [ ] Search for photos by title
 - [ ] Search for photos by tag
 - [ ] Reblogging
-- [ ] Custom urls for photos
+- [x] Custom urls for photos
 - [ ] Support for multiple open sessions
 
 
