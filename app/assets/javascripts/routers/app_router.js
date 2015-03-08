@@ -111,8 +111,6 @@ Geofotr.Routers.Router = Backbone.Router.extend({
       userPhotos: true
     });
 
-    //TO DO fetch subsequent pages of API users collection; not photos collection
-
     this._swapView(this.userShowView);
   },
 
@@ -130,8 +128,6 @@ Geofotr.Routers.Router = Backbone.Router.extend({
 
   photoIndex: function () {
     this.$content.removeClass('no-scroll');
-    //re-initialize photos for when navigating from user page
-    Geofotr.photos = new Geofotr.Collections.Photos();
     Geofotr.photos.fetch({
       data: { page: 1 }
     });
