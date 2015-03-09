@@ -149,9 +149,11 @@ html, body, #content, #map-canvas, #dropdown-map-canvas {
 }
 
 #content {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: fixed;
   top: 50px;
+  height: calc(100% - 50px);
 }
 
 #content.no-scroll {

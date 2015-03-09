@@ -10,12 +10,13 @@ Geophotr is a clone of Flickr built on Rails and Backbone. Users can:
 - [x] Create accounts
 - [x] Create sessions (log in)
 - [x] Upload photos
-- [x] specifying latitude/longitude for photo uploads (via UI)
-- [x] view geotagged photos on map
+- [x] Specify latitude/longitude for photo uploads via UI
+- [x] View geotagged photos on map
 - [x] View individual photos
 - [x] Follow other users
 - [x] View public feed without logging in
-- [x] View a feed of individual photos from followed users
+- [x] View public map without logging in
+- [x] View a feed of individual photos from followed users (including public photos)
 - [x] 'Like' button for signed-in users
 - [x] 'Like' counter on all photos
 
