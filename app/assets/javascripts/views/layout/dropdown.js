@@ -239,15 +239,22 @@ Geofotr.Views.DropdownView = Backbone.View.extend({
 
       var success = function (newPhoto) {
         that.$('div.photo-errors').empty();
-        //silent add to avoid displaying photo twice in photo_index view
-        Geofotr.photos.add(newPhoto, { silent: true });
-        //createSuccess adds photo at beginning of photo_index
-        Geofotr.photos.trigger('photo:createSuccess', newPhoto);
+        if (Backbone.history.fragment) {
+          //in any non-photo-index view
+          Geofotr.photos.unshift(newPhoto, { silent: true });
+        } else {
+          //in photo-index view
+          Geofotr.photos.unshift(newPhoto);
+          //createSuccess prepends photo view at beginning of photo_index
+          Geofotr.photos.trigger('photo:createSuccess', newPhoto);
+        }
+
         that.reset();
         Backbone.history.navigate(
           '#',
           { trigger: true }
           )
+
       };
 
       var error = function (model) {
