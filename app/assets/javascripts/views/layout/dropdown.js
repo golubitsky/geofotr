@@ -248,13 +248,11 @@ Geofotr.Views.DropdownView = Backbone.View.extend({
           //createSuccess prepends photo view at beginning of photo_index
           Geofotr.photos.trigger('photo:createSuccess', newPhoto);
         }
-
         that.reset();
         Backbone.history.navigate(
           '#',
           { trigger: true }
           )
-
       };
 
       var error = function (model) {

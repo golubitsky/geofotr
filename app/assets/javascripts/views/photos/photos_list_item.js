@@ -49,7 +49,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       photos: this.collection
     });
 
-    Geofotr.scrollTo(this.$('.photo'));
+    // Geofotr.scrollTo(this.$('.photo'));
     this.$commentsContainer = this.$('div.comments-container');
 
     this.$commentsContainer.toggleClass('transparent');
@@ -58,7 +58,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
 
 
   removeCommentView: function () {
-    Geofotr.scrollFrom(this.$('.photo'));
+    // Geofotr.scrollFrom(this.$('.photo'));
 
     this.$commentsContainer.on('transitionend', this.commentsIndex.remove.bind(this.commentsIndex));
     this.$commentsContainer.toggleClass('transparent');
@@ -91,7 +91,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       photoView: this
     });
 
-    Geofotr.scrollTo(this.$('.photo'));
+    // Geofotr.scrollTo(this.$('.photo'));
 
     this.$editContainer = this.$('.photo-edit-container');
     this.$editContainer.html(this.editFormView.render().$el);
@@ -100,7 +100,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
   removeEditForm: function (flashSuccess) {
     var editForm = this.editFormView;
 
-    Geofotr.scrollFrom(this.$('.photo'));
+    // Geofotr.scrollFrom(this.$('.photo'));
 
     $photoEditContainer = this.$('.photo-edit-container')
     $photoEditContainer.one('transitionend',
@@ -112,7 +112,7 @@ Geofotr.Views.PhotosListItem = Backbone.CompositeView.extend({
       }.bind(this));
     $photoEditContainer.toggleClass('transparent');
   },
-//photo overlay
+
   addPhotoOverlay: function () {
     var photoOverlay = new Geofotr.Views.PhotoOverlay({
       model: this.model,
