@@ -2,7 +2,7 @@
 
 [Project link][project_link]
 
-[project_link]: https://www.geofotr.com
+[project_link]: http://www.geofotr.com
 
 ## Minimum Viable Product
 Geophotr is a clone of Flickr built on Rails and Backbone. Users can:
